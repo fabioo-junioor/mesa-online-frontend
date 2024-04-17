@@ -1,4 +1,6 @@
 <script setup>
+import Menu from './components/Menu.vue'
+import Inicio from './pages/Inicio.vue'
 import { onMounted, reactive } from "vue"
 
 const dadosUsuario = reactive({
@@ -47,12 +49,7 @@ onMounted(async () => {
 
 <template>
   <div id="app">
-    <form>
-      <input type="text" v-model="dadosUsuario.email" placeholder="email" />
-      <input type="password" v-model="dadosUsuario.senha" placeholder="senha" />
-    </form>
-      <button @click="efetuarLogin">Logar</button>
-      <button @click="auth">Autenticar</button>
+    <Menu />
   </div>
 </template>
 
