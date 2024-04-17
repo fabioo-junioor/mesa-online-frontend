@@ -1,4 +1,5 @@
 <script setup>
+
 </script>
 <template>
     <div id="menu">
@@ -23,7 +24,9 @@
                     <template #button-content>
                         <em>Login</em>
                     </template>
-                    <b-dropdown-item>Usuário</b-dropdown-item>
+                    <b-dropdown-item>
+                        <router-link to="/login">Usuário</router-link>
+                    </b-dropdown-item>
                     <b-dropdown-item>Estabelecimento</b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-navbar-nav>
