@@ -11,21 +11,23 @@
             <b-collapse id="nav-collapse" is-nav>
             <div class="menu-links">
                 <b-navbar-nav>
-                    <b-nav-item>Inicio</b-nav-item>
-                    <b-nav-item>Sobre</b-nav-item>
+                    <b-nav-item>
+                        <router-link to="/">Inicio</router-link>
+                    </b-nav-item>
+                    <b-nav-item disabled>Sobre</b-nav-item>
                 </b-navbar-nav>
 
                 <!-- Right aligned nav items -->
             </div>
             <div class="menu-usuario">
                 <b-navbar-nav>
-                    <b-nav-item-dropdown right>
+                    <b-nav-item-dropdown>
                     <!-- Using 'button-content' slot -->
                     <template #button-content>
                         <em>Login</em>
                     </template>
                     <b-dropdown-item>
-                        <router-link to="/login">Usuário</router-link>
+                        <router-link to="/loginUsuario">Usuário</router-link>
                     </b-dropdown-item>
                     <b-dropdown-item>Estabelecimento</b-dropdown-item>
                     </b-nav-item-dropdown>
@@ -55,7 +57,12 @@
         font-weight: 400;
         font-style: normal;
         font-variation-settings: "wdth" 100;
+        
+        a{
+            text-decoration: none;
+            color: black;
 
+        }
         .navbar{
             width: 100%;
             padding: 0;
@@ -69,12 +76,6 @@
                 padding: .5rem 1rem;
                 display: flex;
                 justify-content: space-between;
-
-                .menu-links{
-                    .nav-link{
-                        color: red !important;
-                    }
-                }
 
                 .menu-usuario{
                     display: flex;

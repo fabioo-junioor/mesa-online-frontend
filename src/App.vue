@@ -1,7 +1,6 @@
 <script setup>
 import Menu from './components/Menu.vue'
-import Inicio from './pages/Inicio.vue'
-import { onMounted, reactive } from "vue"
+import { reactive } from "vue"
 
 const dadosUsuario = reactive({
   email: '',
@@ -42,16 +41,19 @@ const auth = async () =>{
 
   }
 }
-onMounted(async () => {
-
-})
 </script>
 
 <template>
   <div id="app">
     <Menu />
+    <router-view />
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+  #app{
+    min-width: 100vw;
+    min-height: 100vh;
+
+  }
 </style>

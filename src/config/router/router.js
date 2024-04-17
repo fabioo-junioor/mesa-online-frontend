@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import Inicio from '../../pages/Inicio.vue'
-import Login from '../../pages/Login.vue'
+import LoginUsuario from '../../pages/LoginUsuario.vue'
 
 const routes = [
     {
@@ -10,15 +10,16 @@ const routes = [
         component: Inicio
     },
     {
-        path: '/login',
-        name: 'login',
-        component: Login
+        path: '/loginUsuario',
+        name: 'loginUsuario',
+        component: LoginUsuario
     }
 ]
 
 const router = createRouter({
     history: createWebHistory(),
-    routes
+    routes,
+    linkActiveClass: 'vue-school-active-link'
 })
 
 export default router
