@@ -43,7 +43,11 @@ const getSenhalUsuario = (e) => {
                     <a href="#">Cadastrar-se</a>
                 </div>
             </div>
-            <div class="login-left-midias">midias</div>
+            <div class="login-left-midias">
+                <a href="#">
+                    <img src="../assets/icons/instagram-24.png" />
+                </a>
+            </div>
         </div>
         <div class="login-right">
             <h2>Bem vindo!</h2>
@@ -92,6 +96,14 @@ const getSenhalUsuario = (e) => {
             .login-left-midias{
                 text-align: right;
 
+                a{
+                    padding: .5rem 0;
+
+                    img{
+                        height: 2rem;
+
+                    }
+                }
             }
         }
         .login-right{
@@ -110,4 +122,56 @@ const getSenhalUsuario = (e) => {
             }
         }        
     }
+/*################################################*/
+@media only screen and (max-width: 1560px) {
+
+}
+@media only screen and (max-width: 1200px) {
+
+}
+@media only screen and (max-width: 992px) {
+    #login{
+        .login-left{
+            width: 40%;
+
+        }
+        .login-right{
+            width: 50%;
+
+        }
+    }
+}
+@media only screen and (max-width: 720px) {
+    #login{
+        padding: .5rem;
+
+        .login-left{
+            width: 45%;
+
+        }
+        .login-right{
+            width: 50%;
+
+        }
+    }
+}
+@media only screen and (max-width: 481px) {
+    #login{
+        flex-direction: column-reverse;
+
+        .login-left{
+            width: 100%;
+            height: 75%;
+
+        }
+        .login-right{
+            width: 100%;
+            height: 20%;
+
+        }
+    }
+}
+@media only screen and (max-width: 360px) {
+  
+}
 </style>
