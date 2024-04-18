@@ -9,7 +9,6 @@ import Menu from '../components/Menu.vue'
 </template>
 <style lang="scss" scoped>
     #inicio{
-        background-color: red;
         
     }
 </style>

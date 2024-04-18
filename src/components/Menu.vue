@@ -52,9 +52,7 @@
         min-height: 4rem;
         display: flex;
         padding: .2rem 2rem;
-        background: #1D976C;
-        background: -webkit-linear-gradient(to right, #93F9B9, #1D976C);
-        background: linear-gradient(to right, #93F9B9, #1D976C);
+        background: #232526;
 
         font-family: "Fredoka", sans-serif;
         font-optical-sizing: auto;
@@ -62,19 +60,20 @@
         font-style: normal;
         font-variation-settings: "wdth" 100;
         
-        a{
-            text-decoration: none;
-            color: black;
-
-        }
         .navbar{
             padding: 0;
             width: 100%;
+            height: auto;
 
             .navbar-brand{
                 text-align: center;
+                color: white;
 
-            }            
+            }
+            .navbar-toggler{
+                background-color: white;
+                
+            }          
             #nav-collapse{
                 height: 100%;
                 display: flex;
@@ -98,15 +97,15 @@
                             align-items: center;
 
                             a{
+                                text-decoration: none;
+                                color: white;
+                                font-size: 1.2rem;
                                 padding: 1rem .5rem;
-                                border-radius: 5px;
-                                background-color: rgba(255, 255, 255, .5);
                                 
                                 &:hover{
-                                    background-color: rgba(255, 255, 255, 1);
-                                    border-radius: 5px;
-                                }
-                                
+                                    border-bottom: 2px solid white;
+
+                                }                                
                             }
                         }
                     }
@@ -116,22 +115,46 @@
                     display: flex;
                     align-items: center;
 
-                    .navbar-nav{
+                    .navbar-nav:nth-child(1){
                         height: 100%;
                         display: flex;
                         align-items: center;
 
+                        .nav-item{
+                            a{
+                                color: black;
+                                text-decoration: none;
+                                width: 100%;
+                                
+                                em{
+                                    color: white;
+
+                                    &:hover{
+                                        border-bottom: 1px solid white;
+                                    }
+                                }
+                                &:hover{
+                                    border-bottom: 1px solid #232526;
+
+                                }
+                            }
+                        }
                     }
                     .navbar-nav:nth-child(2){
                         .nav-item{
                             a{
+                                text-decoration: none;
+                                color: white;
+                                font-size: 1.1rem;
                                 padding: 1rem;
-                                background-color: rgba(255, 255, 255, .8);
                                 border-radius: 5px;
+                                border: 1px solid white;
                                 
                                 &:hover{
-                                    background-color: rgba(255, 255, 255, 1);
+                                    background-color: white;
                                     border-radius: 5px;
+                                    border: 1px solid white;
+                                    color: #232526;
 
                                 }
                             }
@@ -149,9 +172,6 @@
 
 }
 @media only screen and (max-width: 992px) {
-
-}
-@media only screen and (max-width: 720px) {
     #menu{
         padding: 0 .2rem;
 
@@ -216,6 +236,8 @@
             }
         }
     }    
+}
+@media only screen and (max-width: 720px) {
 }
 @media only screen and (max-width: 481px) {
 
