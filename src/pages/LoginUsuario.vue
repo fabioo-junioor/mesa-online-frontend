@@ -45,7 +45,10 @@ const getSenhaUsuario = (e) => {
             </div>
             <div class="login-left-midias">
                 <a href="#">
-                    <img src="../assets/icons/instagram-24.png" />
+                    <i class='bx bxl-instagram'></i>
+                </a>
+                <a href="#">
+                    <i class='bx bxl-linkedin-square'></i>
                 </a>
             </div>
         </div>
@@ -94,14 +97,23 @@ const getSenhaUsuario = (e) => {
                 }            
             }            
             .login-left-midias{
-                text-align: right;
+                display: flex;
+                justify-content: flex-end;
 
                 a{
-                    padding: .5rem 0;
+                    display: flex;
+                    align-items: center;
+                    margin: .3rem;
+                    text-decoration: none;
 
-                    img{
-                        height: 2rem;
+                    i{
+                        color: #333;
+                        font-size: 1.8rem;
 
+                        &:hover{
+                            color: #1D976Cbb;
+
+                        }
                     }
                 }
             }
