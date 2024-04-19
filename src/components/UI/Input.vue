@@ -4,7 +4,7 @@ defineProps(['label', 'type', 'getInputLogin'])
 </script>
 <template>
     <div id="input">
-        <label for="input-1">{{label}}</label>
+        <label for="input-1">{{label}}:</label>
             <b-form-input
                 @input="$emit('getInputLogin', $event)"
                 :type="type"

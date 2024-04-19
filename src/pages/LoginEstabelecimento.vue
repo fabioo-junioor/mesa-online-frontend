@@ -5,37 +5,37 @@ import Button from '../components/UI/Button.vue'
 
 defineEmits(['update'])
 
-const dadosUsuario = reactive({
+const dadosEstabelecimento = reactive({
     email: '',
     senha: ''
 
 })
 const efetuarLogin = () => {
-    console.log('dados->', dadosUsuario.email, dadosUsuario.senha)
+    console.log('dados->', dadosEstabelecimento.email, dadosEstabelecimento.senha)
 }
-const getEmailUsuario = (e) => {
-    dadosUsuario.email = e
+const getEmailEstabelecimento = (e) => {
+    dadosEstabelecimento.email = e
 
 }
-const getSenhaUsuario = (e) => {
-    dadosUsuario.senha = e
+const getSenhaEstabelecimento = (e) => {
+    dadosEstabelecimento.senha = e
 
 }
 
 </script>
 <template>
-    <div id="login-usuario">
+    <div id="login-estabelecimento">
         <div class="login-left">
             <div class="login-left-logo">Mesa Online</div>
             <div class="login-left-form">
                 <Input
                     label="Email"
                     type="text"
-                    @getInputLogin="getEmailUsuario" />
+                    @getInputLogin="getEmailEstabelecimento" />
                 <Input
                     label="Senha"
                     type="password"
-                    @getInputLogin="getSenhaUsuario" />
+                    @getInputLogin="getSenhaEstabelecimento" />
                 <Button
                     @efetuarLogin="efetuarLogin"
                     type="Login" />
@@ -44,9 +44,6 @@ const getSenhaUsuario = (e) => {
                 </div>
             </div>
             <div class="login-left-midias">
-                <a href="#">
-                    <i class='bx bxl-instagram'></i>
-                </a>
                 <a href="#">
                     <i class='bx bxl-linkedin-square'></i>
                 </a>
@@ -60,8 +57,8 @@ const getSenhaUsuario = (e) => {
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
 
-    #login-usuario{
-        background: linear-gradient(rgba(0, 0, 0, .9), rgba(0, 0, 0, .9)), url('../assets/imagens/background_page_user.jpg') no-repeat fixed center;
+    #login-estabelecimento{
+        background: linear-gradient(rgba(0, 0, 0, .9), rgba(0, 0, 0, .9)), url('../assets/imagens/background_page_establishment.jpg') no-repeat fixed center;
         background-size: cover;
         font-family: "Fredoka", sans-serif;
         background-color: green;
@@ -119,7 +116,7 @@ const getSenhaUsuario = (e) => {
             }
         }
         .login-right{
-            background: linear-gradient(rgba(0, 0, 0, .6), rgba(0, 0, 0, .6)), url('../assets/imagens/background_page_user.jpg') no-repeat fixed center;
+            background: linear-gradient(rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)), url('../assets/imagens/background_page_establishment.jpg') no-repeat fixed center;
             background-size: cover;
             width: 45%;
             height: 70%;
@@ -142,7 +139,7 @@ const getSenhaUsuario = (e) => {
 
 }
 @media only screen and (max-width: 992px) {
-    #login-usuario{
+    #login-estabelecimento{
         .login-left{
             width: 40%;
 
@@ -154,7 +151,7 @@ const getSenhaUsuario = (e) => {
     }
 }
 @media only screen and (max-width: 720px) {
-    #login-usuario{
+    #login-estabelecimento{
         padding: .5rem;
 
         .login-left{
@@ -168,7 +165,7 @@ const getSenhaUsuario = (e) => {
     }
 }
 @media only screen and (max-width: 481px) {
-    #login-usuario{
+    #login-estabelecimento{
         flex-direction: column-reverse;
 
         .login-left{

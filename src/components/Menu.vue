@@ -31,7 +31,9 @@
                         <b-dropdown-item>
                             <router-link to="/loginUsuario">Usuário</router-link>
                         </b-dropdown-item>
-                        <b-dropdown-item>Estabelecimento</b-dropdown-item>
+                        <b-dropdown-item>
+                            <router-link to="/loginEstabelecimento">Estabelecimento</router-link>
+                        </b-dropdown-item>
                         </b-nav-item-dropdown>
                     </b-navbar-nav>
                     <b-navbar-nav>
