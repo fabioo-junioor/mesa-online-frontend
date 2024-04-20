@@ -1,9 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import Inicio from '../../pages/Inicio.vue'
-import LoginUsuario from '../../pages/LoginUsuario.vue'
-import LoginEstabelecimento from '../../pages/LoginEstabelecimento.vue'
-import HomeUsuario from '../../pages/HomeUsuario.vue'
+import LoginUsuario from '../../pages/usuario/LoginUsuario.vue'
+import LoginEstabelecimento from '../../pages/estabelecimento/LoginEstabelecimento.vue'
+import HomeUsuario from '../../pages/usuario/HomeUsuario.vue'
+import EditarPerfilUsuario from '../../pages/usuario/EditarPerfilUsuario.vue'
 
 const routes = [
     {
@@ -25,6 +26,11 @@ const routes = [
         path: '/homeUsuario',
         name: 'homeUsuario',
         component: HomeUsuario
+    },
+    {
+        path: '/editarPerfilUsuario',
+        name: 'editarPerfilUsuario',
+        component: EditarPerfilUsuario
     }
 ]
 
