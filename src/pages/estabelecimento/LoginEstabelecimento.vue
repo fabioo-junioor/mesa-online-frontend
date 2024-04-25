@@ -1,25 +1,45 @@
 <script setup>
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import Input from '../../components/UI/Input.vue'
 import Button from '../../components/UI/Button.vue'
 
-defineEmits(['update'])
-
+const loginOrCadastro = ref(false)
+const disabledButton = ref(true)
 const dadosEstabelecimento = reactive({
     email: '',
-    senha: ''
+    senha: '',
+    senhaRepetida: ''
 
 })
 const efetuarLogin = () => {
-    console.log('dados->', dadosEstabelecimento.email, dadosEstabelecimento.senha)
+    console.log('Logado!')
+}
+const efetuarCadastro = () => {
+    if(dadosEstabelecimento.senhaRepetida != dadosEstabelecimento.senha){
+        console.log('Senha diferentes')
+        return
+        
+    }
+    console.log('Cadastrado!')
+
 }
 const getEmailEstabelecimento = (e) => {
     dadosEstabelecimento.email = e
+    console.log(e)
+    disabledButton.value = ((dadosEstabelecimento.email && dadosEstabelecimento.senha && dadosEstabelecimento.senhaRepetida) != '') ? false : true
 
 }
 const getSenhaEstabelecimento = (e) => {
     dadosEstabelecimento.senha = e
+    console.log(e)
+    disabledButton.value = ((dadosEstabelecimento.email && dadosEstabelecimento.senha && dadosEstabelecimento.senhaRepetida) != '') ? false : true
 
+}
+const getVerificSenhaEstabelecimento = (e) => {
+    dadosEstabelecimento.senhaRepetida = e
+    console.log(e)
+    disabledButton.value = ((dadosEstabelecimento.email && dadosEstabelecimento.senha && dadosEstabelecimento.senhaRepetida) != '') ? false : true
+    
 }
 
 </script>
@@ -36,11 +56,30 @@ const getSenhaEstabelecimento = (e) => {
                     label="Senha"
                     type="password"
                     @getInputLogin="getSenhaEstabelecimento" />
+                <Input
+                    v-if="loginOrCadastro"
+                    label="Repita a Senha"
+                    type="password"
+                    @getInputLogin="getVerificSenhaEstabelecimento" />
                 <Button
+                    v-if="!loginOrCadastro"
+                    :disabled="disabledButton"
                     @efetuarLogin="efetuarLogin"
                     type="Login" />
+                <Button
+                    v-else
+                    :disabled="disabledButton"
+                    @efetuarCadastro="efetuarCadastro"
+                    type="Cadastrar" />
                 <div class="login-left-form-cadastrar">
-                    <a href="#">Cadastrar-se</a>
+                    <a
+                        v-if="!loginOrCadastro"
+                        @click="loginOrCadastro = !loginOrCadastro"
+                        href="#">Cadastrar-se</a>
+                    <a 
+                        v-else
+                        @click="loginOrCadastro = !loginOrCadastro"
+                        href="#">Voltar</a>
                 </div>
             </div>
             <div class="login-left-midias">

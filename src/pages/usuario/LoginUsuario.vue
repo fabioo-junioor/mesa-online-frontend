@@ -1,5 +1,6 @@
 <script setup>
-import { reactive, ref, watch } from 'vue'
+import { reactive, ref } from 'vue'
+import { saveTokenUserStorage } from '../../config/utils/settingSession.js'
 import Input from '../../components/UI/Input.vue'
 import Button from '../../components/UI/Button.vue'
 
@@ -11,9 +12,24 @@ const dadosUsuario = reactive({
     senhaRepetida: ''
 
 })
-const efetuarLogin = () => {
-    console.log('Logado!')
+const efetuarLogin = async () => {
+    try{
+        const response = await fetch(`http://localhost:8000/loginUsuario`, {
+            method: 'POST',
+            mode: 'cors',
+            body: JSON.stringify(dadosUsuario)
+        })
+        const data = await response.json()
 
+        if(data){
+            console.log(data)
+            //saveTokenUserStorage(data)
+
+        }
+  }catch(e){
+    console.log('Error', e)
+
+  }
 }
 const efetuarCadastro = () => {
     if(dadosUsuario.senhaRepetida != dadosUsuario.senha){
@@ -26,12 +42,12 @@ const efetuarCadastro = () => {
 }
 const getEmailUsuario = (e) => {
     dadosUsuario.email = e
-    disabledButton.value = ((dadosUsuario.email && dadosUsuario.senha) != '') ? false : true
+    disabledButton.value = ((dadosUsuario.email && dadosUsuario.senha && dadosUsuario.senhaRepetida) != '') ? false : true
 
 }
 const getSenhaUsuario = (e) => {
     dadosUsuario.senha = e
-    disabledButton.value = ((dadosUsuario.email && dadosUsuario.senha) != '') ? false : true
+    disabledButton.value = ((dadosUsuario.email && dadosUsuario.senha && dadosUsuario.senhaRepetida) != '') ? false : true
 
 }
 const getVerificSenhaUsuario = (e) => {
