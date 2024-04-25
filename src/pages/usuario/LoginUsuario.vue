@@ -13,6 +13,7 @@ const dadosUsuario = reactive({
 
 })
 const efetuarLogin = async () => {
+    /*
     try{
         const response = await fetch(`http://localhost:8000/loginUsuario`, {
             method: 'POST',
@@ -29,7 +30,8 @@ const efetuarLogin = async () => {
   }catch(e){
     console.log('Error', e)
 
-  }
+  }*/
+    console.log('Logado!')
 }
 const efetuarCadastro = () => {
     if(dadosUsuario.senhaRepetida != dadosUsuario.senha){
