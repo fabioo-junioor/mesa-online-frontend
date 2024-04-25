@@ -1,29 +1,29 @@
-# mesa-online
+# Mesa Online
+# Sobre o projeto
+Este é um projeto que desenvolvi chamado Mesa Online, é uma aplicação web que consome dados de uma **API** desenvolvida em **PHP** e os exibe em um layout intuitivo e atraente criado em **VueJs**. Todo projeto foi desenvolvido de forma responsiva para melhor adaptação em diversos dispositivos.  
+A Mesa Online é uma ferramenta que foi desenvolvida para proporcionar aos usuários reservarem lugares em estabelecimento comercias como: restaurantes, pub's, bares, etc.
+Os estabelecimentos podem efetuar seu cadastro e disponibilizar informções pertinentes para que usuário possam reservar um os mais lugares com rapidez sem a necessidade de esperar o retorno de um funcionário. 
 
-This template should help get you started developing with Vue 3 in Vite.
+# Principais funcionalidades 
+* Cadastro de Usuário
+* Editar Dados Usuário
+* Cadastro Estabelecimento
+* Editar Dados do Estabelecimento
+* Favoritar Estabelecimento
+* Reservar Lugar(es) no Estabelecimento
+* Layout Responsivo
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+# Tecnologias utilizadas
+* Vue.Js
+* BootstrapVue
+* SASS
+* VueRouter
+* Vite
+* PHP (MVC)
+* MySql
+* Netlify
+  
+# Autor
+#### Fábio Júnior
+#### Email: fcjunior@inf.ufsm.br
+#### Portfólio: https://fabiojuniordev.netlify.app/
