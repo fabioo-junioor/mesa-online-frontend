@@ -3,7 +3,7 @@ import { getTokenUser, getDataUser } from '../config/utils/settingSession.js'
 import Sidebar from '../components/Sidebar.vue'
 import { onMounted, reactive, ref } from "vue";
 
-const visibleToggle = ref(false)
+const visibleToggle = ref(true)
 const dadosUser = reactive({
     id: null,
     nome: 'anonimo'
