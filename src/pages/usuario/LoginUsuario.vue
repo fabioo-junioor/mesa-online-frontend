@@ -1,25 +1,61 @@
 <script setup>
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
+import { saveTokenUserStorage } from '../../config/utils/settingSession.js'
 import Input from '../../components/UI/Input.vue'
 import Button from '../../components/UI/Button.vue'
 
-defineEmits(['update'])
-
+const loginOrCadastro = ref(false)
+const disabledButton = ref(true)
 const dadosUsuario = reactive({
     email: '',
-    senha: ''
+    senha: '',
+    senhaRepetida: ''
 
 })
-const efetuarLogin = () => {
-    console.log('dados->', dadosUsuario.email, dadosUsuario.senha)
+const efetuarLogin = async () => {
+    /*
+    try{
+        const response = await fetch(`http://localhost:8000/loginUsuario`, {
+            method: 'POST',
+            mode: 'cors',
+            body: JSON.stringify(dadosUsuario)
+        })
+        const data = await response.json()
+
+        if(data){
+            console.log(data)
+            //saveTokenUserStorage(data)
+
+        }
+  }catch(e){
+    console.log('Error', e)
+
+  }*/
+    console.log('Logado!')
+}
+const efetuarCadastro = () => {
+    if(dadosUsuario.senhaRepetida != dadosUsuario.senha){
+        console.log('Senha diferentes')
+        return
+        
+    }
+    console.log('Cadastrado!')
+
 }
 const getEmailUsuario = (e) => {
     dadosUsuario.email = e
+    disabledButton.value = ((dadosUsuario.email && dadosUsuario.senha && dadosUsuario.senhaRepetida) != '') ? false : true
 
 }
 const getSenhaUsuario = (e) => {
     dadosUsuario.senha = e
+    disabledButton.value = ((dadosUsuario.email && dadosUsuario.senha && dadosUsuario.senhaRepetida) != '') ? false : true
 
+}
+const getVerificSenhaUsuario = (e) => {
+    dadosUsuario.senhaRepetida = e
+    disabledButton.value = ((dadosUsuario.email && dadosUsuario.senha && dadosUsuario.senhaRepetida) != '') ? false : true
+    
 }
 
 </script>
@@ -36,11 +72,28 @@ const getSenhaUsuario = (e) => {
                     label="Senha"
                     type="password"
                     @getInputLogin="getSenhaUsuario" />
+                <Input
+                    v-if="loginOrCadastro"
+                    label="Repita a Senha"
+                    type="password"
+                    @getInputLogin="getVerificSenhaUsuario" />
                 <Button
+                    v-if="!loginOrCadastro"
+                    :disabled="disabledButton"
                     @efetuarLogin="efetuarLogin"
                     type="Login" />
+                <Button
+                    v-else
+                    :disabled="disabledButton"
+                    @efetuarCadastro="efetuarCadastro"
+                    type="Cadastrar" />
                 <div class="login-left-form-cadastrar">
-                    <a href="#">Cadastrar-se</a>
+                    <a v-if="!loginOrCadastro"
+                        @click="loginOrCadastro = !loginOrCadastro"
+                        href="#">Cadastrar-se</a>
+                    <a v-else
+                        @click="loginOrCadastro = !loginOrCadastro"
+                        href="#">Voltar</a>
                 </div>
             </div>
             <div class="login-left-midias">

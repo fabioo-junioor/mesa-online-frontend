@@ -1,4 +1,37 @@
 <script setup>
+import { getTokenUser, getDataUser } from '../config/utils/settingSession.js'
+import Sidebar from '../components/Sidebar.vue'
+import { onMounted, reactive, ref } from "vue";
+
+const visibleToggle = ref(true)
+const dadosUser = reactive({
+    id: null,
+    nome: 'anonimo'
+})
+
+const verificaTokenUser = () => {
+    if(getTokenUser() != null){
+        visibleToggle = true
+        return location.reload()
+
+    }
+    //console.log(getTokenUser())
+}
+const verificaDadosUser = () => {
+    if(getDataUser() != null){
+        dadosUser.id = 2
+        dadosUser.nome = Fabio
+        return location.reload()
+
+    }
+    //console.log(getDataUser())
+}
+onMounted(() => {
+    verificaTokenUser()
+    verificaDadosUser()
+    console.log('Montou menu!', dadosUser.id, dadosUser.nome)
+
+})
 
 </script>
 <template>
@@ -9,7 +42,7 @@
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
             <b-collapse id="nav-collapse" is-nav>
-                <div class="menu-links">
+                <div class="menu-links" v-if="visibleToggle">
                     <b-navbar-nav>
                         <b-nav-item>
                             <router-link to="/">Inicio</router-link>
@@ -20,6 +53,12 @@
                     </b-navbar-nav>
 
                     <!-- Right aligned nav items -->
+                </div>
+                <div class="menu-toggle-sidebar" v-else>
+                    <b-button v-b-toggle.sidebar-variant>
+                        <i class='bx bx-menu'></i>
+                    </b-button>
+                    <Sidebar :nome="dadosUser.nome" />
                 </div>
                 <div class="menu-usuario">
                     <b-navbar-nav>
@@ -108,6 +147,26 @@
                                     border-bottom: 2px solid white;
 
                                 }                                
+                            }
+                        }
+                    }
+                }
+                .menu-toggle-sidebar{
+                    .btn{
+                        background-color: transparent;
+                        border: 1px solid white;
+                        padding: .2rem;
+
+                        i{
+                            color: white;
+                            font-size: 2rem;
+
+                        }
+                        &:hover{
+                            background-color: white;
+
+                            i{
+                                color: #232526;
                             }
                         }
                     }

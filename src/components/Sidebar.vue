@@ -5,9 +5,6 @@ defineProps(['nome'])
 <template>
   <div id="sidebar">
     <div>
-      <b-button v-b-toggle.sidebar-variant>
-        <i class='bx bx-menu'></i>
-      </b-button>
       <b-sidebar id="sidebar-variant" aria-labelledby="sidebar-title" bg-variant="dark">
         <div class="px-3 py-2">
           <div class="sidebar-header">
@@ -31,11 +28,9 @@ defineProps(['nome'])
 @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap");
 
   #sidebar {
-    height: 100%;
     font-family: "Fredoka", sans-serif;
 
-    .b-sidebar-body{
-
+    .b-sidebar-body{      
       .sidebar-header{
         display: flex;
         align-items: center;
@@ -82,17 +77,6 @@ defineProps(['nome'])
           min-width: 50%;
 
         }
-      }
-    }
-    .btn{
-      background-color: #232526;
-      border: none;
-      padding: .2rem;
-      margin: .3rem;
-
-      i{
-        font-size: 2.5rem;
-
       }
     }
   }

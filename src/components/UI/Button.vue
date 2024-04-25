@@ -1,11 +1,17 @@
 <script setup>
-defineProps(['type'])
+defineProps(['type', 'disabled'])
 
 </script>
 <template>
     <div id="botao">
         <b-button
+            :disabled="disabled"
+            v-if="type == 'Login'"
             @click="$emit('efetuarLogin')">{{type}}</b-button>
+        <b-button
+            :disabled="disabled"
+            v-else-if="type == 'Cadastrar'"
+            @click="$emit('efetuarCadastro')">{{type}}</b-button>
     </div>
 </template>
 <style lang="scss" scoped>
