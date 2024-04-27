@@ -17,7 +17,7 @@ defineProps(['nome'])
           </div>
           <div class="sidebar-links">
             <i class='bx bx-edit-alt'></i>
-            <router-link to="/editarPerfilUsuario">Editar Perfil</router-link>
+            <router-link to="/editarUsuario">Editar Perfil</router-link>
           </div>
         </div>
       </b-sidebar>

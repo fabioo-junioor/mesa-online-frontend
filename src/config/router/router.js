@@ -4,7 +4,7 @@ import Inicio from '../../pages/Inicio.vue'
 import LoginUsuario from '../../pages/usuario/LoginUsuario.vue'
 import LoginEstabelecimento from '../../pages/estabelecimento/LoginEstabelecimento.vue'
 import HomeUsuario from '../../pages/usuario/HomeUsuario.vue'
-import EditarPerfilUsuario from '../../pages/usuario/EditarPerfilUsuario.vue'
+import EditarUsuario from '../../pages/usuario/EditarUsuario.vue'
 
 const routes = [
     {
@@ -28,9 +28,9 @@ const routes = [
         component: HomeUsuario
     },
     {
-        path: '/editarPerfilUsuario',
-        name: 'editarPerfilUsuario',
-        component: EditarPerfilUsuario
+        path: '/editarUsuario',
+        name: 'editarUsuario',
+        component: EditarUsuario
     }
 ]
 
