@@ -1,16 +1,16 @@
 <script setup>
 </script>
 <template>
-    <div id="home-usuario">
-        <h4>home usuario</h4>
+    <div id="buscar-estabelecimento">
+        <h4>buscar estabelecimento</h4>
     </div>
 </template>
 <style lang="scss" scoped>
-    #home-usuario{
+    #buscar-estabelecimento{
         display: flex;
         min-height: calc(100vh - 4rem);
         padding: 1rem;
-        background-color: green;
+        background-color: blueviolet;
 
     }
 </style>

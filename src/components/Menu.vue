@@ -3,7 +3,7 @@ import { getTokenUser, getDataUser } from '../config/utils/settingSession.js'
 import Sidebar from '../components/Sidebar.vue'
 import { onMounted, reactive, ref } from "vue";
 
-const visibleToggle = ref(true)
+const visibleToggle = ref(false)
 const dadosUser = reactive({
     id: null,
     nome: 'anonimo'
@@ -25,6 +25,10 @@ const verificaDadosUser = () => {
 
     }
     //console.log(getDataUser())
+}
+const efeturarLogout = () => {
+    console.log('Saiu!')
+
 }
 onMounted(() => {
     verificaTokenUser()
@@ -58,7 +62,9 @@ onMounted(() => {
                     <b-button v-b-toggle.sidebar-variant>
                         <i class='bx bx-menu'></i>
                     </b-button>
-                    <Sidebar :nome="dadosUser.nome" />
+                    <Sidebar
+                        :nome="dadosUser.nome"
+                        @efeturarLogout="efeturarLogout" />
                 </div>
                 <div class="menu-usuario">
                     <b-navbar-nav>

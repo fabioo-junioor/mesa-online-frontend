@@ -8,7 +8,7 @@ defineProps(['nome'])
       <b-sidebar id="sidebar-variant" aria-labelledby="sidebar-title" bg-variant="dark">
         <div class="px-3 py-2">
           <div class="sidebar-header">
-            <i class='bx bx-user-circle'></i>
+            <img src="../assets/usuario/usuarioDefault.png" />
             <h4 id="sidebar-title">{{ nome }}</h4>
           </div>
           <div class="sidebar-links">
@@ -16,8 +16,16 @@ defineProps(['nome'])
             <router-link to="/homeUsuario">Inicio</router-link>
           </div>
           <div class="sidebar-links">
+            <i class='bx bx-search-alt'></i>
+            <router-link to="/buscarEstabelecimento">Buscar</router-link>
+          </div>
+          <div class="sidebar-links">
             <i class='bx bx-edit-alt'></i>
-            <router-link to="/editarPerfilUsuario">Editar Perfil</router-link>
+            <router-link to="/editarUsuario">Editar Perfil</router-link>
+          </div>
+          <div class="sidebar-links">
+            <i class='bx bx-log-out'></i>
+            <a @click="$emit('efeturarLogout')">Sair</a>
           </div>
         </div>
       </b-sidebar>
@@ -33,15 +41,15 @@ defineProps(['nome'])
     .b-sidebar-body{      
       .sidebar-header{
         display: flex;
+        flex-direction: column;
         align-items: center;
         margin: 0 0 2rem 0;
-        border-bottom: 1px solid white;
+        border: 1px solid white;
+        border-radius: 5px;
+        background-color: rgb(20, 20, 30);
 
-        i{
-          color: white;
-          font-size: 1.6rem;
-          padding: .3rem;
-          border-right: 1px solid white;
+        img{
+          max-height: 10rem;
 
         }
         #sidebar-title{
@@ -57,26 +65,33 @@ defineProps(['nome'])
         display: flex;
         align-items: center;
         margin: 1rem 0;
-        padding: 0 0 .5rem .4rem;
+        border: 1px solid white;
+        border-radius: 5px;
+        width: 100%;
+        background-color: rgb(20, 20, 30);
 
         i{
           color: white;
-          font-size: 1.3rem;
-          padding: 0 .5rem 0 0;
+          font-size: 1.5rem;
+          padding: 0 .5rem;
 
         }  
         a{
           text-decoration: none;
           color: white;
           font-size: 1.1rem;
-          min-width: 50%;
+          width: 100%;
+          padding: .5rem 0;
+          cursor: pointer;
   
         }
-        &:hover{
-          border-bottom: 1px solid white;
-          min-width: 50%;
-
-        }
+      }
+      .sidebar-links:hover,
+      .sidebar-links:hover a,
+      .sidebar-links:hover i{
+        background-color: white;
+        color: rgb(20, 20, 30);
+        
       }
     }
   }
