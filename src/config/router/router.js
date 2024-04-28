@@ -5,6 +5,7 @@ import LoginUsuario from '../../pages/usuario/LoginUsuario.vue'
 import LoginEstabelecimento from '../../pages/estabelecimento/LoginEstabelecimento.vue'
 import HomeUsuario from '../../pages/usuario/HomeUsuario.vue'
 import EditarUsuario from '../../pages/usuario/EditarUsuario.vue'
+import BuscarEstabelecimento from '../../pages/usuario/BuscarEstabelecimento.vue'
 
 const routes = [
     {
@@ -31,6 +32,11 @@ const routes = [
         path: '/editarUsuario',
         name: 'editarUsuario',
         component: EditarUsuario
+    },
+    {
+        path: '/buscarEstabelecimento',
+        name: 'buscarEstabelecimento',
+        component: BuscarEstabelecimento
     }
 ]
 

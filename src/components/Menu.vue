@@ -26,6 +26,10 @@ const verificaDadosUser = () => {
     }
     //console.log(getDataUser())
 }
+const efeturarLogout = () => {
+    console.log('Saiu!')
+
+}
 onMounted(() => {
     verificaTokenUser()
     verificaDadosUser()
@@ -58,7 +62,9 @@ onMounted(() => {
                     <b-button v-b-toggle.sidebar-variant>
                         <i class='bx bx-menu'></i>
                     </b-button>
-                    <Sidebar :nome="dadosUser.nome" />
+                    <Sidebar
+                        :nome="dadosUser.nome"
+                        @efeturarLogout="efeturarLogout" />
                 </div>
                 <div class="menu-usuario">
                     <b-navbar-nav>
