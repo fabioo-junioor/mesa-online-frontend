@@ -1,18 +1,15 @@
 <script setup>
 import { reactive, ref } from 'vue'
 import { saveTokenUserStorage } from '../../config/utils/settingSession.js'
-import Input from '../../components/UI/Input.vue'
-import Button from '../../components/UI/Button.vue'
 
 const loginOrCadastro = ref(false)
-const disabledButton = ref(true)
 const dadosUsuario = reactive({
     email: '',
     senha: '',
     senhaRepetida: ''
 
 })
-const efetuarLogin = async () => {
+const efetuarLoginOrCadastro = async () => {
     /*
     try{
         const response = await fetch(`http://localhost:8000/loginUsuario`, {
@@ -31,31 +28,42 @@ const efetuarLogin = async () => {
     console.log('Error', e)
 
   }*/
-    console.log('Logado!')
+  if(!loginOrCadastro.value){
+      console.log('Logado!')
+
+  }else{
+    console.log('Cadastrado!')
+    
+  }
+}
+const efetuarLogin = () => {
+
 }
 const efetuarCadastro = () => {
-    if(dadosUsuario.senhaRepetida != dadosUsuario.senha){
-        console.log('Senha diferentes')
-        return
-        
+
+}
+const alterarForm = () => {
+    loginOrCadastro.value = !loginOrCadastro.value
+
+}
+function verificaBotaoEntrar(){
+    if((dadosUsuario.email != '') && (dadosUsuario.senha != '')){
+        return true
     }
-    console.log('Cadastrado!')
+    return false
 
 }
-const getEmailUsuario = (e) => {
-    dadosUsuario.email = e
-    disabledButton.value = ((dadosUsuario.email && dadosUsuario.senha && dadosUsuario.senhaRepetida) != '') ? false : true
+function verificaBotaoCadastrar(){
+    if((dadosUsuario.email != '') && (dadosUsuario.senha != '') && (dadosUsuario.senhaRepetida != '')){
+        if(dadosUsuario.senha === dadosUsuario.senhaRepetida){
+            return true
 
-}
-const getSenhaUsuario = (e) => {
-    dadosUsuario.senha = e
-    disabledButton.value = ((dadosUsuario.email && dadosUsuario.senha && dadosUsuario.senhaRepetida) != '') ? false : true
+        }
+        return false
 
-}
-const getVerificSenhaUsuario = (e) => {
-    dadosUsuario.senhaRepetida = e
-    disabledButton.value = ((dadosUsuario.email && dadosUsuario.senha && dadosUsuario.senhaRepetida) != '') ? false : true
-    
+    }
+    return false
+
 }
 
 </script>
@@ -64,35 +72,42 @@ const getVerificSenhaUsuario = (e) => {
         <div class="login-left">
             <div class="login-left-logo">Mesa Online</div>
             <div class="login-left-form">
-                <Input
-                    label="Email"
-                    type="text"
-                    @getInputLogin="getEmailUsuario" />
-                <Input
-                    label="Senha"
-                    type="password"
-                    @getInputLogin="getSenhaUsuario" />
-                <Input
-                    v-if="loginOrCadastro"
-                    label="Repita a Senha"
-                    type="password"
-                    @getInputLogin="getVerificSenhaUsuario" />
-                <Button
-                    v-if="!loginOrCadastro"
-                    :disabled="disabledButton"
-                    @efetuarLogin="efetuarLogin"
-                    type="Login" />
-                <Button
-                    v-else
-                    :disabled="disabledButton"
-                    @efetuarCadastro="efetuarCadastro"
-                    type="Cadastrar" />
+                <q-form @submit="efetuarLoginOrCadastro">
+                    <q-input
+                        square filled
+                        type="text"
+                        label="Email"
+                        v-model="dadosUsuario.email" />
+                    <q-input
+                        square filled
+                        type="password"
+                        label="Senha"
+                        v-model="dadosUsuario.senha" />
+                    <q-input
+                        v-if="loginOrCadastro"
+                        square filled
+                        type="password"
+                        label="Repita a Senha"
+                        :v-model="dadosUsuario.senhaRepetida" />
+                    <div>
+                        <q-btn
+                            color="secondary"
+                            label="Entrar"
+                            type="submit"
+                            v-if="!loginOrCadastro" />
+                        <q-btn
+                            v-else
+                            color="black"
+                            label="Cadastrar"
+                            type="submit" />
+                    </div>
+                </q-form>
                 <div class="login-left-form-cadastrar">
                     <a v-if="!loginOrCadastro"
-                        @click="loginOrCadastro = !loginOrCadastro"
+                        @click="alterarForm"
                         href="#">Cadastrar-se</a>
                     <a v-else
-                        @click="loginOrCadastro = !loginOrCadastro"
+                        @click="alterarForm"
                         href="#">Voltar</a>
                 </div>
             </div>
@@ -136,6 +151,26 @@ const getVerificSenhaUsuario = (e) => {
             flex-direction: column;
             justify-content: space-between;
 
+            .login-left-form{
+                .q-form{
+                    .q-input{
+                        margin: 1rem 0;
+
+                    }
+                    .q-btn{
+                        width: 100%;
+                        height: 3rem;
+                        margin: 0 0 1rem 0;
+                        border-radius: 5px;
+                        background-color: #1D976C;
+                        border: none;
+
+                        &:hover{
+                            background-color: #1d976cce;
+                        }
+                    }
+                }
+            }
             .login-left-form-cadastrar{
                 text-align: center;
 
