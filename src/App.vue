@@ -1,5 +1,5 @@
 <script setup>
-import Menu from './components/Menu.vue'
+import NavBar from './components/NavBar.vue'
 
 /*
 const auth = async () =>{
@@ -22,8 +22,7 @@ const auth = async () =>{
 
 <template>
   <div id="app">
-    <Menu />
-    <router-view />
+    <NavBar />
   </div>
 </template>
 

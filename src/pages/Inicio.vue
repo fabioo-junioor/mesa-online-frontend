@@ -1,5 +1,4 @@
 <script setup>
-import Menu from '../components/Menu.vue'
 
 </script>
 <template>
@@ -9,6 +8,7 @@ import Menu from '../components/Menu.vue'
 </template>
 <style lang="scss" scoped>
     #inicio{
-        
+        background-color: purple;
+        height: calc(100vh - 3.1rem);
     }
 </style>

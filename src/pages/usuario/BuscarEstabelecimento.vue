@@ -8,7 +8,7 @@
 <style lang="scss" scoped>
     #buscar-estabelecimento{
         display: flex;
-        min-height: calc(100vh - 4rem);
+        min-height: calc(100vh - 3.1rem);
         padding: 1rem;
         background-color: blueviolet;
 
