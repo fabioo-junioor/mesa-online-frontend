@@ -1,88 +1,137 @@
 <script setup>
-import { reactive, ref } from "vue";
+import { onMounted, reactive, ref, watch } from "vue";
+import { useRoute } from 'vue-router'
+import { saveTokenUserStorage } from "../../config/utils/settingSession.js";
 
-const loginOrCadastro = ref(false);
-const disabledButton = ref(true);
+const loginOrCadastro = ref(true)
+const inputRef = ref(null)
+const router = useRoute()
 const dadosEstabelecimento = reactive({
-  email: "",
-  senha: "",
-  senhaRepetida: "",
+  email: null,
+  senha: null,
+  senhaRepetida: null
+
 });
+const efetuarLoginOrCadastro = async () => {
+  if (loginOrCadastro.value) {
+    efetuarLogin();
+  } else {
+    if (verificaIgualdadeSenha()) {
+      efetuarCadastro();
+      return
+
+    }
+    console.log("Senhas diferentes!")
+
+  }
+};
 const efetuarLogin = () => {
-  console.log("Logado!");
+  console.log("Logado!")
+
+  /*
+    try{
+        const response = await fetch(`http://localhost:8000/loginUsuario`, {
+            method: 'POST',
+            mode: 'cors',
+            body: JSON.stringify(dadosUsuario)
+        })
+        const data = await response.json()
+
+        if(data){
+            console.log(data)
+            //saveTokenUserStorage(data)
+
+        }
+  }catch(e){
+    console.log('Error', e)
+
+  }*/
 };
 const efetuarCadastro = () => {
-  if (dadosEstabelecimento.senhaRepetida != dadosEstabelecimento.senha) {
-    console.log("Senha diferentes");
-    return;
-  }
-  console.log("Cadastrado!");
+  console.log("Cadastro!")
+
 };
+const alterarFormulario = () => {
+  loginOrCadastro.value = !loginOrCadastro.value
+  inputRef.value.resetValidation()
+  
+}
+function verificaIgualdadeSenha() {
+  if (dadosEstabelecimento.senha === dadosEstabelecimento.senhaRepetida) {
+    return true
+
+  }
+  return false
+
+}
+watch(() => parseInt(router.params.cadE), (newCad, oldCad) => {
+  loginOrCadastro.value = (newCad === 1) ? false : true
+
+})
+onMounted(() => {
+  loginOrCadastro.value = (parseInt(router.params.cadE) === 1) ? false : true
+
+})
 </script>
 <template>
   <div id="login-estabelecimento">
-    <div class="login-left">
-      <div class="login-left-logo">Mesa Online</div>
-      <div class="login-left-form">
-        <q-form @submit="efetuarLogin">
-          <q-input
-            square
-            filled
-            type="text"
-            v-model="dadosEstabelecimento.email"
-            label="Email"
-          />
-          <q-input
-            square
-            filled
-            type="password"
-            v-model="dadosEstabelecimento.senha"
-            label="Senha"
-          />
-          <q-input
-            v-if="loginOrCadastro"
-            square
-            filled
-            type="password"
-            :v-model="dadosEstabelecimento.senhaRepetida"
-            label="Repita a Senha"
-          />
-          <div>
-            <q-btn
-              color="secondary"
-              label="Entrar"
-              type="submit"
-              v-if="!loginOrCadastro"
-              :disabled="disabledButton"
-            />
-            <q-btn
-              v-else
-              label="Cadastrar"
-              type="submit"
-              :disabled="disabledButton"
-            />
-          </div>
-        </q-form>
-        <div class="login-left-form-cadastrar">
-          <a
-            v-if="!loginOrCadastro"
-            @click="loginOrCadastro = !loginOrCadastro"
-            href="#"
-            >Cadastrar-se</a
-          >
-          <a v-else @click="loginOrCadastro = !loginOrCadastro" href="#"
-            >Voltar</a
-          >
+    <div class="login-estabelecimento-body">
+        <div v-if="loginOrCadastro" class="login-estabelecimento-body-logo">Efetuar Login</div>
+        <div v-else class="login-estabelecimento-body-logo">Cadastrar Estabelecimento</div>
+        <div class="login-estabelecimento-body-form">
+            <q-form @submit="efetuarLoginOrCadastro">
+                <q-input
+                square
+                filled
+                ref="inputRef"
+                type="text"
+                label="Email"
+                v-model="dadosEstabelecimento.email"
+                :rules="[(val) => !!val || 'Preencha o campo']" />
+                <q-input
+                square
+                filled
+                ref="inputRef"
+                type="password"
+                label="Senha"
+                v-model="dadosEstabelecimento.senha"
+                :rules="[(val) => !!val || 'Preencha o campo']" />
+                <q-input
+                v-if="!loginOrCadastro"
+                square
+                filled
+                ref="inputRef"
+                type="password"
+                label="Repita a Senha"
+                v-model="dadosEstabelecimento.senhaRepetida"
+                :rules="[(val) => !!val || 'Preencha o campo']" />
+                <div>
+                    <q-btn
+                        v-if="loginOrCadastro"
+                        color="secondary"
+                        label="Entrar"
+                        type="submit" />
+                    <q-btn 
+                        v-else 
+                        color="black" 
+                        label="Cadastrar" 
+                        type="submit" />
+                </div>
+            </q-form>
+            <div class="login-estabelecimento-body-form-cadastrar">
+                <a v-if="loginOrCadastro" @click="alterarFormulario" href="#"
+                >Cadastrar-se</a>
+                <a v-else @click="alterarFormulario" href="#">Voltar</a>
+            </div>
         </div>
-      </div>
-      <div class="login-left-midias">
-        <a href="#">
-          <i class="bx bxl-linkedin-square"></i>
-        </a>
-      </div>
-    </div>
-    <div class="login-right">
-      <h2>Bem vindo!</h2>
+        <div class="login-estabelecimento-body-midias">
+            <a href="#">
+                <i class="bx bxl-instagram"></i>
+            </a>
+            <a href="#">
+                <i class="bx bxl-linkedin-square"></i>
+            </a>
+        </div>
     </div>
   </div>
 </template>
@@ -91,12 +140,10 @@ const efetuarCadastro = () => {
 
 #login-estabelecimento {
   background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),
-    url("../../assets/imagens/background_page_establishment.jpg") no-repeat
-      fixed center;
+    url("../../assets/imagens/background_page_establishment.jpg") no-repeat fixed center;
   background-size: cover;
   font-family: "Fredoka", sans-serif;
-  background-color: green;
-  height: calc(100vh - 4rem);
+  height: calc(100vh - 3.1rem);
   width: 100%;
   padding: 1rem;
 
@@ -104,124 +151,104 @@ const efetuarCadastro = () => {
   justify-content: center;
   align-items: center;
 
-  .login-left {
+  .login-estabelecimento-body{
     width: 30%;
-    height: 70%;
-    padding: 0.5rem;
+    height: 80%;
     background-color: white;
-
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: space-between;
+    box-shadow: 4px 4px 0px 0px #1d976cce;
 
-    .login-left-form{
-        .q-form{
-            .q-input{
-                margin: 1rem 0;
+    .login-estabelecimento-body-logo{
+        font-size: 2rem;
+        padding: 1rem 0 0 0;
+        text-align: center;
+        
+    }
+    .login-estabelecimento-body-form{
+        width: 95%;
 
-            }
-            .q-btn{
-                width: 100%;
-                height: 3rem;
-                margin: 0 0 1rem 0;
-                border-radius: 5px;
-                background-color: #1D976C;
-                border: none;
+        .q-input {
+            margin: 1rem 0;
 
-                &:hover{
-                    background-color: #1d976cce;
-                }
+        }
+        .q-btn {
+            width: 100%;
+            height: 3rem;
+            margin: 0 0 1rem 0;
+            border-radius: 5px;
+
+        }
+        .login-estabelecimento-body-form-cadastrar{
+            text-align: center;
+        
+            a {
+              color: $negative;
+              font-size: 1rem;
+        
+              &:hover {
+                color: $botaoVerde;
+
+              }
             }
         }
     }
-    .login-left-form-cadastrar {
-      text-align: center;
-
-      a {
-        color: #333;
-        font-size: 1rem;
-
-        &:hover {
-          color: #1d976cbb;
-        }
-      }
-    }
-    .login-left-midias {
-      display: flex;
-      justify-content: flex-end;
-
-      a {
+    .login-estabelecimento-body-midias{
         display: flex;
-        align-items: center;
-        margin: 0.3rem;
-        text-decoration: none;
 
-        i {
-          color: #333;
-          font-size: 1.8rem;
+        a {
+          display: flex;
+          align-items: center;
+          margin: 0.3rem;
+          text-decoration: none;
+    
+          i {
+            color: $iconsCinza;
+            font-size: 2rem;
+    
+            &:hover {
+              color: $botaoVerde;
 
-          &:hover {
-            color: #1d976cbb;
+            }
           }
         }
       }
     }
   }
-  .login-right {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-      url("../../assets/imagens/background_page_establishment.jpg") no-repeat
-        fixed center;
-    background-size: cover;
-    width: 45%;
-    height: 70%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.5rem;
-
-    h2 {
-      color: white;
-    }
-  }
-}
 /*################################################*/
 @media only screen and (max-width: 1560px) {
 }
 @media only screen and (max-width: 1200px) {
+  #login-estabelecimento{
+    .login-estabelecimento-body{
+      width: 50%;
+
+    }
+  }
 }
 @media only screen and (max-width: 992px) {
-  #login-estabelecimento {
-    .login-left {
-      width: 40%;
-    }
-    .login-right {
-      width: 50%;
+  #login-estabelecimento{
+    .login-estabelecimento-body{
+      width: 60%;
+      
     }
   }
 }
 @media only screen and (max-width: 720px) {
-  #login-estabelecimento {
-    padding: 0.5rem;
-
-    .login-left {
-      width: 45%;
-    }
-    .login-right {
-      width: 50%;
+  #login-estabelecimento{
+    .login-estabelecimento-body{
+      width: 90%;
+      
     }
   }
 }
 @media only screen and (max-width: 481px) {
-  #login-estabelecimento {
-    flex-direction: column-reverse;
-
-    .login-left {
+  #login-estabelecimento{
+    .login-estabelecimento-body{
       width: 100%;
-      height: 75%;
-    }
-    .login-right {
-      width: 100%;
-      height: 20%;
+      
     }
   }
 }

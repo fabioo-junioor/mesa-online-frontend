@@ -19,8 +19,18 @@ const routes = [
         component: LoginUsuario
     },
     {
+        path: '/cadastrarUsuario/:cadU',
+        name: 'cadastrarUsuario',
+        component: LoginUsuario
+    },
+    {
         path: '/loginEstabelecimento',
         name: 'loginEstabelecimento',
+        component: LoginEstabelecimento
+    },
+    {
+        path: '/cadastrarEstabelecimento/:cadE',
+        name: 'cadastrarEstabelecimento',
         component: LoginEstabelecimento
     },
     {

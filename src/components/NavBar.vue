@@ -6,34 +6,40 @@ const leftDrawerOpen = ref(false);
 const visibleToggle = ref(true);
 const dadosUser = reactive({
   id: null,
-  nome: "anonimo",
-});
+  nome: "Anônimo",
+
+})
 const toggleLeftDrawer = () => {
-  leftDrawerOpen.value = !leftDrawerOpen.value;
-};
+  leftDrawerOpen.value = !leftDrawerOpen.value
+
+}
 const verificaTokenUser = () => {
   if (getTokenUser() != null) {
-    visibleToggle = true;
-    return location.reload();
+    visibleToggle = true
+    return location.reload()
+
   }
   //console.log(getTokenUser())
-};
+}
 const verificaDadosUser = () => {
   if (getDataUser() != null) {
-    dadosUser.id = 2;
-    dadosUser.nome = Fabio;
-    return location.reload();
+    dadosUser.id = 2
+    dadosUser.nome = Fabio
+    return location.reload()
+
   }
   //console.log(getDataUser())
 };
 const efeturarLogout = () => {
-  console.log("Saiu!");
-};
+  console.log("Saiu!")
+
+}
 onMounted(() => {
   //verificaTokenUser()
   //verificaDadosUser()
-  console.log("Montou menu!", dadosUser.id, dadosUser.nome);
-});
+  console.log("Montou menu!", dadosUser.id, dadosUser.nome)
+
+})
 </script>
 <template>
   <div id="nav-bar">
@@ -46,8 +52,7 @@ onMounted(() => {
             flat
             round
             icon="menu"
-            @click="toggleLeftDrawer"
-          />
+            @click="toggleLeftDrawer" />
 
           <q-toolbar-title> Mesa Online </q-toolbar-title>
 
@@ -60,7 +65,7 @@ onMounted(() => {
                   </q-avatar>
                 </q-item-section>
                 <q-item-section>
-                  <router-link to="/loginUsuario"> Usuário </router-link>
+                  <router-link to="/loginUsuario">Usuário</router-link>
                 </q-item-section>
               </q-item>
               <q-item clickable v-close-popup tabindex="0">
@@ -70,9 +75,31 @@ onMounted(() => {
                   </q-avatar>
                 </q-item-section>
                 <q-item-section>
-                  <router-link class="link" to="/loginEstabelecimento">
-                    Estabelecimento
-                  </router-link>
+                  <router-link to="/loginEstabelecimento">Estabelecimento</router-link>
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </q-btn-dropdown>
+          <q-btn-dropdown class="nav-bar-cadastrar" stretch flat label="Cadastrar">
+            <q-list>
+              <q-item clickable v-close-popup tabindex="0">
+                <q-item-section avatar>
+                  <q-avatar color="dark" text-color="white">
+                    <i class="bx bx-user"></i>
+                  </q-avatar>
+                </q-item-section>
+                <q-item-section>
+                  <router-link :to="{name: 'cadastrarUsuario', params:{ cadU: 1 } }">Usuário</router-link>
+                </q-item-section>
+              </q-item>
+              <q-item clickable v-close-popup tabindex="0">
+                <q-item-section avatar>
+                  <q-avatar color="dark" text-color="white">
+                    <i class="bx bx-home"></i>
+                  </q-avatar>
+                </q-item-section>
+                <q-item-section>
+                  <router-link :to="{name: 'cadastrarEstabelecimento', params:{cadE: 1 } }">Estabelecimento</router-link>
                 </q-item-section>
               </q-item>
             </q-list>
@@ -85,8 +112,7 @@ onMounted(() => {
         v-model="leftDrawerOpen"
         side="left"
         overlay
-        elevated
-      >
+        elevated>
         <div class="menu-sidebar">
           <div class="menu-sidebar-header">
             <img src="../assets/usuario/usuarioDefault.png" />
@@ -119,6 +145,10 @@ onMounted(() => {
 #nav-bar {
   font-family: "Fredoka", sans-serif;
 
+  .nav-bar-cadastrar{
+    background-color: $botaoVerde;
+  }
+
   .menu-sidebar {
     padding: 0.2rem;
 
@@ -133,6 +163,7 @@ onMounted(() => {
 
       img {
         max-height: 10rem;
+
       }
       #sidebar-title {
         padding: 0.3rem;

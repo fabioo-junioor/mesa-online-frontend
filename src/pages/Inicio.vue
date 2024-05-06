@@ -8,6 +8,7 @@
 </template>
 <style lang="scss" scoped>
     #inicio{
-        
+        background-color: purple;
+        height: calc(100vh - 3.1rem);
     }
 </style>
