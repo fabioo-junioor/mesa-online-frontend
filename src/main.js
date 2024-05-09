@@ -10,11 +10,14 @@ import router from './config/router/router.js'
 //import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 // Quasar
-import { Quasar } from 'quasar'
+import { Quasar, Notify } from 'quasar'
 import '@quasar/extras/material-icons/material-icons.css'
 import 'quasar/src/css/index.sass'
 
 createApp(App)
-    .use(Quasar)
+    .use(Quasar, {
+            plugins: {Notify}
+        }
+    )
     .use(router)
     .mount('#app')
