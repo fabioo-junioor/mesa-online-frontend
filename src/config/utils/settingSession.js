@@ -1,4 +1,4 @@
-function saveTokenUserStorage(userToken){
+function saveTokenUser(userToken){
     localStorage.setItem('token', userToken)
 
 }
@@ -10,12 +10,18 @@ function deleteTokenUser(){
     localStorage.removeItem('token')
 
 }
-function saveDataUserStorage(dadosUser){
-    localStorage.setItem('dadosUser', dadosUser)
+function saveDataUser(dadosUser){
+    localStorage.setItem('dadosUser', JSON.stringify(dadosUser))
 
 }
 function getDataUser(){
-    return localStorage.getItem('dadosUser') ? localStorage.getItem('dadosUser') : null
+    if(localStorage.getItem('dadosUser')){
+        let dadosUserString = localStorage.getItem('dadosUser')
+        let dadosUserObj = JSON.parse(dadosUserString)
+        return dadosUserObj
+
+    }
+    return null
 
 }
 function deleteDataUser(){
@@ -23,8 +29,8 @@ function deleteDataUser(){
 
 }
 export { getTokenUser,
-        saveTokenUserStorage,
+        saveTokenUser,
         deleteTokenUser,
         getDataUser,
-        saveDataUserStorage,
+        saveDataUser,
         deleteDataUser }

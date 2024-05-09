@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted } from 'vue'
 import { useQuasar } from 'quasar'
+
 const props = defineProps({
     type: String,
     msg: String
@@ -15,7 +16,6 @@ const trigger = () => {
     })
 }
 onMounted(() => {
-    console.log('sasas')
     trigger()
 
 })

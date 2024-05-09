@@ -1,75 +1,129 @@
 <script setup>
 import { onMounted, reactive, ref, watch } from "vue";
 import { useRoute } from 'vue-router'
-import { saveTokenUserStorage } from "../../config/utils/settingSession.js";
+import { saveDataUser, saveTokenUser } from "../../config/utils/settingSession.js";
+import Alert from '../../components/Alert.vue'
 
+const route = useRoute()
 const loginOrCadastro = ref(true)
 const inputRef = ref(null)
-const router = useRoute()
+const urlApi = ref('')
+const getAlert = reactive({
+  isAlert: false,
+  type: '',
+  msg: ''
+
+})
 const dadosUsuario = reactive({
   email: null,
   senha: null,
-  senhaRepetida: null,
+  senhaRepetida: null
+
 });
 const efetuarLoginOrCadastro = async () => {
+  await desactivateAlert()
   if (loginOrCadastro.value) {
-    efetuarLogin();
+    efetuarLogin()
+
   } else {
     if (verificaIgualdadeSenha()) {
-      efetuarCadastro();
-      return;
+      efetuarCadastro()
+      return
+
     }
-    console.log("Senhas diferentes!");
+    await activateAlert('warning', 'Senhas diferentes!')
   }
 };
-const efetuarLogin = () => {
-  console.log("Logado!");
-  /*
-    try{
-        const response = await fetch(`http://localhost:8000/loginUsuario`, {
-            method: 'POST',
-            mode: 'cors',
-            body: JSON.stringify(dadosUsuario)
-        })
-        const data = await response.json()
+const efetuarLogin = async () => {
+  const response = await fetch(urlApi.value+'loginUsuario', {
+      method: 'POST',
+      mode: 'cors',
+      body: JSON.stringify({
+        email: dadosUsuario.email,
+        senha: dadosUsuario.senha
+      })
+  })
+  const data = await response.json()
+  if(data.msg == 'success'){
+      saveTokenUser(data.token)
+      await getDadosUsuario(data.token, data.id)
+      return location.reload()
 
-        if(data){
-            console.log(data)
-            //saveTokenUserStorage(data)
+  }
+  activateAlert('warning', data.msg)
 
-        }
-  }catch(e){
-    console.log('Error', e)
-
-  }*/
 };
-const efetuarCadastro = () => {
-  console.log("Cadastro!");
-};
+const efetuarCadastro = async () => {
+  const response = await fetch(urlApi.value+'usuario', {
+      method: 'POST',
+      mode: 'cors',
+      body: JSON.stringify({
+        email: dadosUsuario.email,
+        senha: dadosUsuario.senha
+      })
+  })
+  const data = await response.json()
+  if(data.code == 201){
+    await activateAlert('positive', data.msg)
+    return
+
+  }
+  await activateAlert('negative', data.msg)
+
+}
+const getDadosUsuario = async (token, id) => {
+    const response = await fetch(urlApi.value+`usuario/${id}`, {
+        headers: { Authorization: `Bearer ${token}`},
+        method: 'GET',
+        mode: 'cors',
+    })
+    const data = await response.json()
+    if(data){
+      saveDataUser(data)
+
+    }  
+}
 const alterarFormulario = () => {
   loginOrCadastro.value = !loginOrCadastro.value
   inputRef.value.resetValidation()
   
-};
-
+}
 function verificaIgualdadeSenha() {
   if (dadosUsuario.senha === dadosUsuario.senhaRepetida) {
-    return true;
+    return true
+
   }
-  return false;
+  return false
+
 }
-watch(() => parseInt(router.params.cadU), (newCad, oldCad) => {
+const activateAlert = async (type, msg) => {
+  getAlert.isAlert = true
+  getAlert.type = type
+  getAlert.msg = msg
+
+}
+const desactivateAlert = async () => {
+  getAlert.isAlert = false
+  getAlert.type = ''
+  getAlert.msg = ''
+
+}
+watch(() => parseInt(route.params.cadU), (newCad, oldCad) => {
   loginOrCadastro.value = (newCad === 1) ? false : true
 
 })
 onMounted(() => {
-  loginOrCadastro.value = (parseInt(router.params.cadU)) === 1 ? false : true
-      
+  loginOrCadastro.value = (parseInt(route.params.cadU)) === 1 ? false : true
+  urlApi.value = import.meta.env.VITE_ROOT_API
 
 })
 </script>
 <template>
   <div id="login-usuario">
+    <Alert 
+      v-if="getAlert.isAlert"
+      :type="getAlert.type"
+      :msg="getAlert.msg" />
     <div class="login-usuario-body">
         <div v-if="loginOrCadastro" class="login-usuario-body-logo">Efetuar Login</div>
         <div v-else class="login-usuario-body-logo">Cadastrar Usuário</div>

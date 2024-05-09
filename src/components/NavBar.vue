@@ -1,11 +1,11 @@
 <script setup>
-import { getTokenUser, getDataUser } from "../config/utils/settingSession.js";
+import { getTokenUser, getDataUser, deleteTokenUser, deleteDataUser } from "../config/utils/settingSession.js";
 import { ref, reactive, onMounted } from "vue";
 
-const leftDrawerOpen = ref(false);
-const visibleToggle = ref(true);
+const leftDrawerOpen = ref(false)
+const visibleToggle = ref(false)
+const urlApi = ref('')
 const dadosUser = reactive({
-  id: null,
   nome: "Anônimo",
 
 })
@@ -15,29 +15,26 @@ const toggleLeftDrawer = () => {
 }
 const verificaTokenUser = () => {
   if (getTokenUser() != null) {
-    visibleToggle = true
-    return location.reload()
+    visibleToggle.value = true
 
   }
-  //console.log(getTokenUser())
 }
 const verificaDadosUser = () => {
   if (getDataUser() != null) {
-    dadosUser.id = 2
-    dadosUser.nome = Fabio
-    return location.reload()
+    dadosUser.nome = getDataUser().email
 
   }
-  //console.log(getDataUser())
-};
+}
 const efeturarLogout = () => {
-  console.log("Saiu!")
+  deleteTokenUser()
+  deleteDataUser()
+  console.log('Saiu!')
+  return location.reload()
 
 }
 onMounted(() => {
-  //verificaTokenUser()
-  //verificaDadosUser()
-  console.log("Montou menu!", dadosUser.id, dadosUser.nome)
+  verificaTokenUser()
+  verificaDadosUser()
 
 })
 </script>
@@ -56,54 +53,63 @@ onMounted(() => {
 
           <q-toolbar-title> Mesa Online </q-toolbar-title>
 
-          <q-btn-dropdown class="nav-bar-login" stretch flat label="Login">
-            <q-list>
-              <q-item clickable v-close-popup tabindex="0">
-                <q-item-section avatar>
-                  <q-avatar color="dark" text-color="white">
-                    <i class="bx bx-user"></i>
-                  </q-avatar>
-                </q-item-section>
-                <q-item-section>
-                  <router-link to="/loginUsuario">Usuário</router-link>
-                </q-item-section>
-              </q-item>
-              <q-item clickable v-close-popup tabindex="0">
-                <q-item-section avatar>
-                  <q-avatar color="dark" text-color="white">
-                    <i class="bx bx-home"></i>
-                  </q-avatar>
-                </q-item-section>
-                <q-item-section>
-                  <router-link to="/loginEstabelecimento">Estabelecimento</router-link>
-                </q-item-section>
-              </q-item>
-            </q-list>
-          </q-btn-dropdown>
-          <q-btn-dropdown class="nav-bar-cadastrar" stretch flat label="Cadastrar">
-            <q-list>
-              <q-item clickable v-close-popup tabindex="0">
-                <q-item-section avatar>
-                  <q-avatar color="dark" text-color="white">
-                    <i class="bx bx-user"></i>
-                  </q-avatar>
-                </q-item-section>
-                <q-item-section>
-                  <router-link :to="{name: 'cadastrarUsuario', params:{ cadU: 1 } }">Usuário</router-link>
-                </q-item-section>
-              </q-item>
-              <q-item clickable v-close-popup tabindex="0">
-                <q-item-section avatar>
-                  <q-avatar color="dark" text-color="white">
-                    <i class="bx bx-home"></i>
-                  </q-avatar>
-                </q-item-section>
-                <q-item-section>
-                  <router-link :to="{name: 'cadastrarEstabelecimento', params:{cadE: 1 } }">Estabelecimento</router-link>
-                </q-item-section>
-              </q-item>
-            </q-list>
-          </q-btn-dropdown>
+          <div v-if="!visibleToggle" class="nav-bar-login-state">
+            <q-btn-dropdown class="nav-bar-login" stretch flat label="Login">
+              <q-list>
+                <q-item clickable v-close-popup tabindex="0">
+                  <q-item-section avatar>
+                    <q-avatar color="dark" text-color="white">
+                      <i class="bx bx-user"></i>
+                    </q-avatar>
+                  </q-item-section>
+                  <q-item-section>
+                    <router-link to="/loginUsuario">Usuário</router-link>
+                  </q-item-section>
+                </q-item>
+                <q-item clickable v-close-popup tabindex="0">
+                  <q-item-section avatar>
+                    <q-avatar color="dark" text-color="white">
+                      <i class="bx bx-home"></i>
+                    </q-avatar>
+                  </q-item-section>
+                  <q-item-section>
+                    <router-link to="/loginEstabelecimento">Estabelecimento</router-link>
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </q-btn-dropdown>
+            <q-btn-dropdown class="nav-bar-cadastrar" stretch flat label="Cadastrar">
+              <q-list>
+                <q-item clickable v-close-popup tabindex="0">
+                  <q-item-section avatar>
+                    <q-avatar color="dark" text-color="white">
+                      <i class="bx bx-user"></i>
+                    </q-avatar>
+                  </q-item-section>
+                  <q-item-section>
+                    <router-link :to="{name: 'cadastrarUsuario', params:{cadU: 1 } }">Usuário</router-link>
+                  </q-item-section>
+                </q-item>
+                <q-item clickable v-close-popup tabindex="0">
+                  <q-item-section avatar>
+                    <q-avatar color="dark" text-color="white">
+                      <i class="bx bx-home"></i>
+                    </q-avatar>
+                  </q-item-section>
+                  <q-item-section>
+                    <router-link :to="{name: 'cadastrarEstabelecimento', params:{cadE: 1 } }">Estabelecimento</router-link>
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </q-btn-dropdown>
+          </div>
+          <div v-else class="nav-bar-login-state">
+            <q-btn outline
+              class="nav-bar-login-state-btn-sair"
+              style="color: #negative"
+              label="Sair"
+              @click="efeturarLogout" />
+          </div>
         </q-toolbar>
       </q-header>
 
@@ -145,10 +151,15 @@ onMounted(() => {
 #nav-bar {
   font-family: "Fredoka", sans-serif;
 
-  .nav-bar-cadastrar{
-    background-color: $botaoVerde;
-  }
+  .nav-bar-login-state{
+    display: flex;
+    height: 3rem;
 
+    .nav-bar-cadastrar{
+      background-color: $botaoVerde;
+
+    }
+  }
   .menu-sidebar {
     padding: 0.2rem;
 
