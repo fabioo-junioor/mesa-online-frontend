@@ -19,9 +19,12 @@ Os estabelecimentos podem efetuar seu cadastro e disponibilizar informções per
 * SASS
 * VueRouter
 * Vite
-* PHP (MVC)
+* PHP
 * MySql
 * Netlify
+
+# Repositório
+* Backend (API/MVC): https://github.com/fabioo-junioor/mesa-online-backend
   
 # Autor
 #### Fábio Júnior

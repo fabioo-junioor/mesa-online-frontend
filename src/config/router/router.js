@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { getTokenUser } from '../utils/settingSession.js'
 
 import Inicio from '../../pages/Inicio.vue'
 import LoginUsuario from '../../pages/usuario/LoginUsuario.vue'
@@ -16,12 +17,31 @@ const routes = [
     {
         path: '/loginUsuario',
         name: 'loginUsuario',
-        component: LoginUsuario
+        component: LoginUsuario,
+        beforeEnter: (_, __, next) => {
+            if(getTokenUser()){
+                next('/homeUsuario')
+                return
+
+            }
+            next()
+            return
+        }
     },
     {
         path: '/cadastrarUsuario/:cadU',
         name: 'cadastrarUsuario',
-        component: LoginUsuario
+        component: LoginUsuario,
+        beforeEnter: (_, __, next) => {
+            if(getTokenUser()){
+                next('/homeUsuario')
+                return
+
+            }
+            next()
+            return
+            
+        }
     },
     {
         path: '/loginEstabelecimento',
@@ -36,17 +56,62 @@ const routes = [
     {
         path: '/homeUsuario',
         name: 'homeUsuario',
-        component: HomeUsuario
+        component: HomeUsuario,
+        beforeEnter: (_, __, next) => {
+            if(getTokenUser()){
+                next()
+                return
+
+            }
+            next('/')
+            return
+
+        }
     },
     {
         path: '/editarUsuario',
         name: 'editarUsuario',
-        component: EditarUsuario
+        component: EditarUsuario,
+        beforeEnter: (_, __, next) => {
+            if(getTokenUser()){
+                next()
+                return
+
+            }
+            next('/')
+            return
+
+        }
     },
     {
         path: '/buscarEstabelecimento',
         name: 'buscarEstabelecimento',
-        component: BuscarEstabelecimento
+        component: BuscarEstabelecimento,
+        beforeEnter: (_, __, next) => {
+            if(getTokenUser()){
+                next()
+                return
+
+            }
+            next('/')
+            return
+
+        }
+    },
+    {
+        path: '/:pathMatch(.*)',
+        name: 'inicio',
+        component: Inicio,
+        beforeEnter: (_, __, next) => {
+            if(getTokenUser() == null){
+                next()
+                return
+
+            }
+            next('/homeUsuario')
+            return
+
+        }
     }
 ]
 
