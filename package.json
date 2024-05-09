@@ -11,8 +11,6 @@
   "dependencies": {
     "@quasar/extras": "^1.16.11",
     "@vue/compat": "^3.4.23",
-    "bootstrap": "^5.3.3",
-    "bootstrap-vue": "^2.23.1",
     "quasar": "^2.15.4",
     "vue": "^3.4.23",
     "vue-router": "^4.3.0"
