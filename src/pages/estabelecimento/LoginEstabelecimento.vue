@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, reactive, ref, watch } from "vue";
 import { useRoute } from 'vue-router'
-import { saveTokenUser } from "../../config/utils/settingSession.js";
+import { saveDadosUsuario } from "../../config/utils/settingSession.js";
 
 const loginOrCadastro = ref(true)
 const inputRef = ref(null)

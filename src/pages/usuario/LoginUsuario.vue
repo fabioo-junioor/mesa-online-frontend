@@ -1,7 +1,8 @@
 <script setup>
 import { onMounted, reactive, ref, watch } from "vue";
 import { useRoute } from 'vue-router'
-import { saveDataUser, saveTokenUser } from "../../config/utils/settingSession.js";
+import { saveDadosPossoa, saveDadosUsuario } from "../../config/utils/settingSession.js";
+import { getDadosPessoaApi } from "../../config/utils/settingApi.js";
 import Alert from '../../components/Alert.vue'
 
 const route = useRoute()
@@ -35,6 +36,7 @@ const efetuarLoginOrCadastro = async () => {
   }
 };
 const efetuarLogin = async () => {
+  let dadosPessoaTemp = null
   const response = await fetch(urlApi.value+'loginUsuario', {
       method: 'POST',
       mode: 'cors',
@@ -45,8 +47,9 @@ const efetuarLogin = async () => {
   })
   const data = await response.json()
   if(data.msg == 'success'){
-      saveTokenUser(data.token)
-      await getDadosUsuario(data.token, data.id)
+      saveDadosUsuario(data)
+      dadosPessoaTemp = await getDadosPessoaApi(data.token, data.pkUsuario)
+      saveDadosPossoa(dadosPessoaTemp)
       return location.reload()
 
   }
@@ -70,18 +73,6 @@ const efetuarCadastro = async () => {
   }
   await activateAlert('negative', data.msg)
 
-}
-const getDadosUsuario = async (token, id) => {
-    const response = await fetch(urlApi.value+`usuario/${id}`, {
-        headers: { Authorization: `Bearer ${token}`},
-        method: 'GET',
-        mode: 'cors',
-    })
-    const data = await response.json()
-    if(data){
-      saveDataUser(data)
-
-    }  
 }
 const alterarFormulario = () => {
   loginOrCadastro.value = !loginOrCadastro.value

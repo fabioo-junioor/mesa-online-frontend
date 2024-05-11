@@ -1,40 +1,40 @@
 <script setup>
-import { getTokenUser, getDataUser, deleteTokenUser, deleteDataUser } from "../config/utils/settingSession.js";
+import { getDadosUsuario, getDadosPessoa, deleteDadosUsuario, deleteDadosPessoa } from "../config/utils/settingSession.js";
 import { ref, reactive, onMounted } from "vue";
 
 const leftDrawerOpen = ref(false)
 const visibleToggle = ref(false)
 const urlApi = ref('')
-const dadosUser = reactive({
+const dadosPessoa = reactive({
   nome: "Anônimo",
+  telefone: ''
 
 })
 const toggleLeftDrawer = () => {
   leftDrawerOpen.value = !leftDrawerOpen.value
 
 }
-const verificaTokenUser = () => {
-  if (getTokenUser() != null) {
+const verificaDadosUsuario = () => {
+  if (getDadosUsuario() != null) {
     visibleToggle.value = true
 
   }
 }
-const verificaDadosUser = () => {
-  if (getDataUser() != null) {
-    dadosUser.nome = getDataUser().email
+const verificaDadosPessoa = () => {
+  if(getDadosPessoa() != null){
+    dadosPessoa.nome = getDadosPessoa() ? getDadosPessoa().nome : ''
 
   }
 }
 const efeturarLogout = () => {
-  deleteTokenUser()
-  deleteDataUser()
-  console.log('Saiu!')
+  deleteDadosPessoa()
+  deleteDadosUsuario()
   return location.reload()
 
 }
 onMounted(() => {
-  verificaTokenUser()
-  verificaDadosUser()
+  verificaDadosUsuario()
+  verificaDadosPessoa()
 
 })
 </script>
@@ -122,7 +122,7 @@ onMounted(() => {
         <div class="menu-sidebar">
           <div class="menu-sidebar-header">
             <img src="../assets/usuario/usuarioDefault.png" />
-            <h4 id="sidebar-title">{{ dadosUser.nome }}</h4>
+            <h4 id="sidebar-title">{{ dadosPessoa.nome }}</h4>
           </div>
           <div class="menu-sidebar-links">
             <i class="bx bx-home"></i>
