@@ -7,7 +7,7 @@
 </template>
 <style lang="scss" scoped>
     #inicio{
-        background-color: purple;
+        background-color: $background;
         height: calc(100vh - 3.1rem);
     }
 </style>
