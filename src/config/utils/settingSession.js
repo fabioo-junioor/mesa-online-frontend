@@ -1,36 +1,43 @@
-function saveTokenUser(userToken){
-    localStorage.setItem('token', userToken)
+function saveDadosUsuario(dadosUsuario){
+    localStorage.setItem('dadosUsuario', JSON.stringify(dadosUsuario))
 
 }
-function getTokenUser(){
-    return localStorage.getItem('token') ? localStorage.getItem('token') : null
-
-}
-function deleteTokenUser(){
-    localStorage.removeItem('token')
-
-}
-function saveDataUser(dadosUser){
-    localStorage.setItem('dadosUser', JSON.stringify(dadosUser))
-
-}
-function getDataUser(){
-    if(localStorage.getItem('dadosUser')){
-        let dadosUserString = localStorage.getItem('dadosUser')
-        let dadosUserObj = JSON.parse(dadosUserString)
-        return dadosUserObj
+function getDadosUsuario(){
+    if(localStorage.getItem('dadosUsuario')){
+        let dadosUsuarioString = localStorage.getItem('dadosUsuario')
+        let dadosUsuarioObj = JSON.parse(dadosUsuarioString)
+        return dadosUsuarioObj
 
     }
     return null
 
 }
-function deleteDataUser(){
-    localStorage.removeItem('dadosUser')
+function deleteDadosUsuario(){
+    localStorage.removeItem('dadosUsuario')
 
 }
-export { getTokenUser,
-        saveTokenUser,
-        deleteTokenUser,
-        getDataUser,
-        saveDataUser,
-        deleteDataUser }
+function saveDadosPossoa(dadosPessoa){
+    localStorage.setItem('dadosPessoa', JSON.stringify(dadosPessoa))
+
+}
+function getDadosPessoa(){
+    if(localStorage.getItem('dadosPessoa')){
+        let dadosPessoaString = localStorage.getItem('dadosPessoa')
+        let dadosPessoaObj = JSON.parse(dadosPessoaString)
+        return dadosPessoaObj
+
+    }
+    return null
+
+}
+function deleteDadosPessoa(){
+    localStorage.removeItem('dadosPessoa')
+
+}
+
+export { getDadosUsuario,
+        saveDadosUsuario,
+        deleteDadosUsuario,
+        getDadosPessoa,
+        saveDadosPossoa,
+        deleteDadosPessoa }

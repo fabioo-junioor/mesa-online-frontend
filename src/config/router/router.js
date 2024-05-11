@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { getTokenUser } from '../utils/settingSession.js'
+import { getDadosUsuario } from '../utils/settingSession.js'
 
 import Inicio from '../../pages/Inicio.vue'
 import LoginUsuario from '../../pages/usuario/LoginUsuario.vue'
@@ -7,6 +7,7 @@ import LoginEstabelecimento from '../../pages/estabelecimento/LoginEstabelecimen
 import HomeUsuario from '../../pages/usuario/HomeUsuario.vue'
 import EditarUsuario from '../../pages/usuario/EditarUsuario.vue'
 import BuscarEstabelecimento from '../../pages/usuario/BuscarEstabelecimento.vue'
+import HomeEstabelecimento from '../../pages/estabelecimento/HomeEstabelecimento.vue'
 
 const routes = [
     {
@@ -19,13 +20,19 @@ const routes = [
         name: 'loginUsuario',
         component: LoginUsuario,
         beforeEnter: (_, __, next) => {
-            if(getTokenUser()){
-                next('/homeUsuario')
+            if(getDadosUsuario()){
+                if(getDadosUsuario().tipoUsuario === '1'){
+                    next('/homeUsuario')
+                    return
+
+                }
+                next('/homeEstabelecimento')
                 return
 
             }
             next()
             return
+
         }
     },
     {
@@ -33,8 +40,13 @@ const routes = [
         name: 'cadastrarUsuario',
         component: LoginUsuario,
         beforeEnter: (_, __, next) => {
-            if(getTokenUser()){
-                next('/homeUsuario')
+            if(getDadosUsuario()){
+                if(getDadosUsuario().tipoUsuario === '1'){
+                    next('/homeUsuario')
+                    return
+
+                }
+                next('/homeEstabelecimento')
                 return
 
             }
@@ -44,22 +56,17 @@ const routes = [
         }
     },
     {
-        path: '/loginEstabelecimento',
-        name: 'loginEstabelecimento',
-        component: LoginEstabelecimento
-    },
-    {
-        path: '/cadastrarEstabelecimento/:cadE',
-        name: 'cadastrarEstabelecimento',
-        component: LoginEstabelecimento
-    },
-    {
         path: '/homeUsuario',
         name: 'homeUsuario',
         component: HomeUsuario,
         beforeEnter: (_, __, next) => {
-            if(getTokenUser()){
-                next()
+            if(getDadosUsuario()){
+                if(getDadosUsuario().tipoUsuario === '1'){
+                    next()
+                    return
+
+                }
+                next('/homeEstabelecimento')
                 return
 
             }
@@ -73,10 +80,15 @@ const routes = [
         name: 'editarUsuario',
         component: EditarUsuario,
         beforeEnter: (_, __, next) => {
-            if(getTokenUser()){
-                next()
+            if(getDadosUsuario()){
+                if(getDadosUsuario().tipoUsuario === '1'){
+                    next()
+                    return
+                    
+                }
+                next('/homeEstabelecimento')
                 return
-
+                
             }
             next('/')
             return
@@ -88,8 +100,13 @@ const routes = [
         name: 'buscarEstabelecimento',
         component: BuscarEstabelecimento,
         beforeEnter: (_, __, next) => {
-            if(getTokenUser()){
-                next()
+            if(getDadosUsuario()){
+                if(getDadosUsuario().tipoUsuario === '1'){
+                    next()
+                    return
+
+                }
+                next('/homeEstabelecimento')
                 return
 
             }
@@ -99,16 +116,71 @@ const routes = [
         }
     },
     {
+        path: '/loginEstabelecimento',
+        name: 'loginEstabelecimento',
+        component: LoginEstabelecimento,
+        beforeEnter: (_, __, next) => {
+            if(getDadosUsuario()){
+                if(getDadosUsuario().tipoUsuario === '2'){
+                    next('/homeEstabelecimento')
+                    return
+
+                }
+                next('/homeUsuario')
+                return
+
+            }
+            next()
+            return
+
+        }
+    },
+    {
+        path: '/cadastrarEstabelecimento/:cadE',
+        name: 'cadastrarEstabelecimento',
+        component: LoginEstabelecimento,
+        beforeEnter: (_, __, next) => {
+            if(getDadosUsuario()){
+                if(getDadosUsuario().tipoUsuario === '2'){
+                    next('/homeEstabelecimento')
+                    return
+
+                }
+                next('/homeUsuario')
+                return
+
+            }
+            next()
+            return
+
+        }
+    },
+    {
+        path: '/homeEstabelecimento',
+        name: 'homeEstabelecimento',
+        component: HomeEstabelecimento,
+        beforeEnter: (_, __, next) => {
+            if(getDadosUsuario()){
+                if(getDadosUsuario().tipoUsuario === '2'){
+                    next()
+                    return
+
+                }
+                next('/homeUsuario')
+                return
+
+            }
+            next('/')
+            return
+            
+        }
+    },
+    {
         path: '/:pathMatch(.*)',
         name: 'inicio',
         component: Inicio,
         beforeEnter: (_, __, next) => {
-            if(getTokenUser() == null){
-                next()
-                return
-
-            }
-            next('/homeUsuario')
+            next()
             return
 
         }
