@@ -7,8 +7,8 @@ import Alert from '../../components/Alert.vue'
 
 const route = useRoute()
 const loginOrCadastro = ref(true)
-const inputRef = ref(null)
 const urlApi = ref('')
+const isPwd = ref(true)
 const getAlert = reactive({
   isAlert: false,
   type: '',
@@ -50,7 +50,8 @@ const efetuarLogin = async () => {
       saveDadosUsuario(data)
       dadosPessoaTemp = await getDadosPessoaApi(data.token, data.pkUsuario)
       saveDadosPossoa(dadosPessoaTemp)
-      return location.reload()
+      activateAlert('positive', 'Sucesso, aguarde')
+      return setTimeout(() => {location.reload()}, '3000')
 
   }
   activateAlert('warning', data.msg)
@@ -68,7 +69,7 @@ const efetuarCadastro = async () => {
   const data = await response.json()
   if(data.code == 201){
     await activateAlert('positive', data.msg)
-    return
+    return setTimeout(() => {alterarFormulario()}, '3000')
 
   }
   await activateAlert('negative', data.msg)
@@ -76,7 +77,6 @@ const efetuarCadastro = async () => {
 }
 const alterarFormulario = () => {
   loginOrCadastro.value = !loginOrCadastro.value
-  inputRef.value.resetValidation()
   
 }
 function verificaIgualdadeSenha() {
@@ -120,27 +120,27 @@ onMounted(() => {
         <div v-else class="login-usuario-body-logo">Cadastrar Usuário</div>
         <div class="login-usuario-body-form">
             <q-form @submit="efetuarLoginOrCadastro">
-                <q-input
-                square
-                filled
-                ref="inputRef"
+                <q-input square filled
+                color="teal"
                 type="text"
                 label="Email"
                 v-model="dadosUsuario.email"
                 :rules="[(val) => !!val || 'Preencha o campo']" />
-                <q-input
-                square
-                filled
-                ref="inputRef"
-                type="password"
+                <q-input square filled
+                color="teal"
+                :type="isPwd ? 'password' : 'text'"
                 label="Senha"
                 v-model="dadosUsuario.senha"
-                :rules="[(val) => !!val || 'Preencha o campo']" />
-                <q-input
+                :rules="[(val) => !!val || 'Preencha o campo']">
+                  <template v-slot:append>
+                    <q-icon
+                      :name="isPwd ? 'visibility_off' : 'visibility'"
+                      class=""
+                      @click="isPwd = !isPwd" />
+                  </template>
+                </q-input>
+                <q-input square filled
                 v-if="!loginOrCadastro"
-                square
-                filled
-                ref="inputRef"
                 type="password"
                 label="Repita a Senha"
                 v-model="dadosUsuario.senhaRepetida"
@@ -212,6 +212,11 @@ onMounted(() => {
 
         .q-input {
             margin: 1rem 0;
+
+            .q-field__append::after{
+              background-color: red;
+
+            }
 
         }
         .q-btn {

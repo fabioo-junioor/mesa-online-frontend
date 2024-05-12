@@ -136,6 +136,10 @@ onMounted(() => {
             <i class="bx bx-edit-alt"></i>
             <router-link to="/editarUsuario">Editar Perfil</router-link>
           </div>
+          <div class="menu-sidebar-links">
+            <i class="bx bxs-key"></i>
+            <router-link to="/editarSenhaUsuario">Alterar Senha</router-link>
+          </div>
         </div>
       </q-drawer>
 

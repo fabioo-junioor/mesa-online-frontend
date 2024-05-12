@@ -77,20 +77,19 @@ onMounted(() => {
         <div class="editar-usuario-formulario">
             <h4>Editar usuário</h4>
             <q-form @submit="salvarAteracoes">
-                <q-input
-                square
-                filled
+                <q-input square filled
+                color="teal"
                 ref="inputRef"
                 type="text"
                 label="Nome"
                 v-model="dadosFormulario.nome"
                 :rules="[(val) => !!val || 'Preencha o campo']" />
-                <q-input
-                square
-                filled
+                <q-input square filled
+                color="teal"
                 ref="inputRef"
-                type="text"
                 label="Telefone"
+                mask="(##) #### - ####"
+                hint="(##) #### - ####"
                 v-model="dadosFormulario.telefone"
                 :rules="[(val) => !!val || 'Preencha o campo']" />
                 <div>
