@@ -15,16 +15,18 @@ const toggleLeftDrawer = () => {
 
 }
 const verificaDadosUsuario = () => {
-  if (getDadosUsuario() != null) {
+  if (getDadosUsuario()) {
     visibleToggle.value = true
 
   }
+  //console.log(getDadosUsuario())
 }
 const verificaDadosPessoa = () => {
-  if(getDadosPessoa() != null){
-    dadosPessoa.nome = getDadosPessoa() ? getDadosPessoa().nome : ''
+  if(getDadosPessoa()){
+    dadosPessoa.nome = getDadosPessoa().nome
 
   }
+  //console.log(getDadosPessoa())
 }
 const efeturarLogout = () => {
   deleteDadosPessoa()

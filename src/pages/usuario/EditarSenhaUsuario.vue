@@ -2,6 +2,7 @@
 import { getDadosUsuario } from '../../config/utils/settingSession.js'
 import { onMounted, reactive, ref } from 'vue'
 import Alert from '../../components/Alert.vue'
+import MyInput from '../../components/UI/MyInput.vue'
 
 const urlApi = ref('')
 const token = ref('')
@@ -86,47 +87,33 @@ onMounted(() => {
         <div class="editar-usuario-formulario">
             <h4>Alterar senha</h4>
             <q-form @submit="salvarAteracoesSenha">
-                <q-input square filled
-                color="teal"
-                :type="isPwd1 ? 'password' : 'text'"
-                label="Senha Atual"
-                v-model="dadosFormulario.senhaAtual"
-                lazy-rules
-                :rules="[(val) => !!val || 'Preencha o campo']">
-                  <template v-slot:append>
-                    <q-icon
-                      :name="isPwd2 ? 'visibility_off' : 'visibility'"
-                      class="cursor-pointer"
-                      @click="isPwd1 = !isPwd1" />
-                  </template>
-                </q-input>
-                <q-input square filled
-                color="teal"
-                :type="isPwd2 ? 'password' : 'text'"
-                label="Nova Senha"
-                v-model="dadosFormulario.senhaNova"
-                :rules="[(val) => !!val || 'Preencha o campo']">
-                  <template v-slot:append>
-                    <q-icon
-                      :name="isPwd2 ? 'visibility_off' : 'visibility'"
-                      class="cursor-pointer"
-                      @click="isPwd2 = !isPwd2" />
-                  </template>
-                </q-input>
-                <q-input square filled
-                color="teal"
-                ref="inputRef"
-                :type="isPwd3 ? 'password' : 'text'"
-                label="Repita a Nova Senha"
-                v-model="dadosFormulario.senhaNovaRepetida"
-                :rules="[(val) => !!val || 'Preencha o campo']">
-                  <template v-slot:append>
-                    <q-icon
-                      :name="isPwd3 ? 'visibility_off' : 'visibility'"
-                      class="cursor-pointer"
-                      @click="isPwd3 = !isPwd3" />
-                  </template>
-                </q-input>
+                <MyInput 
+                    v-model="dadosFormulario.senha"
+                    color="teal"
+                    label="Senha Atual"
+                    :type="isPwd1 ? 'password' : 'text'"
+                    :isPwd="isPwd1"
+                    :isType="1"
+                    :rules="[(val) => !!val || 'Preencha o campo']"
+                    @visiblePass="$event => (isPwd1 = !isPwd1)" />
+                <MyInput 
+                    v-model="dadosFormulario.senhaNova"
+                    color="teal"
+                    label="Nova Senha"
+                    :type="isPwd2 ? 'password' : 'text'"
+                    :isPwd="isPwd2"
+                    :isType="1"
+                    :rules="[(val) => !!val || 'Preencha o campo']"
+                    @visiblePass="$event => (isPwd2 = !isPwd2)" />
+                <MyInput 
+                    v-model="dadosFormulario.senhaNovaRepetida"
+                    color="teal"
+                    label="Repita a Nova Senha"
+                    :type="isPwd3 ? 'password' : 'text'"
+                    :isPwd="isPwd3"
+                    :isType="1"
+                    :rules="[(val) => !!val || 'Preencha o campo']"
+                    @visiblePass="$event => (isPwd3 = !isPwd3)" />
                 <div>
                     <q-btn
                         color="secondary"
@@ -168,10 +155,6 @@ onMounted(() => {
                 width: 100%;
                 padding: .5rem;
 
-                .q-input{
-                    margin: 1rem 0;
-
-                }
             }
             .q-btn{
                 width: 100%;

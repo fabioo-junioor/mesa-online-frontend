@@ -3,13 +3,16 @@ import { getDadosUsuario, getDadosPessoa, saveDadosPossoa } from '../../config/u
 import { getDadosPessoaApi } from '../../config/utils/settingApi.js'
 import { onMounted, reactive, ref } from 'vue'
 import Alert from '../../components/Alert.vue'
+import MyInput from '../../components/UI/MyInput.vue'
 
 const urlApi = ref('')
 const token = ref('')
+const dataAtual = ref(new Date())
 const dadosFormulario = reactive({
     fkUsuario: null,
     nome: '',
-    telefone: ''
+    telefone: '',
+    dataNasc: ''
 
 })
 const getAlert = reactive({
@@ -20,7 +23,7 @@ const getAlert = reactive({
 })
 const salvarAteracoes = async () => {
     var dadosPessoaTemp = null
-    await desactivateAlert()
+    await desactivateAlert()/*
     const response = await fetch(urlApi.value+'pessoa', {
         headers: { Authorization: `Bearer ${token.value}`},
         method: 'PUT',
@@ -28,7 +31,7 @@ const salvarAteracoes = async () => {
         body: JSON.stringify({
             pkUsuario: dadosFormulario.fkUsuario,
             nome: dadosFormulario.nome,
-            telefone: dadosFormulario.telefone
+            telefone: removeCaracteres(dadosFormulario.telefone)
         })
     })
     const data = await response.json()
@@ -40,7 +43,8 @@ const salvarAteracoes = async () => {
         return
 
     }
-    await activateAlert('warning', data.msg)
+    await activateAlert('warning', data.msg)*/
+    console.log(dadosFormulario.dataNasc)
     
 }
 const buscaDadosUsuario = () => {
@@ -50,6 +54,9 @@ const buscaDadosUsuario = () => {
     token.value = getDadosUsuario().token
 
 }
+const removeCaracteres = str => str.replace(/[^a-zA-Z0-9]/g, "")
+const formatData = data => data = dataAtual.value.getFullYear() + '/' + (dataAtual.value.getMonth() + 1) + '/' + dataAtual.value.getDate()
+
 const activateAlert = async (type, msg) => {
   getAlert.isAlert = true
   getAlert.type = type
@@ -64,6 +71,7 @@ const desactivateAlert = async () => {
 }
 onMounted(() => {
     urlApi.value = import.meta.env.VITE_ROOT_API
+    dataAtual.value, dadosFormulario.dataNasc  = formatData(dataAtual.value)
     buscaDadosUsuario()
 
 })
@@ -77,21 +85,26 @@ onMounted(() => {
         <div class="editar-usuario-formulario">
             <h4>Editar usuário</h4>
             <q-form @submit="salvarAteracoes">
-                <q-input square filled
-                color="teal"
-                ref="inputRef"
-                type="text"
-                label="Nome"
-                v-model="dadosFormulario.nome"
-                :rules="[(val) => !!val || 'Preencha o campo']" />
-                <q-input square filled
-                color="teal"
-                ref="inputRef"
-                label="Telefone"
-                mask="(##) #### - ####"
-                hint="(##) #### - ####"
-                v-model="dadosFormulario.telefone"
-                :rules="[(val) => !!val || 'Preencha o campo']" />
+                <MyInput
+                    v-model="dadosFormulario.nome"
+                    color="teal"
+                    type="text"
+                    label="Nome"
+                    :rules="[(val) => !!val || 'Preencha o campo']" />
+                <MyInput
+                    v-model="dadosFormulario.telefone"
+                    color="teal"
+                    type="text"
+                    mask="(##) ####-####"
+                    label="Telefone"
+                    :rules="[(val) => !!val || 'Preencha o campo']" />
+                <MyInput
+                    v-model="dadosFormulario.dataNasc"
+                    color="teal"
+                    label="Data Nascimento"
+                    :mask="dataAtual.value"
+                    :rule="['date']"
+                    :isType="2" />
                 <div>
                     <q-btn
                         color="secondary"
