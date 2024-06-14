@@ -4,11 +4,13 @@ import { useRoute } from 'vue-router'
 import { saveDadosPossoa, saveDadosUsuario } from "../../config/utils/settingSession.js";
 import { getDadosPessoaApi } from "../../config/utils/settingApi.js";
 import Alert from '../../components/Alert.vue'
+import MyInput from '../../components/UI/MyInput.vue'
 
 const route = useRoute()
 const loginOrCadastro = ref(true)
-const inputRef = ref(null)
 const urlApi = ref('')
+const isPwd1 = ref(true)
+const isPwd2 = ref(true)
 const getAlert = reactive({
   isAlert: false,
   type: '',
@@ -50,7 +52,8 @@ const efetuarLogin = async () => {
       saveDadosUsuario(data)
       dadosPessoaTemp = await getDadosPessoaApi(data.token, data.pkUsuario)
       saveDadosPossoa(dadosPessoaTemp)
-      return location.reload()
+      activateAlert('positive', 'Sucesso, aguarde')
+      return setTimeout(() => {location.reload()}, '3000')
 
   }
   activateAlert('warning', data.msg)
@@ -68,7 +71,7 @@ const efetuarCadastro = async () => {
   const data = await response.json()
   if(data.code == 201){
     await activateAlert('positive', data.msg)
-    return
+    return setTimeout(() => {alterarFormulario()}, '3000')
 
   }
   await activateAlert('negative', data.msg)
@@ -76,7 +79,6 @@ const efetuarCadastro = async () => {
 }
 const alterarFormulario = () => {
   loginOrCadastro.value = !loginOrCadastro.value
-  inputRef.value.resetValidation()
   
 }
 function verificaIgualdadeSenha() {
@@ -120,31 +122,31 @@ onMounted(() => {
         <div v-else class="login-usuario-body-logo">Cadastrar Usuário</div>
         <div class="login-usuario-body-form">
             <q-form @submit="efetuarLoginOrCadastro">
-                <q-input
-                square
-                filled
-                ref="inputRef"
-                type="text"
-                label="Email"
-                v-model="dadosUsuario.email"
-                :rules="[(val) => !!val || 'Preencha o campo']" />
-                <q-input
-                square
-                filled
-                ref="inputRef"
-                type="password"
-                label="Senha"
-                v-model="dadosUsuario.senha"
-                :rules="[(val) => !!val || 'Preencha o campo']" />
-                <q-input
-                v-if="!loginOrCadastro"
-                square
-                filled
-                ref="inputRef"
-                type="password"
-                label="Repita a Senha"
-                v-model="dadosUsuario.senhaRepetida"
-                :rules="[(val) => !!val || 'Preencha o campo']" />
+                <MyInput 
+                  v-model="dadosUsuario.email"
+                  color="teal"
+                  type="email"
+                  label="Email"
+                  :rules="[(val) => !!val || 'Preencha o campo']" />
+                <MyInput 
+                  v-model="dadosUsuario.senha"
+                  color="teal"
+                  label="Senha"
+                  :type="isPwd1 ? 'password' : 'text'"
+                  :isPwd="isPwd1"
+                  :isType="1"
+                  :rules="[(val) => !!val || 'Preencha o campo']"
+                  @visiblePass="$event => (isPwd1 = !isPwd1)" />
+                <MyInput 
+                  v-if="!loginOrCadastro"
+                  v-model="dadosUsuario.senhaRepetida"
+                  color="teal"
+                  label="Repita a senha"
+                  :type="isPwd2 ? 'password' : 'text'"
+                  :isPwd="isPwd2"
+                  :isType="1"
+                  :rules="[(val) => !!val || 'Preencha o campo']"
+                  @visiblePass="$event => (isPwd2 = !isPwd2)" />
                 <div>
                     <q-btn
                         v-if="loginOrCadastro"
@@ -210,10 +212,6 @@ onMounted(() => {
     .login-usuario-body-form{
         width: 95%;
 
-        .q-input {
-            margin: 1rem 0;
-
-        }
         .q-btn {
             width: 100%;
             height: 3rem;

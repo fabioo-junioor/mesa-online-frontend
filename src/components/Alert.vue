@@ -12,7 +12,11 @@ const $q = useQuasar()
 const trigger = () => {
     $q.notify({
         type: props.type,
-        message: props.msg
+        message: props.msg+'!',
+        progress: true,
+        position: 'top-right',
+        timeout: 2000
+        
     })
 }
 onMounted(() => {

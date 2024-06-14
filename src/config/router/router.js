@@ -2,11 +2,16 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { getDadosUsuario } from '../utils/settingSession.js'
 
 import Inicio from '../../pages/Inicio.vue'
+
+// Components usuário
 import LoginUsuario from '../../pages/usuario/LoginUsuario.vue'
-import LoginEstabelecimento from '../../pages/estabelecimento/LoginEstabelecimento.vue'
 import HomeUsuario from '../../pages/usuario/HomeUsuario.vue'
 import EditarUsuario from '../../pages/usuario/EditarUsuario.vue'
 import BuscarEstabelecimento from '../../pages/usuario/BuscarEstabelecimento.vue'
+import EditarSenhaUsuario from '../../pages/usuario/EditarSenhaUsuario.vue'
+
+// Components estabelecimento
+import LoginEstabelecimento from '../../pages/estabelecimento/LoginEstabelecimento.vue'
 import HomeEstabelecimento from '../../pages/estabelecimento/HomeEstabelecimento.vue'
 
 const routes = [
@@ -79,6 +84,26 @@ const routes = [
         path: '/editarUsuario',
         name: 'editarUsuario',
         component: EditarUsuario,
+        beforeEnter: (_, __, next) => {
+            if(getDadosUsuario()){
+                if(getDadosUsuario().tipoUsuario === '1'){
+                    next()
+                    return
+                    
+                }
+                next('/homeEstabelecimento')
+                return
+                
+            }
+            next('/')
+            return
+
+        }
+    },
+    {
+        path: '/editarSenhaUsuario',
+        name: 'editarSenhaUsuario',
+        component: EditarSenhaUsuario,
         beforeEnter: (_, __, next) => {
             if(getDadosUsuario()){
                 if(getDadosUsuario().tipoUsuario === '1'){

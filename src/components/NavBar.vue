@@ -15,16 +15,18 @@ const toggleLeftDrawer = () => {
 
 }
 const verificaDadosUsuario = () => {
-  if (getDadosUsuario() != null) {
+  if (getDadosUsuario()) {
     visibleToggle.value = true
 
   }
+  //console.log(getDadosUsuario())
 }
 const verificaDadosPessoa = () => {
-  if(getDadosPessoa() != null){
-    dadosPessoa.nome = getDadosPessoa() ? getDadosPessoa().nome : ''
+  if(getDadosPessoa()){
+    dadosPessoa.nome = getDadosPessoa().nome
 
   }
+  //console.log(getDadosPessoa())
 }
 const efeturarLogout = () => {
   deleteDadosPessoa()
@@ -135,6 +137,10 @@ onMounted(() => {
           <div class="menu-sidebar-links">
             <i class="bx bx-edit-alt"></i>
             <router-link to="/editarUsuario">Editar Perfil</router-link>
+          </div>
+          <div class="menu-sidebar-links">
+            <i class="bx bxs-key"></i>
+            <router-link to="/editarSenhaUsuario">Alterar Senha</router-link>
           </div>
         </div>
       </q-drawer>
