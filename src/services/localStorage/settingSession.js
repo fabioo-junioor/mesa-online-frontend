@@ -1,19 +1,19 @@
 function saveDadosUsuario(dadosUsuario){
-    localStorage.setItem('dadosUsuario', JSON.stringify(dadosUsuario))
+    localStorage.setItem('dadosUsuario', JSON.stringify(dadosUsuario));
 
 }
 function getDadosUsuario(){
     if(localStorage.getItem('dadosUsuario')){
-        let dadosUsuarioString = localStorage.getItem('dadosUsuario')
-        let dadosUsuarioObj = JSON.parse(dadosUsuarioString)
-        return dadosUsuarioObj
+        let dadosUsuarioString = localStorage.getItem('dadosUsuario');
+        let dadosUsuarioObj = JSON.parse(dadosUsuarioString);
+        return dadosUsuarioObj;
 
     }
-    return null
+    return null;
 
 }
 function deleteDadosUsuario(){
-    localStorage.removeItem('dadosUsuario')
+    localStorage.removeItem('dadosUsuario');
 
 }
 function saveDadosPossoa(dadosPessoa){
@@ -22,16 +22,16 @@ function saveDadosPossoa(dadosPessoa){
 }
 function getDadosPessoa(){
     if(localStorage.getItem('dadosPessoa')){
-        let dadosPessoaString = localStorage.getItem('dadosPessoa')
-        let dadosPessoaObj = JSON.parse(dadosPessoaString)
-        return dadosPessoaObj
+        let dadosPessoaString = localStorage.getItem('dadosPessoa');
+        let dadosPessoaObj = JSON.parse(dadosPessoaString);
+        return dadosPessoaObj;
 
     }
-    return null
+    return null;
 
 }
 function deleteDadosPessoa(){
-    localStorage.removeItem('dadosPessoa')
+    localStorage.removeItem('dadosPessoa');
 
 }
 

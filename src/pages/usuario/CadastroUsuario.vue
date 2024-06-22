@@ -1,11 +1,11 @@
 <script setup>
 import { onMounted, reactive, ref } from 'vue';
-import { loginUsuario } from '../../services/usuario/apiUsuario.js';
-import { saveDadosUsuario } from '../../services/localStorage/settingSession.js';
+import { cadastroUsuario } from '../../services/usuario/apiUsuario.js';
 import Alert from '../../components/Alert.vue';
 import MyInput from '../../components/UI/MyInput.vue';
 
-const isPwd = ref(true);
+const isPwd1 = ref(true);
+const isPwd2 = ref(true);
 const getAlert = reactive({
   isAlert: false,
   type: '',
@@ -14,22 +14,39 @@ const getAlert = reactive({
 });
 const dadosUsuario = reactive({
   email: null,
-  senha: null
+  senha: null,
+  senhaRepetida: null,
+  tipoUsuario: '1'
 
 });
-const efetuarLogin = async () => {
-  const dados = await loginUsuario(dadosUsuario);
-  if(dados.statusCode === 200){
-    saveDadosUsuario(dados);
-    await activateAlert('positive', dados.message);
-    return location.reload();
+const efetuarCadastro = async () => {
+  desactivateAlert();
+  if(verificaIgualdadeSenha()){
+    const dados = await cadastroUsuario(dadosUsuario);
+    if(dados.statusCode === 201){
+      await activateAlert('positive', dados.message);
+      return;
+      
+    }
+    await activateAlert('negative', dados.message);
+    return;
 
   }
-  await activateAlert('warning', dados.message);
-  await desactivateAlert();
+  await activateAlert('negative', 'Senhas diferentes');
   return;
 
-};
+}
+const alterarFormulario = () => {
+  
+}
+function verificaIgualdadeSenha() {
+  if (dadosUsuario.senha === dadosUsuario.senhaRepetida) {
+    return true;
+
+  }
+  return false;
+
+}
 const activateAlert = async (type, msg) => {
   getAlert.isAlert = true;
   getAlert.type = type;
@@ -42,12 +59,8 @@ const desactivateAlert = async () => {
   getAlert.msg = '';
 
 }
-const alterarFormulario = () => {
-  console.log('asdas');
-  
-}
 onMounted(() => {
-
+  
 })
 </script>
 <template>
@@ -57,9 +70,9 @@ onMounted(() => {
       :type="getAlert.type"
       :msg="getAlert.msg" />
     <div class="login-usuario-body">
-        <div class="login-usuario-body-logo">Efetuar Login</div>
+        <div class="login-usuario-body-logo">Cadastrar Usuário</div>
         <div class="login-usuario-body-form">
-            <q-form @submit="efetuarLogin">
+            <q-form @submit="efetuarCadastro">
                 <MyInput 
                   v-model="dadosUsuario.email"
                   color="teal"
@@ -70,21 +83,29 @@ onMounted(() => {
                   v-model="dadosUsuario.senha"
                   color="teal"
                   label="Senha"
-                  :type="isPwd ? 'password' : 'text'"
-                  :isPwd="isPwd"
+                  :type="isPwd1 ? 'password' : 'text'"
+                  :isPwd="isPwd1"
                   :isType="1"
                   :rules="[(val) => !!val || 'Preencha o campo']"
-                  @visiblePass="$event => (isPwd = !isPwd)" />
+                  @visiblePass="$event => (isPwd1 = !isPwd1)" />
+                <MyInput 
+                  v-model="dadosUsuario.senhaRepetida"
+                  color="teal"
+                  label="Repita a senha"
+                  :type="isPwd2 ? 'password' : 'text'"
+                  :isPwd="isPwd2"
+                  :isType="1"
+                  :rules="[(val) => !!val || 'Preencha o campo']"
+                  @visiblePass="$event => (isPwd2 = !isPwd2)" />
                 <div>
-                    <q-btn
-                        color="secondary"
-                        label="Entrar"
+                    <q-btn 
+                        color="black" 
+                        label="Cadastrar" 
                         type="submit" />
                 </div>
             </q-form>
             <div class="login-usuario-body-form-cadastrar">
-                <a @click="alterarFormulario" href="#"
-                >Cadastrar-se</a>
+                <a @click="alterarFormulario" href="#">Voltar</a>
             </div>
         </div>
         <div class="login-usuario-body-midias">

@@ -1,80 +1,62 @@
 <script setup>
-import { getDadosUsuario } from '../../config/utils/settingSession.js'
-import { onMounted, reactive, ref } from 'vue'
-import Alert from '../../components/Alert.vue'
-import MyInput from '../../components/UI/MyInput.vue'
+import { editarUsuario } from '../../services/usuario/apiUsuario.js';
+import { onMounted, reactive, ref } from 'vue';
+import Alert from '../../components/Alert.vue';
+import MyInput from '../../components/UI/MyInput.vue';
 
-const urlApi = ref('')
-const token = ref('')
-const isPwd1 = ref(true)
-const isPwd2 = ref(true)
-const isPwd3 = ref(true)
+const isPwd1 = ref(true);
+const isPwd2 = ref(true);
+const isPwd3 = ref(true);
 const dadosFormulario = reactive({
-    pkUsuario: null,
     senhaAtual: null,
     senhaNova: null,
     senhaNovaRepetida: null
 
-})
+});
 const getAlert = reactive({
   isAlert: false,
   type: '',
   msg: ''
 
-})
+});
 const salvarAteracoesSenha = async () => {
-    await desactivateAlert()
+    await desactivateAlert();
     if(verificaIgualdadeSenha()){
-        const response = await fetch(urlApi.value+'usuario', {
-            headers: { Authorization: `Bearer ${token.value}`},
-            method: 'PUT',
-            mode: 'cors',
-            body: JSON.stringify({
-                pkUsuario: dadosFormulario.pkUsuario,
-                senhaAtual: dadosFormulario.senhaAtual,
-                senhaNova: dadosFormulario.senhaNova
-            })
-        })
-        const data = await response.json()
-        if(data.code === 201){
-            await activateAlert('positive', data.msg)
-            return setTimeout(() => {location.reload()}, '3000')
-    
-        }
-        await activateAlert('warning', data.msg)
+        const dados = await editarUsuario(dadosFormulario);
+        if(dados.statusCode === 200){
+            await activateAlert('positive', dados.message);
+            return;
 
-    }
-    await activateAlert('warning', 'Repetir senha corretamente')
-    
+        }
+        await activateAlert('warning', dados.message);
+        return;
+
+    }  
+    await activateAlert('warning', 'Repetir senha corretamente');
+    return;
+
 }
 function verificaIgualdadeSenha() {
   if (dadosFormulario.senhaNova === dadosFormulario.senhaNovaRepetida) {
-    return true
+    return true;
 
   }
-  return false
-
-}
-const buscaDadosUsuario = () => {
-    token.value = getDadosUsuario().token
-    dadosFormulario.pkUsuario = getDadosUsuario().pkUsuario
+  return false;
 
 }
 const activateAlert = async (type, msg) => {
-  getAlert.isAlert = true
-  getAlert.type = type
-  getAlert.msg = msg
+  getAlert.isAlert = true;
+  getAlert.type = type;
+  getAlert.msg = msg;
 
 }
 const desactivateAlert = async () => {
-    getAlert.isAlert = false
-    getAlert.type = ''
-    getAlert.msg = ''
+    getAlert.isAlert = false;
+    getAlert.type = '';
+    getAlert.msg = '';
 
 }
 onMounted(() => {
-    urlApi.value = import.meta.env.VITE_ROOT_API
-    buscaDadosUsuario()
 
 })
 </script>
@@ -88,7 +70,7 @@ onMounted(() => {
             <h4>Alterar senha</h4>
             <q-form @submit="salvarAteracoesSenha">
                 <MyInput 
-                    v-model="dadosFormulario.senha"
+                    v-model="dadosFormulario.senhaAtual"
                     color="teal"
                     label="Senha Atual"
                     :type="isPwd1 ? 'password' : 'text'"

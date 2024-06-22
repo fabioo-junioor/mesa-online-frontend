@@ -1,18 +1,27 @@
 <script setup>
 import { onMounted, reactive } from 'vue';
-import { saveDadosUsuario } from '../../services/localStorage/settingSession.js';
+import { saveDadosUsuario } from "../../services/localStorage/settingSession.js";
 
 const dadosEstabelecimento = reactive({
   email: null,
-  senha: null
+  senha: null,
+  senhaRepetida: null
 
 });
-const efetuarLogin = () => {
-  console.log("Logado!");
+const efetuarCadastro = () => {
+  console.log("Cadastro!");
 
 };
 const alterarFormulario = () => {
-    
+  
+}
+function verificaIgualdadeSenha() {
+  if (dadosEstabelecimento.senha === dadosEstabelecimento.senhaRepetida) {
+    return true;
+
+  }
+  return false;
+
 }
 onMounted(() => {
   
@@ -21,9 +30,9 @@ onMounted(() => {
 <template>
   <div id="login-estabelecimento">
     <div class="login-estabelecimento-body">
-        <div class="login-estabelecimento-body-logo">Efetuar Login</div>
+        <div class="login-estabelecimento-body-logo">Cadastrar Estabelecimento</div>
         <div class="login-estabelecimento-body-form">
-            <q-form @submit="efetuarLogin">
+            <q-form @submit="efetuarCadastro">
                 <q-input
                 square
                 filled
@@ -40,16 +49,23 @@ onMounted(() => {
                 label="Senha"
                 v-model="dadosEstabelecimento.senha"
                 :rules="[(val) => !!val || 'Preencha o campo']" />
+                <q-input
+                square
+                filled
+                ref="inputRef"
+                type="password"
+                label="Repita a Senha"
+                v-model="dadosEstabelecimento.senhaRepetida"
+                :rules="[(val) => !!val || 'Preencha o campo']" />
                 <div>
-                    <q-btn
-                        color="secondary"
-                        label="Entrar"
+                    <q-btn 
+                        color="black" 
+                        label="Cadastrar" 
                         type="submit" />
                 </div>
             </q-form>
             <div class="login-estabelecimento-body-form-cadastrar">
-                <a @click="alterarFormulario" href="#"
-                >Cadastrar-se</a>
+                <a @click="alterarFormulario" href="#">Voltar</a>
             </div>
         </div>
         <div class="login-estabelecimento-body-midias">
