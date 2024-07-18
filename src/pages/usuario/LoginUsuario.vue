@@ -1,216 +1,64 @@
 <script setup>
-import { onMounted, reactive, ref } from 'vue';
-import { loginUsuario } from '../../services/usuario/apiUsuario.js';
-import { saveDadosUsuario } from '../../services/localStorage/settingSession.js';
-import Alert from '../../components/Alert.vue';
-import MyInput from '../../components/UI/MyInput.vue';
+import { reactive } from 'vue';
+import { FormUser } from '../../components';
 
-const isPwd = ref(true);
-const getAlert = reactive({
-  isAlert: false,
-  type: '',
-  msg: ''
-
+const dataFormUser = reactive({
+    email: 'contato@bol.com',
+    password: '333'
 });
-const dadosUsuario = reactive({
-  email: null,
-  senha: null
-
-});
-const efetuarLogin = async () => {
-  const dados = await loginUsuario(dadosUsuario);
-  if(dados.statusCode === 200){
-    saveDadosUsuario(dados);
-    await activateAlert('positive', dados.message);
-    return location.reload();
-
-  }
-  await activateAlert('warning', dados.message);
-  await desactivateAlert();
-  return;
-
-};
-const activateAlert = async (type, msg) => {
-  getAlert.isAlert = true;
-  getAlert.type = type;
-  getAlert.msg = msg;
+const loginUser = () => {
+    console.log('login ', dataFormUser);
 
 }
-const desactivateAlert = async () => {
-  getAlert.isAlert = false;
-  getAlert.type = '';
-  getAlert.msg = '';
 
-}
-const alterarFormulario = () => {
-  console.log('asdas');
-  
-}
-onMounted(() => {
-
-})
 </script>
 <template>
-  <div id="login-usuario">
-    <Alert 
-      v-if="getAlert.isAlert"
-      :type="getAlert.type"
-      :msg="getAlert.msg" />
-    <div class="login-usuario-body">
-        <div class="login-usuario-body-logo">Efetuar Login</div>
-        <div class="login-usuario-body-form">
-            <q-form @submit="efetuarLogin">
-                <MyInput 
-                  v-model="dadosUsuario.email"
-                  color="teal"
-                  type="email"
-                  label="Email"
-                  :rules="[(val) => !!val || 'Preencha o campo']" />
-                <MyInput 
-                  v-model="dadosUsuario.senha"
-                  color="teal"
-                  label="Senha"
-                  :type="isPwd ? 'password' : 'text'"
-                  :isPwd="isPwd"
-                  :isType="1"
-                  :rules="[(val) => !!val || 'Preencha o campo']"
-                  @visiblePass="$event => (isPwd = !isPwd)" />
-                <div>
-                    <q-btn
-                        color="secondary"
-                        label="Entrar"
-                        type="submit" />
-                </div>
-            </q-form>
-            <div class="login-usuario-body-form-cadastrar">
-                <a @click="alterarFormulario" href="#"
-                >Cadastrar-se</a>
-            </div>
-        </div>
-        <div class="login-usuario-body-midias">
-            <a href="#">
-                <i class="bx bxl-instagram"></i>
-            </a>
-            <a href="#">
-                <i class="bx bxl-linkedin-square"></i>
-            </a>
-        </div>
+    <div id="login-usuario">
+        <h4>Login Usuário</h4>
+        <FormUser
+            class="form-user q-pt-xl q-pb-xl"
+            typeForm="loginUser"
+            v-model:email="dataFormUser.email"
+            v-model:password="dataFormUser.password"
+            @loginUser="loginUser" />
     </div>
-  </div>
 </template>
 <style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap");
-
-#login-usuario {
-  background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),
-    url("../../assets/imagens/background_page_user.jpg") no-repeat fixed center;
-  background-size: cover;
-  font-family: "Fredoka", sans-serif;
-  height: calc(100vh - 3.1rem);
-  width: 100%;
-  padding: 1rem;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .login-usuario-body{
-    width: 30%;
-    height: 80%;
-    background-color: white;
+#login-usuario{
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    justify-content: space-between;
-    box-shadow: 4px 4px 0px 0px #1d976cce;
+    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),
+        url("../../assets/imagens/background_page_user.jpg") no-repeat fixed center;
+    background-size: cover;
+    height: calc(100vh - 3.1rem);
+    font-family: "Fredoka", sans-serif;
 
-    .login-usuario-body-logo{
-        font-size: 2rem;
-        padding: 1rem 0 0 0;
+    h4{
+        width: 60%;
         text-align: center;
-        
+        padding: 1rem;
+        background-color: white;
+        box-shadow: 3px 3px 0px 0px #1d976cce;
+        border-radius: 5px;
+
     }
-    .login-usuario-body-form{
-        width: 95%;
-
-        .q-btn {
-            width: 100%;
-            height: 3rem;
-            margin: 0 0 1rem 0;
-            border-radius: 5px;
-
-        }
-        .login-usuario-body-form-cadastrar{
-            text-align: center;
-        
-            a {
-              color: $negative;
-              font-size: 1rem;
-        
-              &:hover {
-                color: $botaoVerde;
-
-              }
-            }
-        }
-    }
-    .login-usuario-body-midias{
+    .form-user{
         display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 60%;
+        background-color: white;
+        box-shadow: 4px 4px 0px 0px #1d976cce;
+        border-radius: 5px;
 
-        a {
-          display: flex;
-          align-items: center;
-          margin: 0.3rem;
-          text-decoration: none;
-    
-          i {
-            color: $iconsCinza;
-            font-size: 2rem;
-    
-            &:hover {
-              color: $botaoVerde;
-              
-            }
-          }
+        .q-form{
+            width: 100%;
+            
         }
-      }
     }
-  }
-/*################################################*/
-@media only screen and (max-width: 1560px) {
-}
-@media only screen and (max-width: 1200px) {
-  #login-usuario{
-    .login-usuario-body{
-      width: 50%;
-
-    }
-  }
-}
-@media only screen and (max-width: 992px) {
-  #login-usuario{
-    .login-usuario-body{
-      width: 60%;
-      
-    }
-  }
-}
-@media only screen and (max-width: 720px) {
-  #login-usuario{
-    .login-usuario-body{
-      width: 90%;
-      
-    }
-  }
-}
-@media only screen and (max-width: 481px) {
-  #login-usuario{
-    .login-usuario-body{
-      width: 100%;
-      
-    }
-  }
-}
-@media only screen and (max-width: 360px) {
 }
 </style>
