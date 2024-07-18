@@ -1,20 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { getDadosUsuario } from '../../services/localStorage/settingSession.js';
+import { getDadosUsuario } from '../services/localStorage/settingSession.js';
 
-import Inicio from '../../pages/Inicio.vue';
-
-// Components usuário
-import LoginUsuario from '../../pages/usuario/LoginUsuario.vue';
-import CadastroUsuario from '../../pages/usuario/CadastroUsuario.vue';
-import HomeUsuario from '../../pages/usuario/HomeUsuario.vue';
-import EditarUsuario from '../../pages/usuario/EditarUsuario.vue';
-import BuscarEstabelecimento from '../../pages/usuario/BuscarEstabelecimento.vue';
-import EditarSenhaUsuario from '../../pages/usuario/EditarSenhaUsuario.vue';
-
-// Components estabelecimento
-import LoginEstabelecimento from '../../pages/estabelecimento/LoginEstabelecimento.vue';
-import CadastroEstabelecimento from '../../pages/estabelecimento/CadastroEstabelecimento.vue';
-import HomeEstabelecimento from '../../pages/estabelecimento/HomeEstabelecimento.vue';
+import { Inicio, LoginUsuario, 
+    CadastroUsuario, HomeUsuario,
+    EditarUsuario, EditarSenhaUsuario,
+    BuscarEstabelecimento, CadastroEstabelecimento,
+    HomeEstabelecimento, LoginEstabelecimento } from '../pages';
 
 const routes = [
     {
@@ -67,10 +58,10 @@ const routes = [
         name: 'homeUsuario',
         component: HomeUsuario,
         beforeEnter: (_, __, next) => {
-            if(getDadosUsuario()){
+            /*if(getDadosUsuario()){
                 if(getDadosUsuario().tipoUsuario == '1'){
-                    next()
-                    return
+                    */next()
+                    return/*
 
                 }
                 next('/homeEstabelecimento')
@@ -78,7 +69,7 @@ const routes = [
 
             }
             next('/')
-            return
+            return*/
 
         }
     },
@@ -87,10 +78,10 @@ const routes = [
         name: 'editarUsuario',
         component: EditarUsuario,
         beforeEnter: (_, __, next) => {
-            if(getDadosUsuario()){
+            /*if(getDadosUsuario()){
                 if(getDadosUsuario().tipoUsuario == '1'){
-                    next()
-                    return
+                    */next()
+                    return/*
                     
                 }
                 next('/homeEstabelecimento')
@@ -98,7 +89,7 @@ const routes = [
                 
             }
             next('/')
-            return
+            return*/
 
         }
     },
@@ -107,10 +98,10 @@ const routes = [
         name: 'editarSenhaUsuario',
         component: EditarSenhaUsuario,
         beforeEnter: (_, __, next) => {
-            if(getDadosUsuario()){
+            /*if(getDadosUsuario()){
                 if(getDadosUsuario().tipoUsuario == '1'){
-                    next()
-                    return
+                    */next()
+                    return/*
                     
                 }
                 next('/homeEstabelecimento')
@@ -118,7 +109,7 @@ const routes = [
                 
             }
             next('/')
-            return
+            return*/
 
         }
     },
@@ -127,10 +118,10 @@ const routes = [
         name: 'buscarEstabelecimento',
         component: BuscarEstabelecimento,
         beforeEnter: (_, __, next) => {
-            if(getDadosUsuario()){
+            /*if(getDadosUsuario()){
                 if(getDadosUsuario().tipoUsuario == '1'){
-                    next()
-                    return
+                    */next()
+                    return/*
 
                 }
                 next('/homeEstabelecimento')
@@ -138,7 +129,7 @@ const routes = [
 
             }
             next('/')
-            return
+            return*/
 
         }
     },

@@ -19,7 +19,6 @@ const verificaDadosUsuario = () => {
     return;
 
   }
-  //console.log(getDadosUsuario());
 }
 const efeturarLogout = () => {
   deleteDadosUsuario();
@@ -44,7 +43,9 @@ onMounted(() => {
             icon="menu"
             @click="toggleLeftDrawer" />
 
-          <q-toolbar-title> Mesa Online </q-toolbar-title>
+          <router-link to="/">
+            <q-toolbar-title> Mesa Online </q-toolbar-title>
+          </router-link>
 
           <div v-if="!visibleToggle" class="nav-bar-login-state">
             <q-btn-dropdown class="nav-bar-login" stretch flat label="Login">
@@ -148,6 +149,20 @@ onMounted(() => {
 #nav-bar {
   font-family: "Fredoka", sans-serif;
 
+  .q-toolbar{
+    display: flex;
+    justify-content: space-between;
+    
+    a{
+      text-decoration: none;
+      color: rgba(255, 255, 255, .8);
+
+      &:hover{
+        color: white;
+
+      }
+    }
+  }
   .nav-bar-login-state{
     display: flex;
     height: 3rem;
