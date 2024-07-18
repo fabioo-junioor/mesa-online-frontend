@@ -1,31 +1,24 @@
 <script setup>
-import { reactive } from 'vue';
-import { FormUser } from '../../components';
+import { FormEstablishment } from '../../components';
 
-const dataFormUser = reactive({
-    email: 'contato@bol.com',
-    password: '333'
-});
-const loginUser = () => {
-    console.log('login ', dataFormUser);
-
+const createEstablishment = (values) => {
+    let dataFormEstablishment = values;
+    console.log('cadastrar ', dataFormEstablishment);
 }
 
 </script>
 <template>
-    <div id="login-usuario">
-        <h4>Login Usuário</h4>
-        <FormUser
-            class="form-user q-pt-xl q-pb-xl"
-            typeForm="loginUser"
-            v-model:email="dataFormUser.email"
-            v-model:password="dataFormUser.password"
-            @loginUser="loginUser" />
+    <div id="create-establishment">
+        <h4>Cadastrar Estabelecimento</h4>
+        <FormEstablishment
+            class="form-establishment q-pt-xl q-pb-xl"
+            typeForm="createEstablishment"
+            @createEstablishment="createEstablishment" />
     </div>
 </template>
 <style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap");
-#login-usuario{
+#create-establishment{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -45,7 +38,7 @@ const loginUser = () => {
         border-radius: 5px;
 
     }
-    .form-user{
+    .form-establishment{
         display: flex;
         flex-direction: column;
         align-items: center;

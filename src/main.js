@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 
 // Vue router
-import router from './config/router/router.js'
+import router from './router/router.js'
 
 // Quasar
 import { Quasar, Notify } from 'quasar'

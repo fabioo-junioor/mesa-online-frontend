@@ -1,42 +1,32 @@
 <script setup>
-import { getDadosUsuario, getDadosPessoa, deleteDadosUsuario, deleteDadosPessoa } from "../config/utils/settingSession.js";
-import { ref, reactive, onMounted } from "vue";
+import { getDadosUsuario, deleteDadosUsuario } from '../services/localStorage/settingSession.js';
+import { ref, reactive, onMounted } from 'vue';
 
-const leftDrawerOpen = ref(false)
-const visibleToggle = ref(false)
-const urlApi = ref('')
+const leftDrawerOpen = ref(false);
+const visibleToggle = ref(false);
 const dadosPessoa = reactive({
   nome: "Anônimo",
   telefone: ''
 
-})
+});
 const toggleLeftDrawer = () => {
-  leftDrawerOpen.value = !leftDrawerOpen.value
+  leftDrawerOpen.value = !leftDrawerOpen.value;
 
 }
 const verificaDadosUsuario = () => {
-  if (getDadosUsuario()) {
-    visibleToggle.value = true
+  if(getDadosUsuario()) {
+    visibleToggle.value = true;
+    return;
 
   }
-  //console.log(getDadosUsuario())
-}
-const verificaDadosPessoa = () => {
-  if(getDadosPessoa()){
-    dadosPessoa.nome = getDadosPessoa().nome
-
-  }
-  //console.log(getDadosPessoa())
 }
 const efeturarLogout = () => {
-  deleteDadosPessoa()
-  deleteDadosUsuario()
-  return location.reload()
+  deleteDadosUsuario();
+  return location.reload();
 
 }
 onMounted(() => {
-  verificaDadosUsuario()
-  verificaDadosPessoa()
+  verificaDadosUsuario();
 
 })
 </script>
@@ -53,7 +43,9 @@ onMounted(() => {
             icon="menu"
             @click="toggleLeftDrawer" />
 
-          <q-toolbar-title> Mesa Online </q-toolbar-title>
+          <router-link to="/">
+            <q-toolbar-title> Mesa Online </q-toolbar-title>
+          </router-link>
 
           <div v-if="!visibleToggle" class="nav-bar-login-state">
             <q-btn-dropdown class="nav-bar-login" stretch flat label="Login">
@@ -89,7 +81,7 @@ onMounted(() => {
                     </q-avatar>
                   </q-item-section>
                   <q-item-section>
-                    <router-link :to="{name: 'cadastrarUsuario', params:{cadU: 1 } }">Usuário</router-link>
+                    <router-link to="/cadastroUsuario">Usuário</router-link>
                   </q-item-section>
                 </q-item>
                 <q-item clickable v-close-popup tabindex="0">
@@ -99,7 +91,7 @@ onMounted(() => {
                     </q-avatar>
                   </q-item-section>
                   <q-item-section>
-                    <router-link :to="{name: 'cadastrarEstabelecimento', params:{cadE: 1 } }">Estabelecimento</router-link>
+                    <router-link to="/cadastroEstabelecimento">Estabelecimento</router-link>
                   </q-item-section>
                 </q-item>
               </q-list>
@@ -157,6 +149,20 @@ onMounted(() => {
 #nav-bar {
   font-family: "Fredoka", sans-serif;
 
+  .q-toolbar{
+    display: flex;
+    justify-content: space-between;
+    
+    a{
+      text-decoration: none;
+      color: rgba(255, 255, 255, .8);
+
+      &:hover{
+        color: white;
+
+      }
+    }
+  }
   .nav-bar-login-state{
     display: flex;
     height: 3rem;
