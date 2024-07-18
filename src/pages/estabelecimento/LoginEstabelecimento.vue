@@ -1,8 +1,12 @@
 <script setup>
+import { reactive } from 'vue';
 import { FormEstablishment } from '../../components';
 
-const loginEstablishment = (values) => {
-    let dataFormEstablishment = values;
+const dataFormEstablishment = reactive({
+    email: '',
+    password: ''
+});
+const loginEstablishment = () => {
     console.log('login ', dataFormEstablishment);
 
 }
@@ -14,6 +18,8 @@ const loginEstablishment = (values) => {
         <FormEstablishment
             class="form-establishment q-pt-xl q-pb-xl"
             typeForm="loginEstablishment"
+            v-model:emailEstablishment="dataFormEstablishment.email"
+            v-model:password="dataFormEstablishment.password"
             @loginEstablishment="loginEstablishment" />
     </div>
 </template>
@@ -31,7 +37,7 @@ const loginEstablishment = (values) => {
     font-family: "Fredoka", sans-serif;
 
     h4{
-        width: 60%;
+        width: 50%;
         text-align: center;
         padding: 1rem;
         background-color: white;
@@ -40,11 +46,11 @@ const loginEstablishment = (values) => {
 
     }
     .form-establishment{
+        width: 50%;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        width: 60%;
         background-color: white;
         box-shadow: 4px 4px 0px 0px #1d976cce;
         border-radius: 5px;

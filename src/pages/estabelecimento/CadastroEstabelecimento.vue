@@ -1,8 +1,13 @@
 <script setup>
+import { reactive } from 'vue';
 import { FormEstablishment } from '../../components';
 
-const createEstablishment = (values) => {
-    let dataFormEstablishment = values;
+const dataFormEstablishment = reactive({
+    email: '',
+    password: '',
+    repeatPassword: ''
+});
+const createEstablishment = () => {
     console.log('cadastrar ', dataFormEstablishment);
 }
 
@@ -13,6 +18,9 @@ const createEstablishment = (values) => {
         <FormEstablishment
             class="form-establishment q-pt-xl q-pb-xl"
             typeForm="createEstablishment"
+            v-model:emailEstablishment="dataFormEstablishment.email"
+            v-model:password="dataFormEstablishment.password"
+            v-model:repeatPassword="dataFormEstablishment.repeatPassword"
             @createEstablishment="createEstablishment" />
     </div>
 </template>
@@ -30,7 +38,7 @@ const createEstablishment = (values) => {
     font-family: "Fredoka", sans-serif;
 
     h4{
-        width: 60%;
+        width: 50%;
         text-align: center;
         padding: 1rem;
         background-color: white;
@@ -39,11 +47,11 @@ const createEstablishment = (values) => {
 
     }
     .form-establishment{
+        width: 50%;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        width: 60%;
         background-color: white;
         box-shadow: 4px 4px 0px 0px #1d976cce;
         border-radius: 5px;
