@@ -8,17 +8,12 @@ const dataSearchEstablishment = reactive({
     isVacancies: false
 
 });
-const dataCardEstablishment = reactive({
-    name: 'Rock',
-    description: 'descriçao',
-    isOpen: true,
-    isVacancies: true
-
-});
-const searchEstablishment = () => {
-    console.log(dataSearchEstablishment);
-    
-}
+const dataEstablishments = reactive([
+    {name: 'rock lanches', description: 'descrição', isOpen: true, isVacancies: true},
+    {name: 'gonha lanches', description: 'descrição', isOpen: true, isVacancies: false},
+    {name: 'mana lanches', description: 'descrição', isOpen: false, isVacancies: false},
+    {name: 'buneco', description: 'descrição', isOpen: true, isVacancies: true}
+]);
 </script>
 <template>
     <div id="search-establishment">
@@ -55,11 +50,11 @@ const searchEstablishment = () => {
         </div>
         <div class="cards-establishment">
             <CardEstablishment
-                :name="dataCardEstablishment.name"
-                :description="dataCardEstablishment.description"
-                :isVacancies="dataCardEstablishment.isVacancies"
-                :isOpen="dataCardEstablishment.isOpen"
-                v-for="i in 10" :key="i" />
+                v-for="i in dataEstablishments" :key="i" 
+                :name="i.name"
+                :description="i.description"
+                :isOpen="i.isOpen"
+                :isVacancies="i.isVacancies" />
         </div>
     </div>
 </template>
