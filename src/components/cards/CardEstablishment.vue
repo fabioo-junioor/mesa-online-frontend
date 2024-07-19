@@ -18,11 +18,18 @@ const props = defineProps(['name', 'description', 'isVacancies', 'isOpen']);
 
       <q-card-actions>
         <div class="infos-establishment">
-            <span v-if="isOpen" class="q-ma-sm" style="color: green;">Aberto</span>
-            <span v-else class="q-ma-sm" style="color: red;">Fechado</span>
-
-            <span v-if="isVacancies && isOpen" class="q-ma-sm">A vagas</span>
-            <span v-if="!isVacancies && isOpen" class="q-ma-sm">Não a vagas</span>
+          <div v-if="isOpen" class="q-ma-sm">
+            <q-badge color="green" class="q-mr-xs" />Aberto
+          </div>
+          <div v-else class="q-ma-sm">
+            <q-badge color="red" class="q-mr-xs" />Fechado
+          </div>
+          <div v-if="isVacancies && isOpen" class="q-ma-sm">
+            <q-badge color="green" class="q-mr-xs" />A vagas
+          </div>
+          <div v-if="!isVacancies && isOpen" class="q-ma-sm">
+            <q-badge color="red" class="q-mr-xs" />Não a vagas
+          </div>
         </div>
         <q-btn outline color="teal">Reservar</q-btn>
       </q-card-actions>
@@ -38,10 +45,8 @@ const props = defineProps(['name', 'description', 'isVacancies', 'isOpen']);
         justify-content: space-between;
 
         .infos-establishment{
-            span{
-                font-weight: 500;
-                
-            }
+            display: flex;
+            
         }
 
     }
