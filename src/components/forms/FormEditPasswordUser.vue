@@ -20,7 +20,7 @@ const onSubmit = () => {
 
 </script>
 <template>
-    <div id="form-edit-password-user" class="q-ma-sm q-pa-sm">
+    <div id="form-edit-password-user">
         <q-form @submit="onSubmit">
             <q-input
                 class="q-mb-md"
