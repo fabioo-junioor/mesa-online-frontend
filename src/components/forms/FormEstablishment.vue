@@ -4,28 +4,24 @@ import { fielsRequired, emailValidator } from '../../utils/inputValidators.js';
 
 const emit = defineEmits(['loginEstablishment', 'createEstablishment']);
 const props = defineProps(['typeForm']);
+const emailEstablishment = defineModel('email');
+const passwordEstablishment = defineModel('password');
+const repeatPasswordEstablishment = defineModel('repeatPassword');
 const isPwd1 = ref(true);
 const isPwd2 = ref(true);
 const typeFormEstablishment = ref(true);
-const dataFormEstablishment = reactive({
-    email: '',
-    password: '',
-    repeatPassword: '',
-    rules: {
-        required: v => fielsRequired(v) || 'Campo obrigatório',
-        email: v => emailValidator(v) || 'Email inválido',
-        equals: v => (v === dataFormEstablishment.password) || 'Senhas diferentes'
+const rulesEstablishment = reactive({
+    required: v => fielsRequired(v) || 'Campo obrigatório',
+    email: v => emailValidator(v) || 'Email inválido'
 
-    }
-})
+});
 const onSubmit = () => {
-    const { email, password } = {...dataFormEstablishment};
     if(props.typeForm == 'loginEstablishment'){
-        emit('loginEstablishment', {email, password});
+        emit('loginEstablishment');
         return;
 
     }
-    emit('createEstablishment', {email, password});
+    emit('createEstablishment');
     return;
     
 }
@@ -41,20 +37,20 @@ onMounted(() => {
                 class="q-mb-md"
                 filled
                 color="teal"
-                v-model="dataFormEstablishment.email"
+                v-model="emailEstablishment"
                 type="text"
                 label="Seu e-mail:"
                 lazy-rules
-                :rules="[dataFormEstablishment.rules.email]" />
+                :rules="[rulesEstablishment.email]" />
             <q-input
                 class="q-mb-md"
                 filled
                 color="teal"
-                v-model="dataFormEstablishment.password"
+                v-model="passwordEstablishment"
                 :type="isPwd1 ? 'password' : 'text'"
                 label="Sua senha:"
                 lazy-rules
-                :rules="[dataFormEstablishment.rules.required]">
+                :rules="[rulesEstablishment.required]">
                 <template v-slot:append>
                     <q-icon :name="isPwd1 ? 'visibility_off' : 'visibility'"
                         class="cursor-pointer"
@@ -66,11 +62,11 @@ onMounted(() => {
                 class="q-mb-md"
                 filled
                 color="teal"
-                v-model="dataFormEstablishment.repeatPassword"
+                v-model="repeatPasswordEstablishment"
                 :type="isPwd2 ? 'password' : 'text'"
                 label="Repita a senha:"
                 lazy-rules
-                :rules="[dataFormEstablishment.rules.required, dataFormEstablishment.rules.equals]">
+                :rules="[rulesEstablishment.required, v => (v === passwordEstablishment) || 'Senhas diferentes']">
                 <template v-slot:append>
                     <q-icon :name="isPwd2 ? 'visibility_off' : 'visibility'"
                         class="cursor-pointer"

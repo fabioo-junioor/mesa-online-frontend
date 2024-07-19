@@ -25,7 +25,7 @@ onMounted(() => {
     <div id="edit-user">
         <h4>Editar Usuário</h4>
         <FormEditUser
-            class="form-edit-user q-pt-xl q-pb-xl"
+            class="form-edit-user q-pt-md"
             v-model:name='dataFormUser.name'
             v-model:phone='dataFormUser.phone'
             @saveFormUser='saveFormUser' />
@@ -42,25 +42,17 @@ onMounted(() => {
     font-family: "Fredoka", sans-serif;
 
     h4{
-        width: 60%;
-        text-align: center;
-        padding: 1rem;
-        background-color: white;
-        box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, .2);
-        border: 1px solid rgba(0, 0, 0, .2);
-        border-radius: 5px;
+        width: 50%;
+        font-size: 1.5rem;
 
     }
     .form-edit-user{
+        width: 50%;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        width: 60%;
-        background-color: white;
-        box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, .2);
-        border: 1px solid rgba(0, 0, 0, .2);
-        border-radius: 5px;
+        border-top: 1px solid rgba(0, 0, 0, .5);
 
         .q-form{
             width: 100%;

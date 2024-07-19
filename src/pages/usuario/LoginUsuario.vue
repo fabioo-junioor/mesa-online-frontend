@@ -37,7 +37,7 @@ const loginUser = () => {
     font-family: "Fredoka", sans-serif;
 
     h4{
-        width: 60%;
+        width: 50%;
         text-align: center;
         padding: 1rem;
         background-color: white;
@@ -46,11 +46,11 @@ const loginUser = () => {
 
     }
     .form-user{
+        width: 50%;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        width: 60%;
         background-color: white;
         box-shadow: 4px 4px 0px 0px #1d976cce;
         border-radius: 5px;
