@@ -10,6 +10,8 @@ import BuscarEstabelecimento from './usuario/BuscarEstabelecimento.vue';
 import CadastroEstabelecimento from './estabelecimento/CadastroEstabelecimento.vue';
 import HomeEstabelecimento from './estabelecimento/HomeEstabelecimento.vue';
 import LoginEstabelecimento from './estabelecimento/LoginEstabelecimento.vue';
+import DetailsEstablishment from './estabelecimento/DetailsEstablishment.vue';
+
 
 export {
     Inicio,
@@ -21,5 +23,6 @@ export {
     BuscarEstabelecimento,
     CadastroEstabelecimento,
     HomeEstabelecimento,
-    LoginEstabelecimento
+    LoginEstabelecimento,
+    DetailsEstablishment
 }

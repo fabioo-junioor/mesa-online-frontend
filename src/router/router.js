@@ -5,7 +5,8 @@ import { Inicio, LoginUsuario,
     CadastroUsuario, HomeUsuario,
     EditarUsuario, EditarSenhaUsuario,
     BuscarEstabelecimento, CadastroEstabelecimento,
-    HomeEstabelecimento, LoginEstabelecimento } from '../pages';
+    HomeEstabelecimento, LoginEstabelecimento,
+    DetailsEstablishment } from '../pages';
 
 const routes = [
     {
@@ -20,16 +21,16 @@ const routes = [
         beforeEnter: (_, __, next) => {
             if(getDadosUsuario()){
                 if(getDadosUsuario().tipoUsuario == '1'){
-                    next('/homeUsuario')
-                    return
+                    next('/homeUsuario');
+                    return;
 
                 }
-                next('/homeEstabelecimento')
-                return
+                next('/homeEstabelecimento');
+                return;
 
             }
-            next()
-            return
+            next();
+            return;
 
         }
     },
@@ -60,16 +61,16 @@ const routes = [
         beforeEnter: (_, __, next) => {
             /*if(getDadosUsuario()){
                 if(getDadosUsuario().tipoUsuario == '1'){
-                    */next()
-                    return/*
+                    */next();
+                    return;/*
 
                 }
-                next('/homeEstabelecimento')
-                return
+                next('/homeEstabelecimento');
+                return;
 
             }
-            next('/')
-            return*/
+            next('/');
+            return;*/
 
         }
     },
@@ -80,16 +81,16 @@ const routes = [
         beforeEnter: (_, __, next) => {
             /*if(getDadosUsuario()){
                 if(getDadosUsuario().tipoUsuario == '1'){
-                    */next()
-                    return/*
+                    */next();
+                    return;/*
                     
                 }
-                next('/homeEstabelecimento')
-                return
+                next('/homeEstabelecimento');
+                return;
                 
             }
-            next('/')
-            return*/
+            next('/');
+            return;*/
 
         }
     },
@@ -100,16 +101,16 @@ const routes = [
         beforeEnter: (_, __, next) => {
             /*if(getDadosUsuario()){
                 if(getDadosUsuario().tipoUsuario == '1'){
-                    */next()
-                    return/*
+                    */next();
+                    return;/*
                     
                 }
-                next('/homeEstabelecimento')
-                return
+                next('/homeEstabelecimento');
+                return;
                 
             }
-            next('/')
-            return*/
+            next('/');
+            return;*/
 
         }
     },
@@ -120,16 +121,26 @@ const routes = [
         beforeEnter: (_, __, next) => {
             /*if(getDadosUsuario()){
                 if(getDadosUsuario().tipoUsuario == '1'){
-                    */next()
-                    return/*
+                    */next();
+                    return;/*
 
                 }
-                next('/homeEstabelecimento')
-                return
+                next('/homeEstabelecimento');
+                return;
 
             }
-            next('/')
-            return*/
+            next('/');
+            return;*/
+
+        }
+    },
+    {
+        path: '/detailsEstablishment/:id',
+        name: 'detailsEstablishment',
+        component: DetailsEstablishment,
+        beforeEnter: (_, __, next) => {
+            next();
+            return;
 
         }
     },
@@ -140,16 +151,16 @@ const routes = [
         beforeEnter: (_, __, next) => {
             if(getDadosUsuario()){
                 if(getDadosUsuario().tipoUsuario == '2'){
-                    next('/homeEstabelecimento')
-                    return
+                    next('/homeEstabelecimento');
+                    return;
 
                 }
-                next('/homeUsuario')
-                return
+                next('/homeUsuario');
+                return;
 
             }
-            next()
-            return
+            next();
+            return;
 
         }
     },
@@ -160,16 +171,16 @@ const routes = [
         beforeEnter: (_, __, next) => {
             if(getDadosUsuario()){
                 if(getDadosUsuario().tipoUsuario == '2'){
-                    next('/homeEstabelecimento')
-                    return
+                    next('/homeEstabelecimento');
+                    return;
 
                 }
-                next('/homeUsuario')
-                return
+                next('/homeUsuario');
+                return;
 
             }
-            next()
-            return
+            next();
+            return;
 
         }
     },
@@ -180,16 +191,16 @@ const routes = [
         beforeEnter: (_, __, next) => {
             if(getDadosUsuario()){
                 if(getDadosUsuario().tipoUsuario == '2'){
-                    next()
-                    return
+                    next();
+                    return;
 
                 }
-                next('/homeUsuario')
-                return
+                next('/homeUsuario');
+                return;
 
             }
-            next('/')
-            return
+            next('/');
+            return;
             
         }
     },
@@ -198,8 +209,8 @@ const routes = [
         name: 'inicio',
         component: Inicio,
         beforeEnter: (_, __, next) => {
-            next()
-            return
+            next();
+            return;
 
         }
     }
