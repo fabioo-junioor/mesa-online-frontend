@@ -7,7 +7,11 @@ const props = defineProps(['name', 'description', 'isVacancies', 'isOpen']);
     <q-card class="my-card">
       <q-card-section horizontal>
         <q-img class="col-6" src="https://cdn.quasar.dev/img/parallax1.jpg">
-            <div class="absolute-bottom text-subtitle2 text-center">{{ name }}</div>
+          <div class="absolute-bottom text-subtitle2 text-center">
+            <router-link :to="{name: 'detailsEstablishment', params: {id: '1'} }">
+              {{ name }}
+            </router-link>
+          </div>
         </q-img>
         <q-card-section>
           {{ props.description }}
@@ -40,6 +44,18 @@ const props = defineProps(['name', 'description', 'isVacancies', 'isOpen']);
 .my-card{
     width: 25rem;
 
+    .text-subtitle2 a{
+      text-decoration: underline;
+      font-size: 1rem;
+      padding: .3rem;
+      color: $negative;
+      border-radius: 10px;
+
+      &:hover{
+        color: red;
+        
+      }
+    }
     .q-card__actions{
         display: flex;
         justify-content: space-between;
