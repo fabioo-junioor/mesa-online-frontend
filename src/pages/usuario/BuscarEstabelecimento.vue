@@ -1,19 +1,57 @@
 <script setup>
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 import { CardEstablishment } from '../../components';
 
+const dataSearchEstablishment = reactive({
+    name: '',
+    isOpen: false,
+    isVacancies: false
+
+});
 const dataCardEstablishment = reactive({
     name: 'Rock',
     description: 'descriçao',
     isOpen: true,
     isVacancies: true
+
 });
+const searchEstablishment = () => {
+    console.log(dataSearchEstablishment);
+    
+}
 </script>
 <template>
     <div id="search-establishment">
         <h4 class="q-mt-sm q-mb-sm">Estabelecimentos</h4>
-        <div class="search-filters q-mt-sm q-mb-sm">
-
+        <div class="search-filters q-mt-md q-mb-md">
+            <q-form @submit="searchEstablishment">
+                <q-input
+                    square outlined
+                    color="teal"
+                    v-model="dataSearchEstablishment.name"
+                    type="text"
+                    label="Nome do estabelecimento" />
+                <div class="q-ma-xs">
+                    <q-checkbox
+                        rigth-label
+                        v-model="dataSearchEstablishment.isOpen"
+                        checked-icon="task_alt" 
+                        unchecked-icon="highlight_off"
+                        label="Aberto" />
+                </div>
+                <div class="q-ma-xs">
+                    <q-checkbox
+                        rigth-label
+                        v-model="dataSearchEstablishment.isVacancies"
+                        checked-icon="task_alt" 
+                        unchecked-icon="highlight_off"
+                        label="Com vagas" />
+                </div>
+                <q-btn
+                    label="Buscar"
+                    type="submit"
+                    color="teal" />
+        </q-form>
         </div>
         <div class="cards-establishment">
             <CardEstablishment
@@ -34,17 +72,31 @@ const dataCardEstablishment = reactive({
     padding: 1rem;
 
     .search-filters{
-        height: 2rem;
         width: 100%;
-        background-color: red;
 
+        .q-form{
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            gap: .3rem;
+
+            .q-field{
+                min-width: 15rem;
+                min-height: 3.5rem;
+                
+            }
+            .q-btn{
+                min-height: 3.5rem;
+                
+            }
+        }
     }
     .cards-establishment{
         display: flex;
         justify-content: space-evenly;
         flex-wrap: wrap;
         gap: .2rem;
-    }
 
+    }
 }
 </style>
