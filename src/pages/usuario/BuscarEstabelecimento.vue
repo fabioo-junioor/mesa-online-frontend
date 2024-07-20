@@ -3,54 +3,50 @@ import { reactive, ref } from 'vue';
 import { CardEstablishment } from '../../components';
 
 const dataSearchEstablishment = reactive({
-    name: '',
-    isOpen: false,
-    isVacancies: false
+    name: ''
 
 });
 const dataEstablishments = reactive([
     {name: 'rock lanches', description: 'descrição', isOpen: true, isVacancies: true},
-    {name: 'gonha lanches', description: 'descrição', isOpen: true, isVacancies: false},
+    {name: 'gonha lanches', description: 'descrição', isOpen: false, isVacancies: false},
     {name: 'mana lanches', description: 'descrição', isOpen: false, isVacancies: false},
     {name: 'buneco', description: 'descrição', isOpen: true, isVacancies: true}
 ]);
+const searchEstablishment = () => {
+    if(dataEstablishments != []){
+        let data = orderArray(dataEstablishments);
+        return data.filter(i => {
+            return i.name.toLowerCase().includes(dataSearchEstablishment.name.toLocaleLowerCase());
+
+        })
+    }
+    return [];
+
+};
+const orderArray = array => {
+    return array.sort((a, b) => {
+        return b.isOpen - a.isOpen;
+
+    });
+}
 </script>
 <template>
     <div id="search-establishment">
         <h4 class="q-mt-sm q-mb-sm">Estabelecimentos</h4>
         <div class="search-filters q-mt-md q-mb-md">
-            <q-form @submit="searchEstablishment">
+            <q-form>
                 <q-input
                     square outlined
                     color="teal"
                     v-model="dataSearchEstablishment.name"
                     type="text"
                     label="Nome do estabelecimento" />
-                <div class="q-ma-xs">
-                    <q-checkbox
-                        rigth-label
-                        v-model="dataSearchEstablishment.isOpen"
-                        checked-icon="task_alt" 
-                        unchecked-icon="highlight_off"
-                        label="Aberto" />
-                </div>
-                <div class="q-ma-xs">
-                    <q-checkbox
-                        rigth-label
-                        v-model="dataSearchEstablishment.isVacancies"
-                        checked-icon="task_alt" 
-                        unchecked-icon="highlight_off"
-                        label="Com vagas" />
-                </div>
-                <q-btn
-                    label="Buscar"
-                    type="submit"
-                    color="teal" />
         </q-form>
         </div>
         <div class="cards-establishment">
             <CardEstablishment
-                v-for="i in dataEstablishments" :key="i" 
+                v-for="i in searchEstablishment()" :key="i"
+                :id="5"
                 :name="i.name"
                 :description="i.description"
                 :isOpen="i.isOpen"
@@ -90,7 +86,7 @@ const dataEstablishments = reactive([
         display: flex;
         justify-content: space-evenly;
         flex-wrap: wrap;
-        gap: .2rem;
+        gap: .5rem;
 
     }
 }
