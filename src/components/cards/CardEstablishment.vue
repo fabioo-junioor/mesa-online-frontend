@@ -1,16 +1,20 @@
 <script setup>
-const props = defineProps(['name', 'description', 'isVacancies', 'isOpen']);
+import { useRouter } from 'vue-router';
 
+const props = defineProps(['id', 'name', 'description', 'isVacancies', 'isOpen']);
+const router = useRouter();
+const redirectDetails = () => {
+  router.push({name: 'detailsEstablishment', params: {id: props.id}});
+
+}
 </script>
 <template>
   <div id="card-establishment">
-    <q-card class="my-card">
+    <q-card class="my-card" @click="redirectDetails">
       <q-card-section horizontal>
         <q-img class="col-6" src="https://cdn.quasar.dev/img/parallax1.jpg">
           <div class="absolute-bottom text-subtitle2 text-center">
-            <router-link :to="{name: 'detailsEstablishment', params: {id: '1'} }">
               {{ name }}
-            </router-link>
           </div>
         </q-img>
         <q-card-section>
@@ -35,7 +39,6 @@ const props = defineProps(['name', 'description', 'isVacancies', 'isOpen']);
             <q-badge color="red" class="q-mr-xs" />Não a vagas
           </div>
         </div>
-        <q-btn outline color="teal">Reservar</q-btn>
       </q-card-actions>
     </q-card>
   </div>
@@ -43,18 +46,13 @@ const props = defineProps(['name', 'description', 'isVacancies', 'isOpen']);
 <style lang="scss" scoped>
 .my-card{
     width: 25rem;
+    cursor: pointer;
 
-    .text-subtitle2 a{
-      text-decoration: underline;
+    .text-subtitle2{
       font-size: 1rem;
-      padding: .3rem;
-      color: $negative;
-      border-radius: 10px;
+      padding: .5rem 0;
+      color: white;
 
-      &:hover{
-        color: red;
-        
-      }
     }
     .q-card__actions{
         display: flex;
@@ -66,6 +64,10 @@ const props = defineProps(['name', 'description', 'isVacancies', 'isOpen']);
         }
 
     }
+  &:hover{
+    box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, .3);
+
+  }
 
 }
 </style>

@@ -32,7 +32,7 @@ const createEstablishment = () => {
     justify-content: center;
     align-items: center;
     background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),
-        url("../../assets/imagens/background_page_user.jpg") no-repeat fixed center;
+        url("../../assets/imagens/background_page_establishment.jpg") no-repeat fixed center;
     background-size: cover;
     height: calc(100vh - 3.1rem);
     font-family: "Fredoka", sans-serif;

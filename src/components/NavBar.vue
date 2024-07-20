@@ -168,7 +168,7 @@ onMounted(() => {
     height: 3rem;
 
     .nav-bar-cadastrar{
-      background-color: $botaoVerde;
+      background-color: $buttonGreen;
 
     }
   }
