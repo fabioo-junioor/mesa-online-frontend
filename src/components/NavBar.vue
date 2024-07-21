@@ -1,7 +1,9 @@
 <script setup>
 import { getDadosUsuario, deleteDadosUsuario } from '../services/localStorage/settingSession.js';
 import { ref, reactive, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const leftDrawerOpen = ref(false);
 const visibleToggle = ref(false);
 const dadosPessoa = reactive({
@@ -24,6 +26,18 @@ const efeturarLogout = () => {
   deleteDadosUsuario();
   return location.reload();
 
+}
+const loginUser = () => {
+  router.push({name: 'loginUser'});
+}
+const cadUser = () => {
+  router.push({name: 'cadUser'});
+}
+const loginEstablishment = () => {
+  router.push({name: 'loginEstablishment'});
+}
+const cadEstablishment = () => {
+  router.push({name: 'cadEstablishment'});
 }
 onMounted(() => {
   verificaDadosUsuario();
@@ -50,49 +64,41 @@ onMounted(() => {
           <div v-if="!visibleToggle" class="nav-bar-login-state">
             <q-btn-dropdown class="nav-bar-login" stretch flat label="Login">
               <q-list>
-                <q-item clickable v-close-popup tabindex="0">
+                <q-item @click="loginUser" clickable v-close-popup tabindex="0">
                   <q-item-section avatar>
                     <q-avatar color="dark" text-color="white">
                       <i class="bx bx-user"></i>
                     </q-avatar>
                   </q-item-section>
-                  <q-item-section>
-                    <router-link to="/loginUsuario">Usuário</router-link>
-                  </q-item-section>
+                  <q-item-section>Usuário</q-item-section>
                 </q-item>
-                <q-item clickable v-close-popup tabindex="0">
+                <q-item @click="loginEstablishment" clickable v-close-popup tabindex="0">
                   <q-item-section avatar>
                     <q-avatar color="dark" text-color="white">
                       <i class="bx bx-home"></i>
                     </q-avatar>
                   </q-item-section>
-                  <q-item-section>
-                    <router-link to="/loginEstabelecimento">Estabelecimento</router-link>
-                  </q-item-section>
+                  <q-item-section>Estabelecimento</q-item-section>
                 </q-item>
               </q-list>
             </q-btn-dropdown>
             <q-btn-dropdown class="nav-bar-cadastrar" stretch flat label="Cadastrar">
               <q-list>
-                <q-item clickable v-close-popup tabindex="0">
+                <q-item @click="cadUser" clickable v-close-popup tabindex="0">
                   <q-item-section avatar>
                     <q-avatar color="dark" text-color="white">
                       <i class="bx bx-user"></i>
                     </q-avatar>
                   </q-item-section>
-                  <q-item-section>
-                    <router-link to="/cadastroUsuario">Usuário</router-link>
-                  </q-item-section>
+                  <q-item-section>Usuário</q-item-section>
                 </q-item>
-                <q-item clickable v-close-popup tabindex="0">
+                <q-item @click="cadEstablishment" clickable v-close-popup tabindex="0">
                   <q-item-section avatar>
                     <q-avatar color="dark" text-color="white">
                       <i class="bx bx-home"></i>
                     </q-avatar>
                   </q-item-section>
-                  <q-item-section>
-                    <router-link to="/cadastroEstabelecimento">Estabelecimento</router-link>
-                  </q-item-section>
+                  <q-item-section>Estabelecimento</q-item-section>
                 </q-item>
               </q-list>
             </q-btn-dropdown>
