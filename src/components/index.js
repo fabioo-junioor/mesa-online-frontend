@@ -7,6 +7,7 @@ import FormEditPasswordUser from './forms/FormEditPasswordUser.vue';
 import FormEstablishment from './forms/FormEstablishment.vue';
 
 import CardEstablishment from './cards/CardEstablishment.vue';
+import CardSchedules from './cards/CardSchedules.vue';
 
 export {
     Alert,
@@ -15,5 +16,6 @@ export {
     FormEditUser,
     FormEditPasswordUser,
     CardEstablishment,
+    CardSchedules,
     FormEstablishment
 }
