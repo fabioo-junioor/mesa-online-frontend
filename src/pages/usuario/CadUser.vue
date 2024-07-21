@@ -1,38 +1,38 @@
 <script setup>
 import { reactive } from 'vue';
-import { FormEstablishment } from '../../components';
+import { FormUser } from '../../components';
 
-const dataFormEstablishment = reactive({
-    email: '',
-    password: '',
-    repeatPassword: ''
+const dataFormUser = reactive({
+    email: 'contato@gmail.com',
+    password: '123',
+    repeatPassword: '',
 });
-const createEstablishment = () => {
-    console.log('cadastrar ', dataFormEstablishment);
+const createUser = () => {
+    console.log('cadastrar ', dataFormUser);
 }
 
 </script>
 <template>
-    <div id="create-establishment">
-        <h4>Cadastrar Estabelecimento</h4>
-        <FormEstablishment
-            class="form-establishment q-pt-xl q-pb-xl"
-            typeForm="createEstablishment"
-            v-model:emailEstablishment="dataFormEstablishment.email"
-            v-model:password="dataFormEstablishment.password"
-            v-model:repeatPassword="dataFormEstablishment.repeatPassword"
-            @createEstablishment="createEstablishment" />
+    <div id="cad-user">
+        <h4>Cadastrar Usuário</h4>
+        <FormUser
+            class="form-user q-pt-xl q-pb-xl"
+            typeForm="cadUser"
+            v-model:email="dataFormUser.email"
+            v-model:password="dataFormUser.password"
+            v-model:repeatPassword="dataFormUser.repeatPassword"
+            @createUser="createUser" />
     </div>
 </template>
 <style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap");
-#create-establishment{
+#cad-user{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),
-        url("../../assets/imagens/background_page_establishment.jpg") no-repeat fixed center;
+        url("../../assets/imagens/background_page_user.jpg") no-repeat fixed center;
     background-size: cover;
     height: calc(100vh - 3.1rem);
     font-family: "Fredoka", sans-serif;
@@ -46,7 +46,7 @@ const createEstablishment = () => {
         border-radius: 5px;
 
     }
-    .form-establishment{
+    .form-user{
         width: 50%;
         display: flex;
         flex-direction: column;

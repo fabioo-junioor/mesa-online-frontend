@@ -1,37 +1,38 @@
 <script setup>
 import { reactive } from 'vue';
-import { FormUser } from '../../components';
+import { FormEstablishment } from '../../components';
 
-const dataFormUser = reactive({
-    email: 'contato@bol.com',
-    password: '333'
+const dataFormEstablishment = reactive({
+    email: '',
+    password: '',
+    repeatPassword: ''
 });
-const loginUser = () => {
-    console.log('login ', dataFormUser);
-
+const createEstablishment = () => {
+    console.log('cadastrar ', dataFormEstablishment);
 }
 
 </script>
 <template>
-    <div id="login-usuario">
-        <h4>Login Usuário</h4>
-        <FormUser
-            class="form-user q-pt-xl q-pb-xl"
-            typeForm="loginUser"
-            v-model:email="dataFormUser.email"
-            v-model:password="dataFormUser.password"
-            @loginUser="loginUser" />
+    <div id="cad-establishment">
+        <h4>Cadastrar Estabelecimento</h4>
+        <FormEstablishment
+            class="form-establishment q-pt-xl q-pb-xl"
+            typeForm="cadEstablishment"
+            v-model:emailEstablishment="dataFormEstablishment.email"
+            v-model:password="dataFormEstablishment.password"
+            v-model:repeatPassword="dataFormEstablishment.repeatPassword"
+            @createEstablishment="createEstablishment" />
     </div>
 </template>
 <style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap");
-#login-usuario{
+#cad-establishment{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),
-        url("../../assets/imagens/background_page_user.jpg") no-repeat fixed center;
+        url("../../assets/imagens/background_page_establishment.jpg") no-repeat fixed center;
     background-size: cover;
     height: calc(100vh - 3.1rem);
     font-family: "Fredoka", sans-serif;
@@ -45,7 +46,7 @@ const loginUser = () => {
         border-radius: 5px;
 
     }
-    .form-user{
+    .form-establishment{
         width: 50%;
         display: flex;
         flex-direction: column;

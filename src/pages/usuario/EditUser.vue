@@ -4,7 +4,8 @@ import { FormEditUser } from '../../components';
 
 const dataFormUser = reactive({
     name: '',
-    phone: ''
+    phone: '',
+    linkInstagram: ''
 
 });
 const getDataUser = () => {
@@ -28,6 +29,7 @@ onMounted(() => {
             class="form-edit-user q-pt-md"
             v-model:name='dataFormUser.name'
             v-model:phone='dataFormUser.phone'
+            v-model:instagram="dataFormUser.linkInstagram"
             @saveFormUser='saveFormUser' />
     </div>
 </template>

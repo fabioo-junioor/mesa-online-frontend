@@ -1,23 +1,23 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { getDadosUsuario } from '../services/localStorage/settingSession.js';
 
-import { Inicio, LoginUsuario, 
-    CadastroUsuario, HomeUsuario,
-    EditarUsuario, EditarSenhaUsuario,
-    BuscarEstabelecimento, CadastroEstabelecimento,
-    HomeEstabelecimento, LoginEstabelecimento,
+import { Home, LoginUser, 
+    CadUser, HomeUser,
+    EditUser, EditPasswordUser,
+    SearchEstablishment, CadEstablishment,
+    HomeEstablishment, LoginEstablishment,
     DetailsEstablishment } from '../pages';
 
 const routes = [
     {
         path: '/',
-        name: 'inicio',
-        component: Inicio
+        name: 'home',
+        component: Home
     },
     {
-        path: '/loginUsuario',
-        name: 'loginUsuario',
-        component: LoginUsuario,
+        path: '/loginUser',
+        name: 'loginUser',
+        component: LoginUser,
         beforeEnter: (_, __, next) => {
             if(getDadosUsuario()){
                 if(getDadosUsuario().tipoUsuario == '1'){
@@ -25,7 +25,7 @@ const routes = [
                     return;
 
                 }
-                next('/homeEstabelecimento');
+                next('/homeEstablishment');
                 return;
 
             }
@@ -35,17 +35,17 @@ const routes = [
         }
     },
     {
-        path: '/cadastroUsuario',
-        name: 'cadastroUsuario',
-        component: CadastroUsuario,
+        path: '/cadUser',
+        name: 'cadUser',
+        component: CadUser,
         beforeEnter: (_, __, next) => {
             if(getDadosUsuario()){
                 if(getDadosUsuario().tipoUsuario == '1'){
-                    next('/homeUsuario');
+                    next('/homeUser');
                     return;
 
                 }
-                next('/homeEstabelecimento');
+                next('/homeEstablishment');
                 return;
 
             }
@@ -55,9 +55,9 @@ const routes = [
         }
     },
     {
-        path: '/homeUsuario',
-        name: 'homeUsuario',
-        component: HomeUsuario,
+        path: '/homeUser',
+        name: 'homeUser',
+        component: HomeUser,
         beforeEnter: (_, __, next) => {
             /*if(getDadosUsuario()){
                 if(getDadosUsuario().tipoUsuario == '1'){
@@ -75,29 +75,9 @@ const routes = [
         }
     },
     {
-        path: '/editarUsuario',
-        name: 'editarUsuario',
-        component: EditarUsuario,
-        beforeEnter: (_, __, next) => {
-            /*if(getDadosUsuario()){
-                if(getDadosUsuario().tipoUsuario == '1'){
-                    */next();
-                    return;/*
-                    
-                }
-                next('/homeEstabelecimento');
-                return;
-                
-            }
-            next('/');
-            return;*/
-
-        }
-    },
-    {
-        path: '/editarSenhaUsuario',
-        name: 'editarSenhaUsuario',
-        component: EditarSenhaUsuario,
+        path: '/editUser',
+        name: 'editUser',
+        component: EditUser,
         beforeEnter: (_, __, next) => {
             /*if(getDadosUsuario()){
                 if(getDadosUsuario().tipoUsuario == '1'){
@@ -115,9 +95,29 @@ const routes = [
         }
     },
     {
-        path: '/buscarEstabelecimento',
-        name: 'buscarEstabelecimento',
-        component: BuscarEstabelecimento,
+        path: '/editPasswordUser',
+        name: 'editPasswordUser',
+        component: EditPasswordUser,
+        beforeEnter: (_, __, next) => {
+            /*if(getDadosUsuario()){
+                if(getDadosUsuario().tipoUsuario == '1'){
+                    */next();
+                    return;/*
+                    
+                }
+                next('/homeEstabelecimento');
+                return;
+                
+            }
+            next('/');
+            return;*/
+
+        }
+    },
+    {
+        path: '/searchEstablishment',
+        name: 'searchEstablishment',
+        component: SearchEstablishment,
         beforeEnter: (_, __, next) => {
             /*if(getDadosUsuario()){
                 if(getDadosUsuario().tipoUsuario == '1'){
@@ -145,17 +145,17 @@ const routes = [
         }
     },
     {
-        path: '/loginEstabelecimento',
-        name: 'loginEstabelecimento',
-        component: LoginEstabelecimento,
+        path: '/loginEstablishment',
+        name: 'loginEstablishment',
+        component: LoginEstablishment,
         beforeEnter: (_, __, next) => {
             if(getDadosUsuario()){
                 if(getDadosUsuario().tipoUsuario == '2'){
-                    next('/homeEstabelecimento');
+                    next('/homeEstablishment');
                     return;
 
                 }
-                next('/homeUsuario');
+                next('/homeUser');
                 return;
 
             }
@@ -165,17 +165,17 @@ const routes = [
         }
     },
     {
-        path: '/cadastroEstabelecimento',
-        name: 'cadastroEstabelecimento',
-        component: CadastroEstabelecimento,
+        path: '/cadEstablishment',
+        name: 'cadEstablishment',
+        component: CadEstablishment,
         beforeEnter: (_, __, next) => {
             if(getDadosUsuario()){
                 if(getDadosUsuario().tipoUsuario == '2'){
-                    next('/homeEstabelecimento');
+                    next('/homeEstablishment');
                     return;
 
                 }
-                next('/homeUsuario');
+                next('/homeUser');
                 return;
 
             }
@@ -185,9 +185,9 @@ const routes = [
         }
     },
     {
-        path: '/homeEstabelecimento',
-        name: 'homeEstabelecimento',
-        component: HomeEstabelecimento,
+        path: '/homeEstablishment',
+        name: 'homeEstablishment',
+        component: HomeEstablishment,
         beforeEnter: (_, __, next) => {
             if(getDadosUsuario()){
                 if(getDadosUsuario().tipoUsuario == '2'){
@@ -195,7 +195,7 @@ const routes = [
                     return;
 
                 }
-                next('/homeUsuario');
+                next('/homeUser');
                 return;
 
             }
@@ -206,8 +206,8 @@ const routes = [
     },
     {
         path: '/:pathMatch(.*)',
-        name: 'inicio',
-        component: Inicio,
+        name: 'home',
+        component: Home,
         beforeEnter: (_, __, next) => {
             next();
             return;

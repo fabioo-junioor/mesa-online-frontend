@@ -1,28 +1,28 @@
-import Inicio from './Inicio.vue';
+import Home from './Home.vue';
 
-import CadastroUsuario from './usuario/CadastroUsuario.vue';
-import EditarSenhaUsuario from './usuario/EditarSenhaUsuario.vue';
-import EditarUsuario from './usuario/EditarUsuario.vue';
-import HomeUsuario from './usuario/HomeUsuario.vue';
-import LoginUsuario from './usuario/LoginUsuario.vue';
-import BuscarEstabelecimento from './usuario/BuscarEstabelecimento.vue';
+import CadUser from './usuario/CadUser.vue';
+import EditPasswordUser from './usuario/EditPasswordUser.vue';
+import EditUser from './usuario/EditUser.vue';
+import HomeUser from './usuario/HomeUser.vue';
+import LoginUser from './usuario/LoginUser.vue';
+import SearchEstablishment from './usuario/SearchEstablishment.vue';
 
-import CadastroEstabelecimento from './estabelecimento/CadastroEstabelecimento.vue';
-import HomeEstabelecimento from './estabelecimento/HomeEstabelecimento.vue';
-import LoginEstabelecimento from './estabelecimento/LoginEstabelecimento.vue';
+import CadEstablishment from './estabelecimento/CadEstablishment.vue';
+import HomeEstablishment from './estabelecimento/HomeEstablishment.vue';
+import LoginEstablishment from './estabelecimento/LoginEstablishment.vue';
 import DetailsEstablishment from './estabelecimento/DetailsEstablishment.vue';
 
 
 export {
-    Inicio,
-    CadastroUsuario,
-    EditarSenhaUsuario,
-    EditarUsuario,
-    HomeUsuario,
-    LoginUsuario,
-    BuscarEstabelecimento,
-    CadastroEstabelecimento,
-    HomeEstabelecimento,
-    LoginEstabelecimento,
+    Home,
+    CadUser,
+    EditPasswordUser,
+    EditUser,
+    HomeUser,
+    LoginUser,
+    SearchEstablishment,
+    CadEstablishment,
+    HomeEstablishment,
+    LoginEstablishment,
     DetailsEstablishment
 }
