@@ -1,31 +1,28 @@
 <script setup>
-import { CardSchedules } from "../../components";
 import { onMounted, reactive } from "vue";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
-const schedulesEstablishments = [
-    {
-        segunda: {
-            manha: ['08:00', '12:00'],
-            tarde: ['14:00', '17:00'],
-            noite: ['19:00', '23:00']
-        },
-    },
-    {
-        terca: {
-            manha: ['09:00', '12:00'],
-            tarde: ['14:00', '17:00'],
-            noite: ['19:00', '23:00']
-        }
-    }    
-]
-const getSchedules = (obj, v1, v2, v3) => {
-    //console.log(obj[v1][v2][v3]);
-    return obj[v1][v2][v3];
-}
+const schedulesEstablishments = reactive([
+  {
+    segunda: {
+      manha: { abertura: '08:00', fechamento: '12:00' },
+      tarde: { abertura: '14:00', fechamento: '17:00' },
+      noite: { abertura: '19:00', fechamento: '23:00' }
+    }
+  },
+  {
+    terça: {
+      manha: { abertura: '08:00', fechamento: '12:00' },
+      tarde: { abertura: '14:00', fechamento: '17:00' },
+      noite: { abertura: '19:00', fechamento: '23:00' }
+    }
+  }
+]);
+const formatString = string => string.charAt(0).toUpperCase() + string.substring(1);
+
 onMounted(() => {
-  //console.log(schedulesEstablishments);
+  
 });
 </script>
 <template>
@@ -41,30 +38,30 @@ onMounted(() => {
         </a>
       </div>
     </div>
-    <div class="data-establishment q-ma-sm">
-      <div class="data-establishment-address">
-        <h5>Localização</h5>
-        <div>
-          <p>Estado:</p>
-          <p>Cidade:</p>
-          <p>Rua:</p>
-          <p>Numero:</p>
-        </div>
+    <div class="data-establishment q-pa-sm">
+      <div class="data-establishment-left q-pa-md">
+        <h4 class="q-pa-sm">Realizar rezerva</h4>
       </div>
-      <div class="data-establishment-times">
-        <h5>Horários</h5>
-        <div>
-          <CardSchedules
-            v-for="i in schedulesEstablishments"
-            :key="i"
-            :dayWeek="String(Object.keys(i))"
-            :morningOpen="getSchedules(i, String(Object.keys(i)), 'manha', 0)"
-            :morningClose="getSchedules(i, String(Object.keys(i)), 'manha', 1)"
-            :afternoonOpen="getSchedules(i, String(Object.keys(i)), 'tarde', 0)"
-            :afternoonClose="getSchedules(i, String(Object.keys(i)), 'tarde', 1)"
-            :nightOpen="getSchedules(i, String(Object.keys(i)), 'noite', 0)"
-            :nightClose="i[String(Object.keys(i))]['noite'][1]"
-          />
+      <div class="data-establishment-right q-pa-md">
+        <div class="data-establishment-address q-pa-sm">
+          <h4 class="q-pa-sm">Endereço</h4>
+          <div>
+            <p><span>Estado:</span> Rio grande</p>
+            <p><span>Cidade:</span> Santa Maria</p>
+            <p><span>Rua:</span> rua 1</p>
+          </div>
+        </div>
+        <div class="data-establishment-schedules q-pa-sm">
+          <h4 class="q-pa-sm">Horários</h4>
+          <div v-for="i in schedulesEstablishments" :key="i"
+            class="data-schedules">
+            <h5 class="q-pl-sm">{{ formatString(String(Object.keys(i))) }}</h5>
+            <div class="data-schedules-shifts q-pa-sm">
+              <p><span>Manha:</span> {{ i[String(Object.keys(i))]['manha']['abertura'] }} as {{ i[String(Object.keys(i))]['manha']['fechamento'] }}</p>
+              <p><span>Tarde:</span> {{ i[String(Object.keys(i))]['tarde']['abertura'] }} as {{ i[String(Object.keys(i))]['tarde']['fechamento'] }}</p>
+              <p><span>Noite:</span> {{ i[String(Object.keys(i))]['noite']['abertura'] }} as {{ i[String(Object.keys(i))]['noite']['fechamento'] }}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -75,14 +72,12 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   min-height: calc(100vh - 3.1rem);
-  background-color: yellow;
 
   .banner-establishment {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     height: 15rem;
-    width: 100vw;
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
       url("../../assets/imagens/background_page_establishment.jpg") no-repeat
         fixed center;
@@ -91,6 +86,7 @@ onMounted(() => {
     h4 {
       color: white;
       text-decoration: underline;
+
     }
     .socials-establishment {
       i {
@@ -104,7 +100,65 @@ onMounted(() => {
     }
   }
   .data-establishment {
-    background-color: antiquewhite;
+    display: flex;
+    justify-content: center;
+
+    .data-establishment-left{
+      width: 60%;
+      border: 1px solid rgba(0, 0, 0, .4);
+      box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, .2);
+      border-radius: 5px;
+
+      h4{
+        text-align: center;
+
+      }
+    }
+    .data-establishment-right{
+      width: 30%;
+      display: flex;
+      flex-direction: column;
+      gap: .7rem;
+
+      .data-establishment-address{
+        border-radius: 5px;
+        border: 1px solid rgba(0, 0, 0, .4);
+        box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, .2);
+
+        h4{
+          text-align: center;
+
+        }
+      }
+      .data-establishment-schedules{
+        border-radius: 5px;
+        border: 1px solid rgba(0, 0, 0, .4);
+        box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, .2);
+
+        h4{
+          text-align: center;
+
+        }
+        .data-schedules{
+          h5{
+            font-size: 1.5rem;
+            border-bottom: 1px solid rgba(0, 0, 0, .4);
+
+          }
+          p{
+            margin: 0;
+
+          }
+          .data-schedules-shifts{
+            span{
+              font-weight: 500;
+              font-size: 1rem;
+
+            }          
+          }
+        }
+      }
+    }
   }
 }
 </style>
