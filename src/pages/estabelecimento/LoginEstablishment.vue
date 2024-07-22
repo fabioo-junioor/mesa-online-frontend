@@ -4,35 +4,34 @@ import { FormEstablishment } from '../../components';
 
 const dataFormEstablishment = reactive({
     email: '',
-    password: '',
-    repeatPassword: ''
+    password: ''
 });
-const createEstablishment = () => {
-    console.log('cadastrar ', dataFormEstablishment);
+const loginEstablishment = () => {
+    console.log('login ', dataFormEstablishment);
+
 }
 
 </script>
 <template>
-    <div id="create-establishment">
-        <h4>Cadastrar Estabelecimento</h4>
+    <div id="login-establishment">
+        <h4>Login Estabelecimento</h4>
         <FormEstablishment
             class="form-establishment q-pt-xl q-pb-xl"
-            typeForm="createEstablishment"
+            typeForm="loginEstablishment"
             v-model:emailEstablishment="dataFormEstablishment.email"
             v-model:password="dataFormEstablishment.password"
-            v-model:repeatPassword="dataFormEstablishment.repeatPassword"
-            @createEstablishment="createEstablishment" />
+            @loginEstablishment="loginEstablishment" />
     </div>
 </template>
 <style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap");
-#create-establishment{
+#login-establishment{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),
-        url("../../assets/imagens/background_page_user.jpg") no-repeat fixed center;
+        url("../../assets/imagens/background_page_establishment.jpg") no-repeat fixed center;
     background-size: cover;
     height: calc(100vh - 3.1rem);
     font-family: "Fredoka", sans-serif;

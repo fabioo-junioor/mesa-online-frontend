@@ -2,7 +2,7 @@
 import { onMounted, reactive, ref } from 'vue';
 import { fielsRequired, emailValidator } from '../../utils/inputValidators.js';
 
-const emit = defineEmits(['loginUser', 'createUser']);
+const emit = defineEmits(['loginUser', 'cadUser']);
 const props = defineProps(['typeForm']);
 const emailUser = defineModel('email');
 const passwordUser = defineModel('password');
@@ -21,7 +21,7 @@ const onSubmit = () => {
         return;
 
     }
-    emit('createUser');
+    emit('cadteUser');
     return;
     
 }
@@ -87,10 +87,10 @@ onMounted(() => {
                 color="teal" />
             <div class="links-type-form-user q-pa-sm">
                 <a v-if="typeFormUser" href="#">
-                    <router-link to="/cadastroUsuario">Não tem uma conta?</router-link>
+                    <router-link to="/cadUser">Não tem uma conta?</router-link>
                 </a>
                 <a v-else href="#">
-                    <router-link to="/loginUsuario">Já tem uma conta?</router-link>
+                    <router-link to="/loginUser">Já tem uma conta?</router-link>
                 </a>
             </div>
         </q-form>

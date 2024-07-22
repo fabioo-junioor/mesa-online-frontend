@@ -1,16 +1,26 @@
 <script setup>
-const props = defineProps(['name', 'description', 'isVacancies', 'isOpen']);
+import { useRouter } from 'vue-router';
 
+const props = defineProps(['id', 'name', 'description', 'isVacancies', 'isOpen']);
+const router = useRouter();
+const redirectDetails = () => {
+  router.push({name: 'detailsEstablishment', params: {id: props.id}});
+
+}
 </script>
 <template>
   <div id="card-establishment">
-    <q-card class="my-card">
+    <q-card class="my-card" @click="redirectDetails">
       <q-card-section horizontal>
         <q-img class="col-6" src="https://cdn.quasar.dev/img/parallax1.jpg">
-            <div class="absolute-bottom text-subtitle2 text-center">{{ name }}</div>
+          <div class="absolute-bottom text-subtitle2 text-center">
+              {{ name }}
+          </div>
         </q-img>
         <q-card-section>
-          {{ props.description }}
+          <div class="text-subtitle2">
+            {{ props.description }}
+          </div>
         </q-card-section>
       </q-card-section>
 
@@ -31,7 +41,6 @@ const props = defineProps(['name', 'description', 'isVacancies', 'isOpen']);
             <q-badge color="red" class="q-mr-xs" />Não a vagas
           </div>
         </div>
-        <q-btn outline color="teal">Reservar</q-btn>
       </q-card-actions>
     </q-card>
   </div>
@@ -39,17 +48,33 @@ const props = defineProps(['name', 'description', 'isVacancies', 'isOpen']);
 <style lang="scss" scoped>
 .my-card{
     width: 25rem;
+    cursor: pointer;
+    background-color: $dark;
+    border: 1px solid rgba(0, 0, 0, .8);
+    box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, .6);
 
+    .text-subtitle2{
+      font-size: 1rem;
+      padding: .5rem 0;
+      color: white;
+
+    }
     .q-card__actions{
         display: flex;
         justify-content: space-between;
 
         .infos-establishment{
             display: flex;
+            color: white;
             
         }
 
     }
+  &:hover{
+    border: 1px solid rgba(0, 0, 0, 1);
+    box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 1);
+
+  }
 
 }
 </style>

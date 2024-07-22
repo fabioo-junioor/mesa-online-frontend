@@ -3,30 +3,29 @@ import { reactive } from 'vue';
 import { FormUser } from '../../components';
 
 const dataFormUser = reactive({
-    email: 'contato@gmail.com',
-    password: '123',
-    repeatPassword: '',
+    email: 'contato@bol.com',
+    password: '333'
 });
-const createUser = () => {
-    console.log('cadastrar ', dataFormUser);
+const loginUser = () => {
+    console.log('login ', dataFormUser);
+
 }
 
 </script>
 <template>
-    <div id="create-usuario">
-        <h4>Cadastrar Usuário</h4>
+    <div id="login-user">
+        <h4>Login Usuário</h4>
         <FormUser
             class="form-user q-pt-xl q-pb-xl"
-            typeForm="createUser"
+            typeForm="loginUser"
             v-model:email="dataFormUser.email"
             v-model:password="dataFormUser.password"
-            v-model:repeatPassword="dataFormUser.repeatPassword"
-            @createUser="createUser" />
+            @loginUser="loginUser" />
     </div>
 </template>
 <style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap");
-#create-usuario{
+#login-user{
     display: flex;
     flex-direction: column;
     justify-content: center;

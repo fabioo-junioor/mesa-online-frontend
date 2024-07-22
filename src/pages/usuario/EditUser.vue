@@ -4,7 +4,8 @@ import { FormEditUser } from '../../components';
 
 const dataFormUser = reactive({
     name: '',
-    phone: ''
+    phone: '',
+    linkInstagram: ''
 
 });
 const getDataUser = () => {
@@ -28,6 +29,7 @@ onMounted(() => {
             class="form-edit-user q-pt-md"
             v-model:name='dataFormUser.name'
             v-model:phone='dataFormUser.phone'
+            v-model:instagram="dataFormUser.linkInstagram"
             @saveFormUser='saveFormUser' />
     </div>
 </template>
@@ -44,6 +46,7 @@ onMounted(() => {
     h4{
         width: 50%;
         font-size: 1.5rem;
+        color: white;
 
     }
     .form-edit-user{
@@ -52,7 +55,7 @@ onMounted(() => {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        border-top: 1px solid rgba(0, 0, 0, .5);
+        border-top: 1px solid white;
 
         .q-form{
             width: 100%;
