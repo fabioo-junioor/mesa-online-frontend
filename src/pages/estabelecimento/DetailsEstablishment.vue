@@ -27,7 +27,7 @@ onMounted(() => {
 </script>
 <template>
   <div id="details-establishment">
-    <div class="banner-establishment">
+    <div class="banner-establishment q-mb-md">
       <h4 class="q-ml-xl q-mb-md">teste</h4>
       <div class="socials-establishment q-mr-xl q-mb-md">
         <a href="#" target="_blank" rel="noopener noreferrer">
@@ -82,6 +82,8 @@ onMounted(() => {
       url("../../assets/imagens/background_page_establishment.jpg") no-repeat
         fixed center;
     background-size: cover;
+    border-radius: 0 0 50px 50px;
+    box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, .7);
 
     h4 {
       color: white;
@@ -105,12 +107,14 @@ onMounted(() => {
 
     .data-establishment-left{
       width: 60%;
-      border: 1px solid rgba(0, 0, 0, .4);
-      box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, .2);
+      background-color: $dark;
+      border: 1px solid rgba(0, 0, 0, .8);
+      box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, .6);
       border-radius: 5px;
 
       h4{
         text-align: center;
+        color: white;
 
       }
     }
@@ -122,8 +126,10 @@ onMounted(() => {
 
       .data-establishment-address{
         border-radius: 5px;
-        border: 1px solid rgba(0, 0, 0, .4);
-        box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, .2);
+        background-color: $dark;
+        border: 1px solid rgba(0, 0, 0, .8);
+        box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, .6);
+        color: white;
 
         h4{
           text-align: center;
@@ -132,8 +138,10 @@ onMounted(() => {
       }
       .data-establishment-schedules{
         border-radius: 5px;
-        border: 1px solid rgba(0, 0, 0, .4);
-        box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, .2);
+        background-color: $dark;
+        border: 1px solid rgba(0, 0, 0, .8);
+        box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, .6);
+        color: white;
 
         h4{
           text-align: center;
@@ -142,7 +150,7 @@ onMounted(() => {
         .data-schedules{
           h5{
             font-size: 1.5rem;
-            border-bottom: 1px solid rgba(0, 0, 0, .4);
+            border-bottom: 1px solid white;
 
           }
           p{

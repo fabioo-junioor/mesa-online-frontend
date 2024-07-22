@@ -5,7 +5,7 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter();
 const leftDrawerOpen = ref(false);
-const visibleToggle = ref(false);
+const visibleToggle = ref(true);
 const dadosPessoa = reactive({
   nome: "Anônimo",
   telefone: ''
@@ -114,13 +114,13 @@ onMounted(() => {
       </q-header>
 
       <q-drawer
-        class="bg-dark"
+        class="bg-dark q-pa-xs"
         v-model="leftDrawerOpen"
         side="left"
         overlay
         elevated>
         <div class="menu-sidebar">
-          <div class="menu-sidebar-header">
+          <div class="menu-sidebar-header q-ma-xs">
             <img src="../assets/usuario/usuarioDefault.png" />
             <h4 id="sidebar-title">{{ dadosPessoa.nome }}</h4>
           </div>
@@ -130,15 +130,15 @@ onMounted(() => {
           </div>
           <div class="menu-sidebar-links">
             <i class="bx bx-search-alt"></i>
-            <router-link to="/buscarEstabelecimento">Buscar</router-link>
+            <router-link to="/searchEstablishment">Buscar</router-link>
           </div>
           <div class="menu-sidebar-links">
             <i class="bx bx-edit-alt"></i>
-            <router-link to="/editarUsuario">Editar Perfil</router-link>
+            <router-link to="/editUser">Editar Perfil</router-link>
           </div>
           <div class="menu-sidebar-links">
             <i class="bx bxs-key"></i>
-            <router-link to="/editarSenhaUsuario">Alterar Senha</router-link>
+            <router-link to="/editPasswordUser">Alterar Senha</router-link>
           </div>
         </div>
       </q-drawer>
@@ -185,10 +185,10 @@ onMounted(() => {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin: 0 0 2rem 0;
-      border: 1px solid white;
+      background-color: $dark;
+      border: 1px solid rgba(0, 0, 0, .8);
+      box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, .6);
       border-radius: 5px;
-      background-color: rgb(20, 20, 30);
 
       img {
         max-height: 10rem;
@@ -206,15 +206,17 @@ onMounted(() => {
       display: flex;
       align-items: center;
       margin: 1rem 0;
-      border: 1px solid white;
+      background-color: $dark;
+      border: 1px solid rgba(0, 0, 0, .8);
+      box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, .6);
       border-radius: 5px;
       width: 100%;
-      background-color: rgb(20, 20, 30);
 
       i {
         color: white;
         font-size: 1.5rem;
         padding: 0 0.5rem;
+
       }
       a {
         text-decoration: none;
@@ -223,13 +225,16 @@ onMounted(() => {
         width: 100%;
         padding: 0.5rem 0;
         cursor: pointer;
+
       }
     }
     .menu-sidebar-links:hover,
     .menu-sidebar-links:hover a,
     .menu-sidebar-links:hover i {
       background-color: white;
-      color: rgb(20, 20, 30);
+      color: $dark;
+      border-radius: 5px;
+
     }
   }
 }

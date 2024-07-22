@@ -28,6 +28,7 @@ const onSubmit = () => {
                     class="q-mb-md"
                     filled
                     color="teal"
+                    bg-color="white"
                     v-model="oldPassword"
                     :type="isPwd1 ? 'password' : 'text'"
                     label="Sua senha antiga:"
@@ -46,6 +47,7 @@ const onSubmit = () => {
                     class="q-mb-md"
                     filled
                     color="teal"
+                    bg-color="white"
                     v-model="newPassword"
                     :type="isPwd2 ? 'password' : 'text'"
                     label="Sua nova senha:"
@@ -64,6 +66,7 @@ const onSubmit = () => {
                     class="q-mb-md"
                     filled
                     color="teal"
+                    bg-color="white"
                     v-model="repeatNewPassword"
                     :type="isPwd3 ? 'password' : 'text'"
                     label="Repita sua nova senha:"
@@ -104,11 +107,16 @@ const onSubmit = () => {
                 height: 3.5rem;
                 font-size: 1.8rem;
                 border-radius: 5px;
-                background-color: rgba(0, 0, 0, .1);
+                background-color: white;
+                color: $dark;
 
             }
             .q-input{
                 width: 90%;
+
+                .q-field--error .q-field__bottom{
+                    color: blue;
+                }
 
             }
         }

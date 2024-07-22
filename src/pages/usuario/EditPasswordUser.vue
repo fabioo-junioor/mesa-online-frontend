@@ -37,6 +37,7 @@ const saveFormUser = () => {
     h4{
         width: 50%;
         font-size: 1.5rem;
+        color: white;
 
     }
     .form-edit-password-user{
@@ -45,7 +46,7 @@ const saveFormUser = () => {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        border-top: 1px solid rgba(0, 0, 0, .5);
+        border-top: 1px solid white;
         
         .q-form{
             width: 100%;

@@ -10,7 +10,7 @@
         height: calc(100vh - 3.1rem);
 
         h4{
-            color: black;
+            color: white;
             
         }
     }

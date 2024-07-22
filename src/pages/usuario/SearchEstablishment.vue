@@ -38,6 +38,8 @@ const orderArray = array => {
                 <q-input
                     square outlined
                     color="teal"
+                    bg-color="white"
+                    rounded standout
                     v-model="dataSearchEstablishment.name"
                     type="text"
                     label="Nome do estabelecimento" />
@@ -62,6 +64,11 @@ const orderArray = array => {
     min-height: calc(100vh - 3.1rem);
     padding: 1rem;
 
+    h4{
+        color: white;
+        
+    }
+
     .search-filters{
         width: 100%;
 
@@ -73,10 +80,6 @@ const orderArray = array => {
 
             .q-field{
                 min-width: 15rem;
-                min-height: 3.5rem;
-                
-            }
-            .q-btn{
                 min-height: 3.5rem;
                 
             }

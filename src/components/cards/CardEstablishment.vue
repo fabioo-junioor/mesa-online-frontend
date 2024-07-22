@@ -18,7 +18,9 @@ const redirectDetails = () => {
           </div>
         </q-img>
         <q-card-section>
-          {{ props.description }}
+          <div class="text-subtitle2">
+            {{ props.description }}
+          </div>
         </q-card-section>
       </q-card-section>
 
@@ -47,6 +49,9 @@ const redirectDetails = () => {
 .my-card{
     width: 25rem;
     cursor: pointer;
+    background-color: $dark;
+    border: 1px solid rgba(0, 0, 0, .8);
+    box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, .6);
 
     .text-subtitle2{
       font-size: 1rem;
@@ -60,12 +65,14 @@ const redirectDetails = () => {
 
         .infos-establishment{
             display: flex;
+            color: white;
             
         }
 
     }
   &:hover{
-    box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, .3);
+    border: 1px solid rgba(0, 0, 0, 1);
+    box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 1);
 
   }
 
