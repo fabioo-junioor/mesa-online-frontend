@@ -30,9 +30,6 @@ const loginUser = () => {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),
-        url("../../assets/imagens/background_page_user.jpg") no-repeat fixed center;
-    background-size: cover;
     height: calc(100vh - 3.1rem);
     font-family: "Fredoka", sans-serif;
 
@@ -40,8 +37,9 @@ const loginUser = () => {
         width: 50%;
         text-align: center;
         padding: 1rem;
-        background-color: white;
-        box-shadow: 3px 3px 0px 0px #1d976cce;
+        color: white;
+        background-color: #1c1c1c;
+        border: 1px solid rgba(0, 0, 0, .5);
         border-radius: 5px;
 
     }
@@ -51,8 +49,8 @@ const loginUser = () => {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        background-color: white;
-        box-shadow: 4px 4px 0px 0px #1d976cce;
+        background-color: #1c1c1c;
+        border: 1px solid rgba(0, 0, 0, .5);
         border-radius: 5px;
 
         .q-form{

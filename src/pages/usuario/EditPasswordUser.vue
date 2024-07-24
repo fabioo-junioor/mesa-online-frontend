@@ -27,12 +27,12 @@ const saveFormUser = () => {
 <style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap");
 #edit-password-user{
+    font-family: "Fredoka", sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 3.1rem);
-    font-family: "Fredoka", sans-serif;
+    height: calc(100vh - 3.5rem);
 
     h4{
         width: 50%;

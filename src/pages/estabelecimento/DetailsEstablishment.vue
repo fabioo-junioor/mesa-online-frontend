@@ -28,7 +28,7 @@ onMounted(() => {
 <template>
   <div id="details-establishment">
     <div class="banner-establishment q-mb-md">
-      <h4 class="q-ml-xl q-mb-md">teste</h4>
+      <h4 class="q-ml-xl q-mb-md">Rock lanches</h4>
       <div class="socials-establishment q-mr-xl q-mb-md">
         <a href="#" target="_blank" rel="noopener noreferrer">
           <i class="bx bxl-instagram q-mr-md" />
@@ -40,7 +40,7 @@ onMounted(() => {
     </div>
     <div class="data-establishment q-pa-sm">
       <div class="data-establishment-left q-pa-md">
-        <h4 class="q-pa-sm">Realizar rezerva</h4>
+        <h4 class="q-pa-sm">Realizar reserva</h4>
       </div>
       <div class="data-establishment-right q-pa-md">
         <div class="data-establishment-address q-pa-sm">
@@ -71,13 +71,14 @@ onMounted(() => {
 #details-establishment {
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 3.1rem);
+  width: 100%;
+  height: calc(100vh - 3.5rem);
 
   .banner-establishment {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    height: 15rem;
+    min-height: 15rem;
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
       url("../../assets/imagens/background_page_establishment.jpg") no-repeat
         fixed center;
@@ -107,9 +108,8 @@ onMounted(() => {
 
     .data-establishment-left{
       width: 60%;
-      background-color: $dark;
-      border: 1px solid rgba(0, 0, 0, .8);
-      box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, .6);
+      background-color: $cardsDark;
+      border: 1px solid rgba(0, 0, 0, .3);
       border-radius: 5px;
 
       h4{
@@ -126,9 +126,8 @@ onMounted(() => {
 
       .data-establishment-address{
         border-radius: 5px;
-        background-color: $dark;
-        border: 1px solid rgba(0, 0, 0, .8);
-        box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, .6);
+        background-color: $cardsDark;
+        border: 1px solid rgba(0, 0, 0, .3);
         color: white;
 
         h4{
@@ -138,9 +137,8 @@ onMounted(() => {
       }
       .data-establishment-schedules{
         border-radius: 5px;
-        background-color: $dark;
-        border: 1px solid rgba(0, 0, 0, .8);
-        box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, .6);
+        background-color: $cardsDark;
+        border: 1px solid rgba(0, 0, 0, .3);
         color: white;
 
         h4{

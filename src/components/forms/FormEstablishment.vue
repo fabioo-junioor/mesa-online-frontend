@@ -36,7 +36,8 @@ onMounted(() => {
             <q-input
                 class="q-mb-md"
                 filled
-                color="teal"
+                color="orange-9"
+                bg-color="white"
                 v-model="emailEstablishment"
                 type="text"
                 label="Seu e-mail:"
@@ -45,7 +46,8 @@ onMounted(() => {
             <q-input
                 class="q-mb-md"
                 filled
-                color="teal"
+                color="orange-9"
+                bg-color="white"
                 v-model="passwordEstablishment"
                 :type="isPwd1 ? 'password' : 'text'"
                 label="Sua senha:"
@@ -61,7 +63,8 @@ onMounted(() => {
                 v-if="!typeFormEstablishment"
                 class="q-mb-md"
                 filled
-                color="teal"
+                color="orange-9"
+                bg-color="white"
                 v-model="repeatPasswordEstablishment"
                 :type="isPwd2 ? 'password' : 'text'"
                 label="Repita a senha:"
@@ -77,14 +80,12 @@ onMounted(() => {
                 v-if="typeFormEstablishment"
                 class="q-mb-md"
                 label="Entrar"
-                type="submit"
-                color="teal" />
+                type="submit" />
             <q-btn
                 v-else
                 class="q-mb-md"
                 label="Cadastrar-se"
-                type="submit"
-                color="teal" />
+                type="submit" />
             <div class="links-type-form-establishment q-pa-sm">
                 <a v-if="typeFormEstablishment" href="#">
                     <router-link to="/cadEstablishment">Não tem uma conta?</router-link>
@@ -107,6 +108,7 @@ onMounted(() => {
         .q-btn{
             height: 3rem;
             width: 100%;
+            background-color: $buttonOrange;
 
         }
         .links-type-form-establishment{
@@ -115,11 +117,11 @@ onMounted(() => {
             
             a{
                 text-decoration: underline;
-                color: rgb(77, 77, 77);
+                color: rgba(255, 255, 255, .7);
                 font-size: .9rem;
                 
                 &:hover{
-                    color: black;
+                    color: white;
                 }
             }
         }

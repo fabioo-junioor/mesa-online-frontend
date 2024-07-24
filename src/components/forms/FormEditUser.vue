@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, reactive } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
 import { fielsRequired, phoneValidator } from '../../utils/inputValidators.js';
 
 const emit = defineEmits(['saveFormUser']);
@@ -25,7 +25,7 @@ const onSubmit = () => {
                 <q-input
                     class="q-mb-md"
                     filled
-                    color="teal"
+                    color="orange-9"
                     bg-color="white"
                     v-model="nameUser"
                     type="text"
@@ -38,7 +38,7 @@ const onSubmit = () => {
                 <q-input
                     class="q-mb-md"
                     filled
-                    color="teal"
+                    color="orange-9"
                     bg-color="white"
                     v-model="phoneUser"
                     type="tel"
@@ -52,7 +52,7 @@ const onSubmit = () => {
                 <q-input
                     class="q-mb-md"
                     filled
-                    color="teal"
+                    color="orange-9"
                     bg-color="white"
                     v-model="linkInstagram"
                     type="text"
@@ -62,8 +62,7 @@ const onSubmit = () => {
             <q-btn
                 class="q-mb-md"
                 label="Salvar"
-                type="submit"
-                color="teal" />
+                type="submit" />
         </q-form>
     </div>
 </template>
@@ -85,10 +84,8 @@ const onSubmit = () => {
                 align-items: center;
                 width: 10%;
                 height: 3.5rem;
-                font-size: 1.8rem;
-                border-radius: 5px;
-                background-color: white;
-                color: $dark;
+                font-size: 2rem;
+                color: $iconOrange;
 
             }
             .q-input{
@@ -99,6 +96,8 @@ const onSubmit = () => {
         .q-btn{
             height: 3rem;
             width: 100%;
+            color: white;
+            background-color: $buttonOrange;
 
         }
     }

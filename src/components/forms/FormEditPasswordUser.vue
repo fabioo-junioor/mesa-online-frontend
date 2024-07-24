@@ -27,7 +27,7 @@ const onSubmit = () => {
                 <q-input
                     class="q-mb-md"
                     filled
-                    color="teal"
+                    color="orange-9"
                     bg-color="white"
                     v-model="oldPassword"
                     :type="isPwd1 ? 'password' : 'text'"
@@ -46,7 +46,7 @@ const onSubmit = () => {
                 <q-input
                     class="q-mb-md"
                     filled
-                    color="teal"
+                    color="orange-9"
                     bg-color="white"
                     v-model="newPassword"
                     :type="isPwd2 ? 'password' : 'text'"
@@ -65,7 +65,7 @@ const onSubmit = () => {
                 <q-input
                     class="q-mb-md"
                     filled
-                    color="teal"
+                    color="orange-9"
                     bg-color="white"
                     v-model="repeatNewPassword"
                     :type="isPwd3 ? 'password' : 'text'"
@@ -82,8 +82,7 @@ const onSubmit = () => {
             <q-btn
                 class="q-mb-md"
                 label="Salvar"
-                type="submit"
-                color="teal" />
+                type="submit" />
         </q-form>
     </div>
 </template>
@@ -105,24 +104,20 @@ const onSubmit = () => {
                 align-items: center;
                 width: 10%;
                 height: 3.5rem;
-                font-size: 1.8rem;
-                border-radius: 5px;
-                background-color: white;
-                color: $dark;
+                font-size: 2rem;
+                color: $iconOrange;
 
             }
             .q-input{
                 width: 90%;
-
-                .q-field--error .q-field__bottom{
-                    color: blue;
-                }
 
             }
         }
         .q-btn{
             height: 3rem;
             width: 100%;
+            color: white;
+            background-color: $buttonOrange;
 
         }
     }
