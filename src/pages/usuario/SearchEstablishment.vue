@@ -31,13 +31,13 @@ const orderArray = array => {
 }
 </script>
 <template>
-    <div id="search-establishment">
+    <div id="search-establishment" class="q-pa-sm">
         <h4 class="q-mt-sm q-mb-sm">Estabelecimentos</h4>
         <div class="search-filters q-mt-md q-mb-md">
             <q-form>
                 <q-input
                     square outlined
-                    color="teal"
+                    color="orange-9"
                     bg-color="white"
                     rounded standout
                     v-model="dataSearchEstablishment.name"
@@ -61,14 +61,12 @@ const orderArray = array => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: calc(100vh - 3.1rem);
-    padding: 1rem;
+    height: calc(100vh - 3.5rem);
 
     h4{
         color: white;
         
     }
-
     .search-filters{
         width: 100%;
 

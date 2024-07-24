@@ -49,10 +49,14 @@ const redirectDetails = () => {
 .my-card{
     width: 25rem;
     cursor: pointer;
-    background-color: $dark;
-    border: 1px solid rgba(0, 0, 0, .8);
-    box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, .6);
+    background-color: $background;
+    border: 1px solid rgba(0, 0, 0, .5);
 
+    .q-separator{
+      border: .1rem solid $buttonOrange;
+      background-color: $buttonOrange;
+
+    }
     .text-subtitle2{
       font-size: 1rem;
       padding: .5rem 0;
@@ -68,13 +72,11 @@ const redirectDetails = () => {
             color: white;
             
         }
-
     }
   &:hover{
     border: 1px solid rgba(0, 0, 0, 1);
-    box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 1);
+    box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, .5);
 
   }
-
 }
 </style>
