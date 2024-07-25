@@ -6,6 +6,7 @@ const emit = defineEmits(['saveFormUser']);
 const nameUser = defineModel('name');
 const phoneUser = defineModel('phone');
 const linkInstagram = defineModel('instagram');
+const imageProfile = defineModel('imageProfile');
 const rulesUser = reactive({
     required: v => fielsRequired(v) || 'Campo obrigatório',
     phone: v => phoneValidator(v) || 'Numero incorreto'
@@ -20,6 +21,24 @@ const onSubmit = () => {
 <template>
     <div id="form-edit-user">
         <q-form @submit="onSubmit">
+            <div class="form-edit-user-inputs">
+                <i class='bx bxs-image-add q-ml-xs q-mr-xs'></i>
+                <q-file
+                    class="q-mb-md"
+                    v-model="imageProfile"
+                    label="Adicionar nova imagem"
+                    color="orange-9"
+                    bg-color="white"
+                    outlined
+                    max-files="1"
+                    filled>
+                        <template v-if="imageProfile" v-slot:append>
+                            <q-icon name="cancel" 
+                                @click.stop.prevent="imageProfile = null"
+                                class="cursor-pointer" />
+                        </template>
+                    </q-file>
+            </div>
             <div class="form-edit-user-inputs">
                 <i class='bx bxs-user q-ml-xs q-mr-xs'></i>
                 <q-input
@@ -60,7 +79,7 @@ const onSubmit = () => {
                     lazy-rules />
             </div>
             <q-btn
-                class="q-mb-md"
+                class="q-mb-md q-mt-md"
                 label="Salvar"
                 type="submit" />
         </q-form>
@@ -88,7 +107,7 @@ const onSubmit = () => {
                 color: $iconOrange;
 
             }
-            .q-input{
+            .q-input, .q-file{
                 width: 90%;
 
             }

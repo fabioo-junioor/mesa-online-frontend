@@ -2,13 +2,16 @@
 import { getDadosUsuario, deleteDadosUsuario } from '../services/localStorage/settingSession.js';
 import { ref, reactive, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import { CardImageProfile } from '../components';
+import imagemProfileDefault from '../assets/usuario/usuarioDefault.png';
 
 const router = useRouter();
 const leftDrawerOpen = ref(true);
 const visibleToggle = ref(true);
-const dadosPessoa = reactive({
+const dataUser = reactive({
   name: "Anônimo",
-  phone: ''
+  phone: '',
+  imageProfile: null
 
 });
 const toggleLeftDrawer = () => {
@@ -42,6 +45,7 @@ const cadEstablishment = () => {
 }
 onMounted(() => {
   verificaDadosUsuario();
+  dataUser.imageProfile = (dataUser.imageProfile !== null) ? 'teste' :  imagemProfileDefault;
 
 })
 </script>
@@ -122,8 +126,12 @@ onMounted(() => {
         elevated>
         <div class="menu-sidebar">
           <div class="menu-sidebar-header">
-            <img src="../assets/usuario/usuarioDefault.png" />
-            <h4 id="sidebar-title">{{ dadosPessoa.name }}</h4>
+            <CardImageProfile
+              :imgSrc="dataUser.imageProfile"
+              :nameUser="dataUser.name"
+              width="15rem"
+              height="14rem"
+              fit="contain" />
           </div>
           <div class="menu-sidebar-links">
             <i class="bx bx-home"></i>
@@ -168,7 +176,7 @@ onMounted(() => {
       
       a{
         text-decoration: none;
-        color: rgba(255, 255, 255, .8);
+        color: $textOrange;
 
         &:hover{
           color: white;
@@ -200,23 +208,7 @@ onMounted(() => {
       display: flex;
       flex-direction: column;
       align-items: center;
-      background-color: $background;
-      border: 1px solid rgba(0, 0, 0, .3);
-      box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, .6);
-      border-radius: 5px;
 
-      img {
-        max-height: 10rem;
-
-      }
-      #sidebar-title {
-        padding: 0.3rem;
-        margin: 0.1rem;
-        font-size: 1.3rem;
-        font-weight: 500;
-        color: white;
-        
-      }
     }
     .menu-sidebar-links {
       display: flex;

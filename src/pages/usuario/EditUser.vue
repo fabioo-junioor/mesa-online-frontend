@@ -1,16 +1,20 @@
 <script setup>
-import { onMounted, reactive } from 'vue';
-import { FormEditUser } from '../../components';
+import { onMounted, reactive, ref } from 'vue';
+import { FormEditUser, CardImageProfile } from '../../components';
+import imagemProfileDefault from '../../assets/usuario/usuarioDefault.png';
 
+const imageProfile = ref(null);
 const dataFormUser = reactive({
     name: '',
     phone: '',
-    linkInstagram: ''
+    linkInstagram: '',
+    imageProfile: null
 
 });
 const getDataUser = () => {
     dataFormUser.name = 'fabio';
-    dataFormUser.phone = '66666666654';
+    dataFormUser.phone = '66666666651';
+    dataFormUser.imageProfile = 'https://cdn1.iconfinder.com/data/icons/programing-development-8/24/vue_js_logo-512.png'
 
 }
 const saveFormUser = () => {
@@ -19,17 +23,26 @@ const saveFormUser = () => {
 }
 onMounted(() => {
     getDataUser();
+    dataFormUser.imageProfile = (dataFormUser.imageProfile !== null) ? dataFormUser.imageProfile :  imagemProfileDefault;
 
 })
 </script>
 <template>
-    <div id="edit-user">
+    <div id="edit-user" class="q-pa-sm">
+        <CardImageProfile
+            class="q-mt-md q-mb-md"
+            :imgSrc="dataFormUser.imageProfile"
+            :nameUser="dataFormUser.name"
+            width="20rem"
+            height="20rem"
+            fit="contain" />
         <h4>Editar Usuário</h4>
         <FormEditUser
             class="form-edit-user q-pt-md"
             v-model:name='dataFormUser.name'
             v-model:phone='dataFormUser.phone'
-            v-model:instagram="dataFormUser.linkInstagram"
+            v-model:instagram='dataFormUser.linkInstagram'
+            v-model:imageProfile='imageProfile'
             @saveFormUser='saveFormUser' />
     </div>
 </template>
