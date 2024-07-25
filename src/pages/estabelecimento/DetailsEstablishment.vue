@@ -84,7 +84,8 @@ onMounted(() => {
         fixed center;
     background-size: cover;
     border-radius: 0 0 50px 50px;
-    box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, .7);
+    box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, .7);
+    border-bottom: 1px solid $iconOrange;
 
     h4 {
       color: white;
@@ -98,6 +99,7 @@ onMounted(() => {
 
         &:hover {
           color: $iconWhiteHover;
+
         }
       }
     }

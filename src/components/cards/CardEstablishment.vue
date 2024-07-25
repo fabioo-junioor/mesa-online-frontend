@@ -46,37 +46,39 @@ const redirectDetails = () => {
   </div>
 </template>
 <style lang="scss" scoped>
-.my-card{
-    width: 25rem;
-    cursor: pointer;
-    background-color: $background;
-    border: 1px solid rgba(0, 0, 0, .5);
-
-    .q-separator{
-      border: .1rem solid $buttonOrange;
-      background-color: $buttonOrange;
-
+#card-establishment{
+  .my-card{
+      width: 25rem;
+      cursor: pointer;
+      background-color: $background;
+      border: 1px solid rgba(0, 0, 0, .5);
+  
+      .q-separator{
+        border: .1rem solid $buttonOrange;
+        background-color: $buttonOrange;
+  
+      }
+      .text-subtitle2{
+        font-size: 1rem;
+        padding: .5rem 0;
+        color: white;
+  
+      }
+      .q-card__actions{
+          display: flex;
+          justify-content: space-between;
+  
+          .infos-establishment{
+              display: flex;
+              color: white;
+              
+          }
+      }
+    &:hover{
+      border: 1px solid rgba(0, 0, 0, 1);
+      box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, .5);
+  
     }
-    .text-subtitle2{
-      font-size: 1rem;
-      padding: .5rem 0;
-      color: white;
-
-    }
-    .q-card__actions{
-        display: flex;
-        justify-content: space-between;
-
-        .infos-establishment{
-            display: flex;
-            color: white;
-            
-        }
-    }
-  &:hover{
-    border: 1px solid rgba(0, 0, 0, 1);
-    box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, .5);
-
-  }
+  }  
 }
 </style>

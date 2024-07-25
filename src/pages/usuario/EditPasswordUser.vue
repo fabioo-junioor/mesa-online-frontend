@@ -14,7 +14,7 @@ const saveFormUser = () => {
 };
 </script>
 <template>
-    <div id="edit-password-user">
+    <div id="edit-password-user" class="q-pa-sm">
         <h4>Alterar Senha</h4>
         <FormEditPasswordUser
             class="form-edit-password-user q-pt-md"

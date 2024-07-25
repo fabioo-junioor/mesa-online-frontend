@@ -80,7 +80,7 @@ const onSubmit = () => {
                 </q-input>
             </div>
             <q-btn
-                class="q-mb-md"
+                class="q-mb-md q-mt-md"
                 label="Salvar"
                 type="submit" />
         </q-form>
