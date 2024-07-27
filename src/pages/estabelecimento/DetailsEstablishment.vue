@@ -25,7 +25,8 @@ const dataFormReserveEstablishment = reactive({
     numberOfPeople: null,
     date: '26-07-2024',
     time: '12:30',
-    observation: ''
+    observation: '',
+    isDefineSchedules: true
 });
 const formatString = string => string.charAt(0).toUpperCase() + string.substring(1);
 
@@ -61,6 +62,7 @@ onMounted(() => {
             v-model:date="dataFormReserveEstablishment.date"
             v-model:time="dataFormReserveEstablishment.time"
             v-model:observation="dataFormReserveEstablishment.observation"
+            :isDefineSchedules="dataFormReserveEstablishment.isDefineSchedules"
             @reserveEstablishment="reserveEstablishment" />
         </div>
       </div>
@@ -94,7 +96,7 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: calc(100vh - 3.5rem);
+  min-height: calc(100vh - 3.5rem);
 
   .banner-establishment {
     display: flex;
