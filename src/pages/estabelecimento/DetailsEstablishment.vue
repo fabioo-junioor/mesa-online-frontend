@@ -1,6 +1,8 @@
 <script setup>
-import { onMounted, reactive } from "vue";
-import { useRoute } from "vue-router";
+import { onMounted, reactive } from 'vue';
+import { useRoute } from 'vue-router';
+import { FormReserveEstablishment } from '../../components';
+import { getDateToday, getHoursToday } from '../../utils/utilities.js';
 
 const route = useRoute();
 const schedulesEstablishments = reactive([
@@ -19,11 +21,23 @@ const schedulesEstablishments = reactive([
     }
   }
 ]);
+const dataFormReserveEstablishment = reactive({
+    numberOfPeople: null,
+    date: '26-07-2024',
+    time: '12:30',
+    observation: ''
+});
 const formatString = string => string.charAt(0).toUpperCase() + string.substring(1);
 
+const reserveEstablishment = () => {
+  console.log(dataFormReserveEstablishment);
+
+}
 onMounted(() => {
-  
-});
+  dataFormReserveEstablishment.date = getDateToday();
+  dataFormReserveEstablishment.time = getHoursToday();
+
+})
 </script>
 <template>
   <div id="details-establishment">
@@ -40,7 +54,15 @@ onMounted(() => {
     </div>
     <div class="data-establishment q-pa-sm">
       <div class="data-establishment-left q-pa-md">
-        <h4 class="q-pa-sm">Realizar reserva</h4>
+        <h4 class="q-pa-sm q-mb-md">Realizar reserva</h4>
+        <div>
+          <FormReserveEstablishment
+            v-model:numberOfPeople="dataFormReserveEstablishment.numberOfPeople"
+            v-model:date="dataFormReserveEstablishment.date"
+            v-model:time="dataFormReserveEstablishment.time"
+            v-model:observation="dataFormReserveEstablishment.observation"
+            @reserveEstablishment="reserveEstablishment" />
+        </div>
       </div>
       <div class="data-establishment-right q-pa-md">
         <div class="data-establishment-address q-pa-sm">
