@@ -52,6 +52,7 @@ const redirectDetails = () => {
       cursor: pointer;
       background-color: $background;
       border: 1px solid rgba(0, 0, 0, .6);
+      border-left: 4px solid $colorOrange;
   
       .q-separator{
         border: .1rem solid $colorOrange;
@@ -76,6 +77,7 @@ const redirectDetails = () => {
       }
     &:hover{
       border: 1px solid black;
+      border-left: 4px solid $colorOrange;
       box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, .5);
   
     }
