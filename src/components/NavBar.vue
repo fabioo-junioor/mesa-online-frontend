@@ -135,7 +135,7 @@ onMounted(() => {
           </div>
           <div class="menu-sidebar-links">
             <i class="bx bx-home"></i>
-            <router-link to="/homeUsuario">Inicio</router-link>
+            <router-link to="/homeUser">Inicio</router-link>
           </div>
           <div class="menu-sidebar-links">
             <i class="bx bx-search-alt"></i>
