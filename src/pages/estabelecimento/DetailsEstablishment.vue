@@ -25,10 +25,22 @@ const dataFormReserveEstablishment = reactive({
     numberOfPeople: null,
     date: '26-07-2024',
     time: '12:30',
-    observation: ''
+    observation: '',
+    totalOccupancy: 1000,
+    occupancyNow: 200,
+    isDefineSchedules: true,
+    isOpen: true,
+    isVacancies: false
 });
 const formatString = string => string.charAt(0).toUpperCase() + string.substring(1);
+const calculateOccupancyPercentage = () => {
+  return dataFormReserveEstablishment.occupancyNow/dataFormReserveEstablishment.totalOccupancy;
 
+};
+const formatTotalOccupancy = () => {
+  return (calculateOccupancyPercentage() * 100).toFixed(2) + '%';
+
+};
 const reserveEstablishment = () => {
   console.log(dataFormReserveEstablishment);
 
@@ -37,12 +49,38 @@ onMounted(() => {
   dataFormReserveEstablishment.date = getDateToday();
   dataFormReserveEstablishment.time = getHoursToday();
 
-})
+});
 </script>
 <template>
   <div id="details-establishment">
     <div class="banner-establishment q-mb-md">
-      <h4 class="q-ml-xl q-mb-md">Rock lanches</h4>
+      <div class="status-establishment q-ml-xl q-mb-sm">
+        <div v-if="dataFormReserveEstablishment.isOpen" class="q-ma-sm">
+          <q-badge color="green" class="q-pa-sm">
+            <i class='bx bxs-like'></i>
+            Aberto
+          </q-badge>
+        </div>
+        <div v-else class="q-ma-sm">
+          <q-badge color="red" class="q-pa-sm">
+            <i class='bx bxs-dislike'></i>
+            Fechado
+          </q-badge>
+        </div>
+        <div v-if="dataFormReserveEstablishment.isOpen && dataFormReserveEstablishment.isVacancies" class="q-ma-sm">
+          <q-badge color="green" class="q-pa-sm">
+            <i class='bx bxs-like'></i>
+            A vagas
+          </q-badge>
+        </div>
+        <div v-if="dataFormReserveEstablishment.isOpen && !dataFormReserveEstablishment.isVacancies" class="q-ma-sm">
+          <q-badge color="red" class="q-pa-sm">
+            <i class='bx bxs-dislike'></i>
+            Não a vagas
+          </q-badge>
+        </div>
+      </div>
+      <h4 class="q-mb-md">Rock lanches</h4>
       <div class="socials-establishment q-mr-xl q-mb-md">
         <a href="#" target="_blank" rel="noopener noreferrer">
           <i class="bx bxl-instagram q-mr-md" />
@@ -54,34 +92,52 @@ onMounted(() => {
     </div>
     <div class="data-establishment q-pa-sm">
       <div class="data-establishment-left q-pa-md">
-        <h4 class="q-pa-sm q-mb-md">Realizar reserva</h4>
+        <h4 class="q-pa-xs q-mb-md">Realizar reserva</h4>
         <div>
           <FormReserveEstablishment
             v-model:numberOfPeople="dataFormReserveEstablishment.numberOfPeople"
             v-model:date="dataFormReserveEstablishment.date"
             v-model:time="dataFormReserveEstablishment.time"
             v-model:observation="dataFormReserveEstablishment.observation"
+            :isDefineSchedules="dataFormReserveEstablishment.isDefineSchedules"
             @reserveEstablishment="reserveEstablishment" />
         </div>
       </div>
-      <div class="data-establishment-right q-pa-md">
+      <div class="data-establishment-right">
+        <div class="data-establishment-details q-pa-sm">
+          <h4 class="q-pa-xs q-mb-md">Detalhes</h4>
+          <q-separator class="q-mt-sm q-mb-md" color="grey-8" />
+          <div class="data-progress-ocupation">
+            <q-linear-progress dark rounded size="30px" :value="calculateOccupancyPercentage()" color="orange-9">
+              <div class="absolute-full flex flex-center">
+                <q-badge color="white" text-color="black" :label="formatTotalOccupancy()" />
+              </div>
+            </q-linear-progress>
+            <q-badge outline color="orange-9" :label="dataFormReserveEstablishment.occupancyNow+'/'+dataFormReserveEstablishment.totalOccupancy" />
+          </div>
+        </div>
         <div class="data-establishment-address q-pa-sm">
-          <h4 class="q-pa-sm">Endereço</h4>
+          <h4 class="q-pa-xs q-mb-md">Endereço</h4>
+          <q-separator class="q-mt-sm q-mb-md" color="grey-8" />
           <div>
-            <p><span>Estado:</span> Rio grande</p>
-            <p><span>Cidade:</span> Santa Maria</p>
-            <p><span>Rua:</span> rua 1</p>
+            <p><span>Estado: </span>Rio grande do sul</p>
+            <p><span>Cidade: </span>Santa Maria</p>
+            <p><span>Rua: </span>Fernando ferrari</p>
+            <p><span>Numero: </span>2336</p>
           </div>
         </div>
         <div class="data-establishment-schedules q-pa-sm">
-          <h4 class="q-pa-sm">Horários</h4>
-          <div v-for="i in schedulesEstablishments" :key="i"
-            class="data-schedules">
-            <h5 class="q-pl-sm">{{ formatString(String(Object.keys(i))) }}</h5>
-            <div class="data-schedules-shifts q-pa-sm">
-              <p><span>Manha:</span> {{ i[String(Object.keys(i))]['manha']['abertura'] }} as {{ i[String(Object.keys(i))]['manha']['fechamento'] }}</p>
-              <p><span>Tarde:</span> {{ i[String(Object.keys(i))]['tarde']['abertura'] }} as {{ i[String(Object.keys(i))]['tarde']['fechamento'] }}</p>
-              <p><span>Noite:</span> {{ i[String(Object.keys(i))]['noite']['abertura'] }} as {{ i[String(Object.keys(i))]['noite']['fechamento'] }}</p>
+          <h4 class="q-pa-xs q-mb-md">Horários</h4>
+          <q-separator class="q-mt-sm q-mb-md" color="grey-8" />
+          <div class="data-schedules q-pa-xs q-ma-xs">
+            <div class="bg-grey-8 q-pa-sm" 
+              v-for="i in schedulesEstablishments" :key="i">
+              <h5 class="q-pl-sm">{{ formatString(String(Object.keys(i))) }}</h5>
+              <div class="data-schedules-shifts q-pa-sm">
+                <p><span>Manha: </span>{{ i[String(Object.keys(i))]['manha']['abertura'] }} as {{ i[String(Object.keys(i))]['manha']['fechamento'] }}</p>
+                <p><span>Tarde: </span>{{ i[String(Object.keys(i))]['tarde']['abertura'] }} as {{ i[String(Object.keys(i))]['tarde']['fechamento'] }}</p>
+                <p><span>Noite: </span>{{ i[String(Object.keys(i))]['noite']['abertura'] }} as {{ i[String(Object.keys(i))]['noite']['fechamento'] }}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -94,7 +150,7 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: calc(100vh - 3.5rem);
+  min-height: calc(100vh - 3.5rem);
 
   .banner-establishment {
     display: flex;
@@ -109,6 +165,17 @@ onMounted(() => {
     box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, .7);
     border-bottom: 1px solid $iconOrange;
 
+    .status-establishment{
+      display: flex;
+
+      .q-badge{
+        i{
+          font-size: 1rem;
+          margin: .1rem;
+
+        }
+      }
+    }
     h4 {
       color: white;
       text-decoration: underline;
@@ -129,6 +196,7 @@ onMounted(() => {
   .data-establishment {
     display: flex;
     justify-content: center;
+    gap: .7rem;
 
     .data-establishment-left{
       width: 60%;
@@ -139,6 +207,7 @@ onMounted(() => {
       h4{
         text-align: center;
         color: white;
+        font-size: 2rem;
 
       }
     }
@@ -148,6 +217,23 @@ onMounted(() => {
       flex-direction: column;
       gap: .7rem;
 
+      .data-establishment-details{
+        border-radius: 5px;
+        background-color: $cardsDark;
+        border: 1px solid rgba(0, 0, 0, .3);
+        color: white;
+
+        h4{
+          text-align: center;
+          font-size: 1.5rem;
+
+        }
+        .data-progress-ocupation{
+          display: flex;
+          gap: 5px;
+
+        }
+      }
       .data-establishment-address{
         border-radius: 5px;
         background-color: $cardsDark;
@@ -156,6 +242,7 @@ onMounted(() => {
 
         h4{
           text-align: center;
+          font-size: 1.5rem;
 
         }
       }
@@ -167,12 +254,16 @@ onMounted(() => {
 
         h4{
           text-align: center;
+          font-size: 1.5rem;
 
         }
         .data-schedules{
+          display: flex;
+          gap: .5rem;
+          flex-wrap: wrap;
+
           h5{
-            font-size: 1.5rem;
-            border-bottom: 1px solid white;
+            font-size: 1.2rem;
 
           }
           p{
@@ -186,6 +277,10 @@ onMounted(() => {
 
             }          
           }
+        }
+        .data-schedules > div{
+          border-radius: 5px;
+
         }
       }
     }

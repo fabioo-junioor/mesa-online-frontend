@@ -9,6 +9,7 @@ import FormReserveEstablishment from './forms/FormReserveEstablishment.vue';
 
 import CardEstablishment from './cards/CardEstablishment.vue';
 import CardImageProfile from './cards/CardImageProfile.vue';
+import CardReservation from './cards/CardReservation.vue';
 
 export {
     Alert,
@@ -16,8 +17,9 @@ export {
     FormUser,
     FormEditUser,
     FormEditPasswordUser,
-    CardEstablishment,
     FormEstablishment,
+    FormReserveEstablishment,
+    CardEstablishment,
     CardImageProfile,
-    FormReserveEstablishment
+    CardReservation
 }

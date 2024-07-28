@@ -3,6 +3,7 @@ import { reactive, ref } from 'vue';
 import { fielsRequired } from '../../utils/inputValidators.js';
 
 const emit = defineEmits(['reserveEstablishment']);
+const props = defineProps(['isDefineSchedules']);
 const numberOfPeople = defineModel('numberOfPeople');
 const date = defineModel('date');
 const time = defineModel('time');
@@ -79,11 +80,19 @@ const onSubmit = () => {
                 bg-color="white"
                 label="Observações:" />
             <q-btn
+                :disable="props.isDefineSchedules"
                 outline
                 color="orange-9"
                 class="q-mb-md"
                 label="Reservar"
-                type="submit" />
+                type="submit">
+                <q-tooltip 
+                    v-if="props.isDefineSchedules"
+                    class="bg-orange text-black"
+                    :offset="[10, 10]"
+                    transition-show="flip-right"
+                    transition-hide="flip-left">O estabelecimento não definiu seus horários!</q-tooltip>
+            </q-btn>
         </q-form>
     </div>
 </template>
@@ -98,6 +107,7 @@ const onSubmit = () => {
         .form-reserve-date-time{
             display: flex;
             justify-content: center;
+            flex-wrap: wrap;
             gap: .5rem;
 
             div{

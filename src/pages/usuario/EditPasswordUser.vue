@@ -32,7 +32,7 @@ const saveFormUser = () => {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 3.5rem);
+    min-height: calc(100vh - 3.5rem);
 
     h4{
         width: 50%;
