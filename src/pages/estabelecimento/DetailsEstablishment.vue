@@ -2,19 +2,26 @@
 import { onMounted, reactive } from 'vue';
 import { useRoute } from 'vue-router';
 import { FormReserveEstablishment } from '../../components';
-import { getDateToday, getHoursToday } from '../../utils/utilities.js';
+import { getDateToday, getHoursToday, compareDate, daysOfTheWeek } from '../../utils/dateTimeFormatters.js';
 
 const route = useRoute();
 const schedulesEstablishments = reactive([
   {
-    segunda: {
+    sun: {
+      manha: { abertura: '10:00', fechamento: '14:00' },
+      tarde: { abertura: '17:00', fechamento: '19:00' },
+      noite: { abertura: '19:00', fechamento: '22:00' }
+    }
+  },
+  {
+    mon: {
       manha: { abertura: '08:00', fechamento: '12:00' },
       tarde: { abertura: '14:00', fechamento: '17:00' },
       noite: { abertura: '19:00', fechamento: '23:00' }
     }
   },
   {
-    terça: {
+    tue: {
       manha: { abertura: '08:00', fechamento: '12:00' },
       tarde: { abertura: '14:00', fechamento: '17:00' },
       noite: { abertura: '19:00', fechamento: '23:00' }
@@ -22,17 +29,16 @@ const schedulesEstablishments = reactive([
   }
 ]);
 const dataFormReserveEstablishment = reactive({
-    numberOfPeople: null,
-    date: '26-07-2024',
-    time: '12:30',
+    numberOfPeople: 2,
+    date: null,
+    time: null,
     observation: '',
-    totalOccupancy: 1000,
-    occupancyNow: 200,
-    isDefineSchedules: true,
-    isOpen: true,
-    isVacancies: false
+    totalOccupancy: 0,
+    occupancyNow: 0,
+    isOpen: false,
+    isVacancies: false,
+    isDefineSchedules: false
 });
-const formatString = string => string.charAt(0).toUpperCase() + string.substring(1);
 const calculateOccupancyPercentage = () => {
   return dataFormReserveEstablishment.occupancyNow/dataFormReserveEstablishment.totalOccupancy;
 
@@ -42,12 +48,26 @@ const formatTotalOccupancy = () => {
 
 };
 const reserveEstablishment = () => {
-  console.log(dataFormReserveEstablishment);
+  if(!compareDate(dataFormReserveEstablishment.date)){
+    console.log('data invalida!');
+    return;
+
+  }
+  console.log('data valida!');
+  return;
+
+}
+const getInfoEstablishment = () => {
+  dataFormReserveEstablishment.date = getDateToday();
+  dataFormReserveEstablishment.time = getHoursToday();
+  dataFormReserveEstablishment.totalOccupancy = 1000;
+  dataFormReserveEstablishment.occupancyNow = 250;
+  dataFormReserveEstablishment.isOpen = true;
+  dataFormReserveEstablishment.isVacancies = false;
 
 }
 onMounted(() => {
-  dataFormReserveEstablishment.date = getDateToday();
-  dataFormReserveEstablishment.time = getHoursToday();
+  getInfoEstablishment();
 
 });
 </script>
@@ -57,25 +77,25 @@ onMounted(() => {
       <div class="status-establishment q-ml-xl q-mb-sm">
         <div v-if="dataFormReserveEstablishment.isOpen" class="q-ma-sm">
           <q-badge color="green" class="q-pa-sm">
-            <i class='bx bxs-like'></i>
+            <i class='bx bxs-smile'></i>
             Aberto
           </q-badge>
         </div>
         <div v-else class="q-ma-sm">
           <q-badge color="red" class="q-pa-sm">
-            <i class='bx bxs-dislike'></i>
+            <i class='bx bxs-sad'></i>
             Fechado
           </q-badge>
         </div>
         <div v-if="dataFormReserveEstablishment.isOpen && dataFormReserveEstablishment.isVacancies" class="q-ma-sm">
           <q-badge color="green" class="q-pa-sm">
-            <i class='bx bxs-like'></i>
+            <i class='bx bxs-smile'></i>
             A vagas
           </q-badge>
         </div>
         <div v-if="dataFormReserveEstablishment.isOpen && !dataFormReserveEstablishment.isVacancies" class="q-ma-sm">
           <q-badge color="red" class="q-pa-sm">
-            <i class='bx bxs-dislike'></i>
+            <i class='bx bxs-sad'></i>
             Não a vagas
           </q-badge>
         </div>
@@ -132,7 +152,7 @@ onMounted(() => {
           <div class="data-schedules q-pa-xs q-ma-xs">
             <div class="bg-grey-8 q-pa-sm" 
               v-for="i in schedulesEstablishments" :key="i">
-              <h5 class="q-pl-sm">{{ formatString(String(Object.keys(i))) }}</h5>
+              <h5 class="q-pl-sm">{{ daysOfTheWeek(String(Object.keys(i))) }}</h5>
               <div class="data-schedules-shifts q-pa-sm">
                 <p><span>Manha: </span>{{ i[String(Object.keys(i))]['manha']['abertura'] }} as {{ i[String(Object.keys(i))]['manha']['fechamento'] }}</p>
                 <p><span>Tarde: </span>{{ i[String(Object.keys(i))]['tarde']['abertura'] }} as {{ i[String(Object.keys(i))]['tarde']['fechamento'] }}</p>

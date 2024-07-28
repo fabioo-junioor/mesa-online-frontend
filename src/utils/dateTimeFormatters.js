@@ -40,8 +40,29 @@ const getHoursToday = () => {
     return `${hours}:${minutes}`;
 
 }
+const compareDate = (date) => {
+    let parts = date.split('-');
+    let today = new Date();
+    date = new Date(parts[2], parts[1] - 1, parts[0]);
+    
+    return (date >= today) || false;
+
+}
+const daysOfTheWeek = (day) => {
+    let formatDay = day.toLowerCase();
+    let daysWeek = [
+        {sun: 'Domingo'}, {mon: 'Segunda'},
+        {tue: 'Terça'}, {wed: 'Quarta'},
+        {thu: 'Quinta'}, {fri: 'Sexta'},
+        {sat: 'Sabado'}
+    ];
+    return daysWeek.filter(i => formatDay == Object.keys(i))[0][formatDay];
+
+}
 
 export {
     getDateToday,
-    getHoursToday
+    getHoursToday,
+    compareDate,
+    daysOfTheWeek
 }
