@@ -107,6 +107,7 @@ const onSubmit = () => {
         .form-reserve-date-time{
             display: flex;
             justify-content: center;
+            flex-wrap: wrap;
             gap: .5rem;
 
             div{

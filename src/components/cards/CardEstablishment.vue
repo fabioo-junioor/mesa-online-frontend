@@ -55,7 +55,7 @@ const redirectDetails = () => {
       border-left: 4px solid $colorOrange;
   
       .q-separator{
-        border: .1rem solid $colorOrange;
+        border: 1px solid $colorOrange;
         background-color: $colorOrange;
   
       }
