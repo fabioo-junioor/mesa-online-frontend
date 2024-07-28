@@ -6,8 +6,17 @@ import { CardReservation } from '../../components';
   <div id="home-user">
     <div class="data-user q-pa-sm">
       <div class="data-user-left q-pa-md">
-        <h4 class="q-pa-sm">Reservas realizadas</h4>
-        <CardReservation />
+        <h4 class="q-pa-md">Reservas realizadas</h4>
+        <div>
+          <CardReservation v-for="i in 5" :key="i"
+            nameEstablishment="Rock lanches"
+            date="30-07-2024"
+            time="20:00"
+            numberOfPeoples="5"
+            city="santa maria"
+            street="avenida ferrari"
+            number="2541" />
+        </div>
       </div>
       <div class="data-user-right q-pa-md">
         <h4 class="q-pa-sm">Detalhes</h4>
@@ -26,9 +35,10 @@ import { CardReservation } from '../../components';
     display: flex;
     justify-content: center;
     gap: .7rem;
+    flex-wrap: wrap;
 
     .data-user-left {
-      width: 50%;
+      width: 60%;
       background-color: $cardsDark;
       color: white;
       border: 1px solid rgba(0, 0, 0, .3);
@@ -38,9 +48,16 @@ import { CardReservation } from '../../components';
         text-align: center;
 
       }
+      div{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: .7rem;
+
+      }
     }
     .data-user-right {
-      width: 40%;
+      width: 30%;
       background-color: $cardsDark;
       color: white;
       border: 1px solid rgba(0, 0, 0, .3);
