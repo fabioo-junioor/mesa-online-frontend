@@ -1,6 +1,11 @@
 <script setup>
-const props = defineProps(['nameEstablishment', 'date', 'time', 'numberOfPeoples', 'city', 'street', 'number']);
+const props = defineProps(['id', 'nameEstablishment', 'date', 'time', 'numberOfPeoples', 'city', 'street', 'number']);
+const emit = defineEmits(['cancelReservation']);
 
+const onSubmit = () => {
+  emit('cancelReservation', props.id);
+
+}
 </script>
 <template>
   <div id="card-reservation">
@@ -25,17 +30,17 @@ const props = defineProps(['nameEstablishment', 'date', 'time', 'numberOfPeoples
               <i class='bx bx-check-double'></i>
               <p>Numero: {{ props.number }}</p>
             </div>
-            <q-separator />
+            <q-separator class="q-mt-sm q-mb-sm" color="grey-9" />
             <div class="infos-reservation-date-time">
-              <q-badge color="orange-9">
+              <q-badge color="grey-9">
                 <i class='bx bxs-calendar'></i>
                 Dia: {{ props.date }}
               </q-badge>
-              <q-badge color="orange-9">
+              <q-badge color="grey-9">
                 <i class='bx bxs-time'></i>
                 Horário: {{ props.time }}
               </q-badge>
-              <q-badge color="teal">
+              <q-badge color="grey-9">
                 <i class='bx bxs-group'></i>
                 Pessoas: {{ props.numberOfPeoples }}
               </q-badge>
@@ -43,6 +48,14 @@ const props = defineProps(['nameEstablishment', 'date', 'time', 'numberOfPeoples
           </div>
         </q-card-section>
       </q-card-section>
+
+      <q-separator color="orange-9" />
+
+      <q-card-actions>
+        <div class="reservation-actions q-ma-xs">
+          <q-btn @click="onSubmit" color="orange-9" label="Cancelar reserva" />
+        </div>
+      </q-card-actions>
     </q-card>
   </div>
 </template>
@@ -78,16 +91,10 @@ const props = defineProps(['nameEstablishment', 'date', 'time', 'numberOfPeoples
 
           }
         }
-        .q-separator{
-          margin: .7rem 0;
-          border: 1px solid $colorOrange;
-          background-color: $colorOrange;
-  
-        }
         .infos-reservation-date-time{
           width: 100%;
           display: flex;
-          justify-content: flex-end;
+          justify-content: center;
           gap: 1rem;
 
           .q-badge{
@@ -102,6 +109,12 @@ const props = defineProps(['nameEstablishment', 'date', 'time', 'numberOfPeoples
           }
         }
       }
+    }
+    .reservation-actions{
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+
     }
   }
 }

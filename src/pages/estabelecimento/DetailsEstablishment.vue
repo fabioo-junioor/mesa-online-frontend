@@ -2,39 +2,44 @@
 import { onMounted, reactive } from 'vue';
 import { useRoute } from 'vue-router';
 import { FormReserveEstablishment } from '../../components';
-import { getDateToday, getHoursToday } from '../../utils/utilities.js';
+import { getDateToday, getHoursToday, compareDate, daysOfTheWeek, verifyEstablishmentIsOpen } from '../../utils/dateTimeFormatters.js';
 
 const route = useRoute();
-const schedulesEstablishments = reactive([
+const schedulesEstablishment = reactive([
   {
-    segunda: {
-      manha: { abertura: '08:00', fechamento: '12:00' },
-      tarde: { abertura: '14:00', fechamento: '17:00' },
-      noite: { abertura: '19:00', fechamento: '23:00' }
+    sun: {
+      manha: { abertura: '10:00', fechamento: '14:00' },
+      tarde: { abertura: '17:00', fechamento: '19:00' },
+      noite: { abertura: '19:00', fechamento: '22:00' }
     }
   },
   {
-    terça: {
+    mon: {
       manha: { abertura: '08:00', fechamento: '12:00' },
       tarde: { abertura: '14:00', fechamento: '17:00' },
       noite: { abertura: '19:00', fechamento: '23:00' }
     }
   }
 ]);
-const dataFormReserveEstablishment = reactive({
-    numberOfPeople: null,
-    date: '26-07-2024',
-    time: '12:30',
-    observation: '',
-    totalOccupancy: 1000,
-    occupancyNow: 200,
-    isDefineSchedules: true,
-    isOpen: true,
-    isVacancies: false
+const addressEstablishment = reactive({
+  state: 'Rio grande do sul',
+  city: 'Santa maria',
+  street: 'Fernando ferrari',
+  number: '2666'
 });
-const formatString = string => string.charAt(0).toUpperCase() + string.substring(1);
+const formReserveEstablishment = reactive({
+    numberOfPeople: null,
+    date: null,
+    time: null,
+    observation: '',
+    totalOccupancy: 0,
+    occupancyNow: 0,
+    isOpen: false,
+    isVacancies: false,
+    isDefineSchedules: false
+});
 const calculateOccupancyPercentage = () => {
-  return dataFormReserveEstablishment.occupancyNow/dataFormReserveEstablishment.totalOccupancy;
+  return formReserveEstablishment.occupancyNow/formReserveEstablishment.totalOccupancy;
 
 };
 const formatTotalOccupancy = () => {
@@ -42,12 +47,27 @@ const formatTotalOccupancy = () => {
 
 };
 const reserveEstablishment = () => {
-  console.log(dataFormReserveEstablishment);
+  if(!compareDate(formReserveEstablishment.date)){
+    console.log('data invalida!');
+    return;
+
+  }
+  console.log('data valida!');
+  return;
+
+}
+const getInfoEstablishment = () => {
+  formReserveEstablishment.date = getDateToday();
+  formReserveEstablishment.time = getHoursToday();
+  formReserveEstablishment.totalOccupancy = 1000;
+  formReserveEstablishment.occupancyNow = 250;
+  formReserveEstablishment.isOpen = verifyEstablishmentIsOpen(schedulesEstablishment);
+  formReserveEstablishment.isVacancies = false;
+  formReserveEstablishment.isDefineSchedules = (schedulesEstablishment.length === 0);
 
 }
 onMounted(() => {
-  dataFormReserveEstablishment.date = getDateToday();
-  dataFormReserveEstablishment.time = getHoursToday();
+  getInfoEstablishment();
 
 });
 </script>
@@ -55,30 +75,34 @@ onMounted(() => {
   <div id="details-establishment">
     <div class="banner-establishment q-mb-md">
       <div class="status-establishment q-ml-xl q-mb-sm">
-        <div v-if="dataFormReserveEstablishment.isOpen" class="q-ma-sm">
+        <div v-if="formReserveEstablishment.isOpen" class="q-ma-sm">
           <q-badge color="green" class="q-pa-sm">
-            <i class='bx bxs-like'></i>
-            Aberto
+            <i class='bx bxs-smile'></i>
+            <q-separator vertical color="white" class="q-ml-xs q-mr-xs" />
+            Aberto!
           </q-badge>
         </div>
         <div v-else class="q-ma-sm">
           <q-badge color="red" class="q-pa-sm">
-            <i class='bx bxs-dislike'></i>
-            Fechado
+            <i class='bx bxs-sad'></i>
+            <q-separator vertical color="white" class="q-ml-xs q-mr-xs" />
+            Fechado!
           </q-badge>
         </div>
-        <div v-if="dataFormReserveEstablishment.isOpen && dataFormReserveEstablishment.isVacancies" class="q-ma-sm">
+        <!--
+        <div v-if="formReserveEstablishment.isOpen && formReserveEstablishment.isVacancies" class="q-ma-sm">
           <q-badge color="green" class="q-pa-sm">
-            <i class='bx bxs-like'></i>
+            <i class='bx bxs-smile'></i>
             A vagas
           </q-badge>
         </div>
-        <div v-if="dataFormReserveEstablishment.isOpen && !dataFormReserveEstablishment.isVacancies" class="q-ma-sm">
+        <div v-if="formReserveEstablishment.isOpen && !formReserveEstablishment.isVacancies" class="q-ma-sm">
           <q-badge color="red" class="q-pa-sm">
-            <i class='bx bxs-dislike'></i>
+            <i class='bx bxs-sad'></i>
             Não a vagas
           </q-badge>
         </div>
+        -->
       </div>
       <h4 class="q-mb-md">Rock lanches</h4>
       <div class="socials-establishment q-mr-xl q-mb-md">
@@ -95,11 +119,11 @@ onMounted(() => {
         <h4 class="q-pa-xs q-mb-md">Realizar reserva</h4>
         <div>
           <FormReserveEstablishment
-            v-model:numberOfPeople="dataFormReserveEstablishment.numberOfPeople"
-            v-model:date="dataFormReserveEstablishment.date"
-            v-model:time="dataFormReserveEstablishment.time"
-            v-model:observation="dataFormReserveEstablishment.observation"
-            :isDefineSchedules="dataFormReserveEstablishment.isDefineSchedules"
+            v-model:numberOfPeople="formReserveEstablishment.numberOfPeople"
+            v-model:date="formReserveEstablishment.date"
+            v-model:time="formReserveEstablishment.time"
+            v-model:observation="formReserveEstablishment.observation"
+            :isDefineSchedules="formReserveEstablishment.isDefineSchedules"
             @reserveEstablishment="reserveEstablishment" />
         </div>
       </div>
@@ -113,17 +137,17 @@ onMounted(() => {
                 <q-badge color="white" text-color="black" :label="formatTotalOccupancy()" />
               </div>
             </q-linear-progress>
-            <q-badge outline color="orange-9" :label="dataFormReserveEstablishment.occupancyNow+'/'+dataFormReserveEstablishment.totalOccupancy" />
+            <q-badge outline color="orange-9" :label="formReserveEstablishment.occupancyNow+'/'+formReserveEstablishment.totalOccupancy" />
           </div>
         </div>
         <div class="data-establishment-address q-pa-sm">
           <h4 class="q-pa-xs q-mb-md">Endereço</h4>
           <q-separator class="q-mt-sm q-mb-md" color="grey-8" />
           <div>
-            <p><span>Estado: </span>Rio grande do sul</p>
-            <p><span>Cidade: </span>Santa Maria</p>
-            <p><span>Rua: </span>Fernando ferrari</p>
-            <p><span>Numero: </span>2336</p>
+            <p><span>Estado: </span>{{ addressEstablishment.state }}</p>
+            <p><span>Cidade: </span>{{ addressEstablishment.city }}</p>
+            <p><span>Rua: </span>{{ addressEstablishment.street }}</p>
+            <p><span>Numero: </span>{{ addressEstablishment.number }}</p>
           </div>
         </div>
         <div class="data-establishment-schedules q-pa-sm">
@@ -131,8 +155,8 @@ onMounted(() => {
           <q-separator class="q-mt-sm q-mb-md" color="grey-8" />
           <div class="data-schedules q-pa-xs q-ma-xs">
             <div class="bg-grey-8 q-pa-sm" 
-              v-for="i in schedulesEstablishments" :key="i">
-              <h5 class="q-pl-sm">{{ formatString(String(Object.keys(i))) }}</h5>
+              v-for="i in schedulesEstablishment" :key="i">
+              <h5 class="q-pl-sm">{{ daysOfTheWeek(String(Object.keys(i))) }}</h5>
               <div class="data-schedules-shifts q-pa-sm">
                 <p><span>Manha: </span>{{ i[String(Object.keys(i))]['manha']['abertura'] }} as {{ i[String(Object.keys(i))]['manha']['fechamento'] }}</p>
                 <p><span>Tarde: </span>{{ i[String(Object.keys(i))]['tarde']['abertura'] }} as {{ i[String(Object.keys(i))]['tarde']['fechamento'] }}</p>

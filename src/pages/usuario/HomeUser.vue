@@ -1,6 +1,10 @@
 <script setup>
 import { CardReservation } from '../../components';
 
+const cancelReservation = (id) => {
+  console.log('cancelar reserva ', id);
+
+}
 </script>
 <template>
   <div id="home-user">
@@ -8,14 +12,16 @@ import { CardReservation } from '../../components';
       <div class="data-user-left q-pa-md">
         <h4 class="q-pa-md">Reservas realizadas</h4>
         <div>
-          <CardReservation v-for="i in 5" :key="i"
+          <CardReservation v-for="i in 3" :key="i"
+            :id="i"
             nameEstablishment="Rock lanches"
             date="30-07-2024"
             time="20:00"
             numberOfPeoples="5"
             city="santa maria"
             street="avenida ferrari"
-            number="2541" />
+            number="2541"
+            @cancelReservation="cancelReservation" />
         </div>
       </div>
       <div class="data-user-right q-pa-md">
