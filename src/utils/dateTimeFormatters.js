@@ -59,10 +59,29 @@ const daysOfTheWeek = (day) => {
     return daysWeek.filter(i => formatDay == Object.keys(i))[0][formatDay];
 
 }
+const verifyEstablishmentIsOpen = (schedules) => {
+    let hoursToday = getHoursToday();
+    let dayWeekToday = String(new Date()).slice(0, 3);
+    dayWeekToday = dayWeekToday.toLowerCase();
+
+    for(let i = 0; i < schedules.length; i++){
+        if(String(Object.keys(schedules[i])) === dayWeekToday){
+            if(((schedules[i][dayWeekToday]['manha']['abertura'] <= hoursToday) && (schedules[i][dayWeekToday]['manha']['fechamento'] > hoursToday)) ||
+                ((schedules[i][dayWeekToday]['tarde']['abertura'] <= hoursToday) && (schedules[i][dayWeekToday]['tarde']['fechamento'] > hoursToday)) ||
+                ((schedules[i][dayWeekToday]['noite']['abertura'] <= hoursToday) && (schedules[i][dayWeekToday]['noite']['fechamento'] > hoursToday))){
+                return true;
+
+            }
+            return false;
+
+        }
+    }
+}
 
 export {
     getDateToday,
     getHoursToday,
     compareDate,
-    daysOfTheWeek
+    daysOfTheWeek,
+    verifyEstablishmentIsOpen
 }
