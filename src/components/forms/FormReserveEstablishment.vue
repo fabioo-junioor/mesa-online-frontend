@@ -118,6 +118,10 @@ const onSubmit = () => {
                     font-size: 1rem;
 
                 }
+                .q-date, .q-time{
+                    box-shadow: none;
+
+                }
             }
         }
         .q-btn{

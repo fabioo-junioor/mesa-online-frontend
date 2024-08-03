@@ -37,6 +37,7 @@
       cursor: pointer;
       background-color: $background;
       border-left: 4px solid $grey-5;
+      box-shadow: none;
 
       .q-card__section{
         width: 100%;
