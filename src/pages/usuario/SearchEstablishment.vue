@@ -28,8 +28,7 @@ const getData = async () => {
     let establishments = [
         {name: 'rock lanches', description: 'descrição', isOpen: true, isVacancies: true},
         {name: 'gonha lanches', description: 'descrição', isOpen: false, isVacancies: false},
-        {name: 'mana lanches', description: 'descrição', isOpen: false, isVacancies: false},
-        {name: 'buneco', description: 'descrição', isOpen: true, isVacancies: true}
+        {name: 'mana lanches', description: 'descrição', isOpen: false, isVacancies: false}
     ];
     setTimeout(() => {
         dataEstablishments.push(...establishments)
