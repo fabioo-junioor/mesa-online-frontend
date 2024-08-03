@@ -1,17 +1,12 @@
 <script setup>
-import { reactive, ref } from 'vue';
-import { CardEstablishment } from '../../components';
+import { onMounted, reactive, ref } from 'vue';
+import { CardEstablishment, CardEstablishmentSkeleton } from '../../components';
 
 const dataSearchEstablishment = reactive({
     name: ''
 
 });
-const dataEstablishments = reactive([
-    {name: 'rock lanches', description: 'descrição', isOpen: true, isVacancies: true},
-    {name: 'gonha lanches', description: 'descrição', isOpen: false, isVacancies: false},
-    {name: 'mana lanches', description: 'descrição', isOpen: false, isVacancies: false},
-    {name: 'buneco', description: 'descrição', isOpen: true, isVacancies: true}
-]);
+const dataEstablishments = reactive([]);
 const searchEstablishment = () => {
     if(dataEstablishments != []){
         let data = orderArray(dataEstablishments);
@@ -29,13 +24,30 @@ const orderArray = array => {
 
     });
 }
+const getData = async () => {
+    let establishments = [
+        {name: 'rock lanches', description: 'descrição', isOpen: true, isVacancies: true},
+        {name: 'gonha lanches', description: 'descrição', isOpen: false, isVacancies: false},
+        {name: 'mana lanches', description: 'descrição', isOpen: false, isVacancies: false},
+        {name: 'buneco', description: 'descrição', isOpen: true, isVacancies: true}
+    ];
+    setTimeout(() => {
+        dataEstablishments.push(...establishments)
+        
+  }, 3000)
+}
+onMounted( async () => {
+    await getData();
+
+})
 </script>
 <template>
     <div id="search-establishment" class="q-pa-sm">
         <h4 class="q-mt-sm q-mb-sm">Estabelecimentos</h4>
         <div class="search-filters q-mt-md q-mb-md">
             <q-form>
-                <q-input
+                <q-input 
+                    :disable="!dataEstablishments.length"
                     square outlined
                     color="orange-9"
                     bg-color="white"
@@ -47,12 +59,16 @@ const orderArray = array => {
         </div>
         <div class="cards-establishment">
             <CardEstablishment
+                v-show="dataEstablishments.length"
                 v-for="i in searchEstablishment()" :key="i"
                 :id="5"
                 :name="i.name"
                 :description="i.description"
                 :isOpen="i.isOpen"
                 :isVacancies="i.isVacancies" />
+            <CardEstablishmentSkeleton
+                v-show="!dataEstablishments.length"
+                v-for="i in 3" :key="i" />
         </div>
     </div>
 </template>
@@ -87,7 +103,7 @@ const orderArray = array => {
         display: flex;
         justify-content: space-evenly;
         flex-wrap: wrap;
-        gap: .5rem;
+        gap: 1rem;
 
     }
 }

@@ -1,10 +1,34 @@
 <script setup>
-import { CardReservation } from '../../components';
+import { onMounted, reactive } from 'vue';
+import { CardReservation, CardReservationSkeleton } from '../../components';
 
+const dataCardReservation = reactive({
+  idEstablishment: '',
+  nameEstablishment: '',
+  dateReservation: '',
+  hourReservation: '',
+  numberOfPeoples: '',
+  city: '',
+  street: '',
+  number: ''
+});
 const cancelReservation = (id) => {
   console.log('cancelar reserva ', id);
 
 }
+const getData = async () => {
+  setTimeout(() => {
+    dataCardReservation.idEstablishment = '3'
+    dataCardReservation. nameEstablishment = 'rock lanches'
+    dataCardReservation.dateReservation = '15-08-2024'
+
+  }, 3000)
+
+}
+onMounted(async () => {
+  await getData();
+
+})
 </script>
 <template>
   <div id="home-user">
@@ -12,16 +36,20 @@ const cancelReservation = (id) => {
       <div class="data-user-left q-pa-md">
         <h4 class="q-pa-md">Reservas realizadas</h4>
         <div>
-          <CardReservation v-for="i in 3" :key="i"
-            :id="i"
-            nameEstablishment="Rock lanches"
-            date="30-07-2024"
-            time="20:00"
-            numberOfPeoples="5"
-            city="santa maria"
-            street="avenida ferrari"
-            number="2541"
+          <CardReservation v-show="dataCardReservation.idEstablishment"
+            v-for="i in 3" :key="i"
+            :id="dataCardReservation.idEstablishment"
+            :nameEstablishment="dataCardReservation.nameEstablishment"
+            :date="dataCardReservation.dateReservation"
+            :hour="dataCardReservation.hourReservation"
+            :numberOfPeoples="dataCardReservation.numberOfPeoples"
+            :city="dataCardReservation.city"
+            :street="dataCardReservation.street"
+            :number="dataCardReservation.number"
             @cancelReservation="cancelReservation" />
+          <CardReservationSkeleton
+            v-show="!dataCardReservation.idEstablishment"
+            v-for="i in 2" :key="i" />
         </div>
       </div>
       <div class="data-user-right q-pa-md">

@@ -11,6 +11,10 @@ import CardEstablishment from './cards/CardEstablishment.vue';
 import CardImageProfile from './cards/CardImageProfile.vue';
 import CardReservation from './cards/CardReservation.vue';
 
+import CardReservationSkeleton from './cards/CardReservationSkeleton.vue';
+import CardEstablishmentSkeleton from './cards/CardEstablishmentSkeleton.vue';
+
+
 export {
     Alert,
     NavBar,
@@ -21,5 +25,7 @@ export {
     FormReserveEstablishment,
     CardEstablishment,
     CardImageProfile,
-    CardReservation
+    CardReservation,
+    CardReservationSkeleton,
+    CardEstablishmentSkeleton
 }
