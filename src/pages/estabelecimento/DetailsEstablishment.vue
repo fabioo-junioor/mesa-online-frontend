@@ -310,4 +310,53 @@ onMounted(() => {
     }
   }
 }
+/* Breakpoints - response*/
+@media only screen and (max-width: 1560px) {
+}
+@media only screen and (max-width: 1200px) {
+}
+@media only screen and (max-width: 960px) {
+}
+@media only screen and (max-width: 768px) {
+  #details-establishment{
+    .banner-establishment{
+      border-radius: 0;
+
+      .status-establishment{
+        margin: 0 0 .3rem .1rem;
+
+      }
+      h4{
+        margin: 0 0 .3rem 0;
+        font-size: 1.5rem;
+
+      }
+      .socials-establishment{
+        margin: 0 .1rem .3rem 0;
+
+        i{
+          margin: .1rem;
+
+        }
+      }
+    }
+    .data-establishment{
+      flex-direction: column-reverse;
+
+      .data-establishment-left{
+        width: 100%;
+        padding: 0;
+
+      }
+      .data-establishment-right{
+        width: 100%;
+
+      }
+    }
+  }
+}
+@media only screen and (max-width: 480px) {
+}
+@media only screen and (max-width: 320px) {
+}
 </style>

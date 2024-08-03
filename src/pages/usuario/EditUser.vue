@@ -76,4 +76,37 @@ onMounted(() => {
         }
     }
 }
+/* Breakpoints - response*/
+@media only screen and (max-width: 1560px) {
+}
+@media only screen and (max-width: 1200px) {
+}
+@media only screen and (max-width: 960px) {
+    #edit-user{
+        h4{
+            width: 70%;
+            
+        }
+        .form-edit-user{
+            width: 70%;
+
+        }
+    }
+}
+@media only screen and (max-width: 768px) {
+    #edit-user{
+        h4{
+            width: 100%;
+
+        }    
+        .form-edit-user{
+            width: 100%;
+
+        }
+    }
+}
+@media only screen and (max-width: 480px) {
+}
+@media only screen and (max-width: 320px) {
+}
 </style>

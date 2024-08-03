@@ -108,7 +108,7 @@ const onSubmit = () => {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: .5rem;
+            gap: 1.5rem;
 
             div{
                 display: flex;
@@ -128,5 +128,38 @@ const onSubmit = () => {
 
         }
     }
+}
+/* Breakpoints - response*/
+@media only screen and (max-width: 1560px) {
+}
+@media only screen and (max-width: 1200px) {
+}
+@media only screen and (max-width: 960px) {
+}
+@media only screen and (max-width: 768px) {
+    #form-reserve-establishment{
+        margin: 0;
+
+    }
+}
+@media only screen and (max-width: 480px) {
+    #form-reserve-establishment{
+        .form-reserve-date-time{
+            div{
+                width: 100%;
+
+                .q-date{
+                    width: 100%;
+                    
+                }
+                .q-time{
+                    width: 100%;
+
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 320px) {
 }
 </style>

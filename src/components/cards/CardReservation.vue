@@ -95,6 +95,7 @@ const onSubmit = () => {
           width: 100%;
           display: flex;
           justify-content: center;
+          flex-wrap: wrap;
           gap: 1rem;
 
           .q-badge{
@@ -117,5 +118,18 @@ const onSubmit = () => {
 
     }
   }
+}
+/* Breakpoints - response*/
+@media only screen and (max-width: 1560px) {
+}
+@media only screen and (max-width: 1200px) {
+}
+@media only screen and (max-width: 960px) {
+}
+@media only screen and (max-width: 768px) {
+}
+@media only screen and (max-width: 480px) {
+}
+@media only screen and (max-width: 320px) {
 }
 </style>

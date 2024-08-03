@@ -104,4 +104,32 @@ onMounted(async () => {
     }
   }
 }
+/* Breakpoints - response*/
+@media only screen and (max-width: 1560px) {
+}
+@media only screen and (max-width: 1200px) {
+}
+@media only screen and (max-width: 960px) {
+}
+@media only screen and (max-width: 768px) {
+  #home-user{
+    .data-user{
+      flex-direction: column-reverse;
+      padding: .5rem;
+
+      .data-user-left{
+        width: 100%;
+
+      }
+      .data-user-right{
+        width: 100%;
+
+      }
+    }
+  }
+}
+@media only screen and (max-width: 480px) {
+}
+@media only screen and (max-width: 320px) {
+}
 </style>
