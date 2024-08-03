@@ -10,9 +10,11 @@ import FormReserveEstablishment from './forms/FormReserveEstablishment.vue';
 import CardEstablishment from './cards/CardEstablishment.vue';
 import CardImageProfile from './cards/CardImageProfile.vue';
 import CardReservation from './cards/CardReservation.vue';
+import CardSchedulesEstablishment from './cards/CardSchedulesEstablishment.vue';
 
 import CardReservationSkeleton from './cards/CardReservationSkeleton.vue';
 import CardEstablishmentSkeleton from './cards/CardEstablishmentSkeleton.vue';
+import CardSchedulesEstablishmentSkeleton from './cards/CardSchedulesEstablishmentSkeleton.vue';
 
 
 export {
@@ -26,6 +28,8 @@ export {
     CardEstablishment,
     CardImageProfile,
     CardReservation,
+    CardSchedulesEstablishment,
     CardReservationSkeleton,
-    CardEstablishmentSkeleton
+    CardEstablishmentSkeleton,
+    CardSchedulesEstablishmentSkeleton
 }
