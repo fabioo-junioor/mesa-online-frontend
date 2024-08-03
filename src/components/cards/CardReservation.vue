@@ -1,5 +1,5 @@
 <script setup>
-const props = defineProps(['id', 'nameEstablishment', 'date', 'time', 'numberOfPeoples', 'city', 'street', 'number']);
+const props = defineProps(['id', 'nameEstablishment', 'date', 'hour', 'numberOfPeoples', 'city', 'street', 'number']);
 const emit = defineEmits(['cancelReservation']);
 
 const onSubmit = () => {
@@ -38,7 +38,7 @@ const onSubmit = () => {
               </q-badge>
               <q-badge color="grey-9">
                 <i class='bx bxs-time'></i>
-                Horário: {{ props.time }}
+                Horário: {{ props.hour }}
               </q-badge>
               <q-badge color="grey-9">
                 <i class='bx bxs-group'></i>
