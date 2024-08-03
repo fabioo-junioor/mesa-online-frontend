@@ -1,51 +1,31 @@
 <script setup>
 import { onMounted, reactive } from 'vue';
 import { useRoute } from 'vue-router';
-import { FormReserveEstablishment } from '../../components';
+import { FormReserveEstablishment, CardSchedulesEstablishment, CardSchedulesEstablishmentSkeleton } from '../../components';
 import { getDateToday, getHoursToday, compareDate, daysOfTheWeek, verifyEstablishmentIsOpen } from '../../utils/dateTimeFormatters.js';
 
 const route = useRoute();
-const schedulesEstablishment = reactive([
-  {
-    sun: {
-      manha: { abertura: '10:00', fechamento: '14:00' },
-      tarde: { abertura: '17:00', fechamento: '19:00' },
-      noite: { abertura: '19:00', fechamento: '22:00' }
-    }
-  },
-  {
-    mon: {
-      manha: { abertura: '08:00', fechamento: '12:00' },
-      tarde: { abertura: '14:00', fechamento: '17:00' },
-      noite: { abertura: '19:00', fechamento: '23:00' }
-    }
-  }
-]);
+  const formReserveEstablishment = reactive({
+      numberOfPeople: null,
+      date: null,
+      time: null,
+      observation: ''
+  });
+const schedulesEstablishment = reactive([]);
 const addressEstablishment = reactive({
-  state: 'Rio grande do sul',
-  city: 'Santa maria',
-  street: 'Fernando ferrari',
-  number: '2666'
+  state: '',
+  city: '',
+  street: '',
+  number: ''
 });
-const formReserveEstablishment = reactive({
-    numberOfPeople: null,
-    date: null,
-    time: null,
-    observation: '',
-    totalOccupancy: 0,
-    occupancyNow: 0,
-    isOpen: false,
-    isVacancies: false,
-    isDefineSchedules: false
-});
-const calculateOccupancyPercentage = () => {
-  return formReserveEstablishment.occupancyNow/formReserveEstablishment.totalOccupancy;
+const detailsEstablishment = reactive({
+  totalOccupancy: 0,
+  occupancyNow: 0,
+  isOpen: false,
+  isVacancies: false,
+  isDefineSchedules: false
 
-};
-const formatTotalOccupancy = () => {
-  return (calculateOccupancyPercentage() * 100).toFixed(2) + '%';
-
-};
+})
 const reserveEstablishment = () => {
   if(!compareDate(formReserveEstablishment.date)){
     console.log('data invalida!');
@@ -56,18 +36,60 @@ const reserveEstablishment = () => {
   return;
 
 }
-const getInfoEstablishment = () => {
+const getSchedulesEstablishment = async () => {
+  let schedules = [
+      {
+      sun: {
+        manha: { abertura: '10:00', fechamento: '14:00' },
+        tarde: { abertura: '17:00', fechamento: '19:00' },
+        noite: { abertura: '19:00', fechamento: '22:00' }
+      }
+    },
+    {
+      mon: {
+        manha: { abertura: '08:00', fechamento: '12:00' },
+        tarde: { abertura: '14:00', fechamento: '17:00' },
+        noite: { abertura: '19:00', fechamento: '23:00' }
+      }
+    }
+  ];
+  setTimeout(() => {
+    schedulesEstablishment.push(...schedules);
+
+  }, 3000)
+}
+const getFormReserveEstablishment = () => {
   formReserveEstablishment.date = getDateToday();
   formReserveEstablishment.time = getHoursToday();
-  formReserveEstablishment.totalOccupancy = 1000;
-  formReserveEstablishment.occupancyNow = 250;
-  formReserveEstablishment.isOpen = verifyEstablishmentIsOpen(schedulesEstablishment);
-  formReserveEstablishment.isVacancies = false;
-  formReserveEstablishment.isDefineSchedules = (schedulesEstablishment.length === 0);
 
 }
-onMounted(() => {
-  getInfoEstablishment();
+const getDetailsEstablishment = async () => {
+  detailsEstablishment.totalOccupancy = 1000;
+  detailsEstablishment.occupancyNow = 200;
+  detailsEstablishment.isOpen = verifyEstablishmentIsOpen(schedulesEstablishment);
+  detailsEstablishment.isVacancies = false;
+  detailsEstablishment.isDefineSchedules = (schedulesEstablishment.length === 0);
+
+}
+const getAddressEstablishment = async () => {
+  addressEstablishment.state = 'Rio grande do sul';
+  addressEstablishment.city = 'Santa maria';
+  addressEstablishment.street = 'Fernando ferrari';
+  addressEstablishment.number = '5565';
+
+}
+const calculateOccupancyPercentage = () => {
+  return detailsEstablishment.occupancyNow/detailsEstablishment.totalOccupancy;
+
+};
+const formatTotalOccupancy = () => {
+  return (calculateOccupancyPercentage() * 100).toFixed(2) + '%';
+
+};
+onMounted( async () => {
+  await getAddressEstablishment();
+  await getDetailsEstablishment();
+  await getSchedulesEstablishment();
 
 });
 </script>
@@ -75,7 +97,7 @@ onMounted(() => {
   <div id="details-establishment">
     <div class="banner-establishment q-mb-md">
       <div class="status-establishment q-ml-xl q-mb-sm">
-        <div v-if="formReserveEstablishment.isOpen" class="q-ma-sm">
+        <div v-if="detailsEstablishment.isOpen" class="q-ma-sm">
           <q-badge color="green" class="q-pa-sm">
             <i class='bx bxs-smile'></i>
             <q-separator vertical color="white" class="q-ml-xs q-mr-xs" />
@@ -104,7 +126,7 @@ onMounted(() => {
         </div>
         -->
       </div>
-      <h4 class="q-mb-md">Rock lanches</h4>
+      <h4 class="q-mb-xs">Rock lanches</h4>
       <div class="socials-establishment q-mr-xl q-mb-md">
         <a href="#" target="_blank" rel="noopener noreferrer">
           <i class="bx bxl-instagram q-mr-md" />
@@ -132,12 +154,15 @@ onMounted(() => {
           <h4 class="q-pa-xs q-mb-md">Detalhes</h4>
           <q-separator class="q-mt-sm q-mb-md" color="grey-8" />
           <div class="data-progress-ocupation">
-            <q-linear-progress dark rounded size="30px" :value="calculateOccupancyPercentage()" color="orange-9">
+            <q-linear-progress dark rounded stripe 
+              size="30px"
+              :indeterminate="!detailsEstablishment.occupancyNow" 
+              :value="calculateOccupancyPercentage()" color="orange-9">
               <div class="absolute-full flex flex-center">
                 <q-badge color="white" text-color="black" :label="formatTotalOccupancy()" />
               </div>
             </q-linear-progress>
-            <q-badge outline color="orange-9" :label="formReserveEstablishment.occupancyNow+'/'+formReserveEstablishment.totalOccupancy" />
+            <q-badge outline color="orange-9" :label="detailsEstablishment.occupancyNow+'/'+detailsEstablishment.totalOccupancy" />
           </div>
         </div>
         <div class="data-establishment-address q-pa-sm">
@@ -153,16 +178,20 @@ onMounted(() => {
         <div class="data-establishment-schedules q-pa-sm">
           <h4 class="q-pa-xs q-mb-md">Horários</h4>
           <q-separator class="q-mt-sm q-mb-md" color="grey-8" />
-          <div class="data-schedules q-pa-xs q-ma-xs">
-            <div class="bg-grey-8 q-pa-sm" 
-              v-for="i in schedulesEstablishment" :key="i">
-              <h5 class="q-pl-sm">{{ daysOfTheWeek(String(Object.keys(i))) }}</h5>
-              <div class="data-schedules-shifts q-pa-sm">
-                <p><span>Manha: </span>{{ i[String(Object.keys(i))]['manha']['abertura'] }} as {{ i[String(Object.keys(i))]['manha']['fechamento'] }}</p>
-                <p><span>Tarde: </span>{{ i[String(Object.keys(i))]['tarde']['abertura'] }} as {{ i[String(Object.keys(i))]['tarde']['fechamento'] }}</p>
-                <p><span>Noite: </span>{{ i[String(Object.keys(i))]['noite']['abertura'] }} as {{ i[String(Object.keys(i))]['noite']['fechamento'] }}</p>
-              </div>
-            </div>
+          <div class="data-schedules">
+            <CardSchedulesEstablishment
+              v-show="schedulesEstablishment.length"
+              v-for="i in schedulesEstablishment" :key="i"
+              :daysOfTheWeek="daysOfTheWeek(String(Object.keys(i)))"
+              :morningOpen="i[String(Object.keys(i))]['manha']['abertura']"
+              :morningClose="i[String(Object.keys(i))]['manha']['fechamento']"
+              :afternoonOpen="i[String(Object.keys(i))]['tarde']['abertura']"
+              :afternoonClose="i[String(Object.keys(i))]['tarde']['fechamento']"
+              :nightOpen="i[String(Object.keys(i))]['noite']['abertura']"
+              :nightClose="i[String(Object.keys(i))]['noite']['fechamento']" />
+            <CardSchedulesEstablishmentSkeleton
+              v-show="!schedulesEstablishment.length"
+              v-for="i in 7" :key="i" />
           </div>
         </div>
       </div>
@@ -276,34 +305,11 @@ onMounted(() => {
         border: 1px solid rgba(0, 0, 0, .3);
         color: white;
 
-        h4{
-          text-align: center;
-          font-size: 1.5rem;
-
-        }
         .data-schedules{
           display: flex;
-          gap: .5rem;
+          justify-content: center;
+          gap: .3rem;
           flex-wrap: wrap;
-
-          h5{
-            font-size: 1.2rem;
-
-          }
-          p{
-            margin: 0;
-
-          }
-          .data-schedules-shifts{
-            span{
-              font-weight: 500;
-              font-size: 1rem;
-
-            }          
-          }
-        }
-        .data-schedules > div{
-          border-radius: 5px;
 
         }
       }
