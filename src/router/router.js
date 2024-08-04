@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { getDadosUsuario } from '../services/localStorage/settingSession.js';
 
 import { Home, LoginUser, 
     CadUser, HomeUser,
@@ -19,19 +18,8 @@ const routes = [
         name: 'loginUser',
         component: LoginUser,
         beforeEnter: (_, __, next) => {
-            if(getDadosUsuario()){
-                if(getDadosUsuario().tipoUsuario == '1'){
-                    next('/homeUsuario');
-                    return;
-
-                }
-                next('/homeEstablishment');
-                return;
-
-            }
             next();
             return;
-
         }
     },
     {
@@ -39,19 +27,8 @@ const routes = [
         name: 'cadUser',
         component: CadUser,
         beforeEnter: (_, __, next) => {
-            if(getDadosUsuario()){
-                if(getDadosUsuario().tipoUsuario == '1'){
-                    next('/homeUser');
-                    return;
-
-                }
-                next('/homeEstablishment');
-                return;
-
-            }
             next();
             return;
-            
         }
     },
     {
@@ -59,19 +36,8 @@ const routes = [
         name: 'homeUser',
         component: HomeUser,
         beforeEnter: (_, __, next) => {
-            /*if(getDadosUsuario()){
-                if(getDadosUsuario().tipoUsuario == '1'){
-                    */next();
-                    return;/*
-
-                }
-                next('/homeEstabelecimento');
-                return;
-
-            }
-            next('/');
-            return;*/
-
+            next();
+            return;
         }
     },
     {
@@ -79,19 +45,8 @@ const routes = [
         name: 'editUser',
         component: EditUser,
         beforeEnter: (_, __, next) => {
-            /*if(getDadosUsuario()){
-                if(getDadosUsuario().tipoUsuario == '1'){
-                    */next();
-                    return;/*
-                    
-                }
-                next('/homeEstabelecimento');
-                return;
-                
-            }
-            next('/');
-            return;*/
-
+            next();
+            return;
         }
     },
     {
@@ -99,19 +54,8 @@ const routes = [
         name: 'editPasswordUser',
         component: EditPasswordUser,
         beforeEnter: (_, __, next) => {
-            /*if(getDadosUsuario()){
-                if(getDadosUsuario().tipoUsuario == '1'){
-                    */next();
-                    return;/*
-                    
-                }
-                next('/homeEstabelecimento');
-                return;
-                
-            }
-            next('/');
-            return;*/
-
+            next();
+            return;
         }
     },
     {
@@ -119,29 +63,8 @@ const routes = [
         name: 'searchEstablishment',
         component: SearchEstablishment,
         beforeEnter: (_, __, next) => {
-            /*if(getDadosUsuario()){
-                if(getDadosUsuario().tipoUsuario == '1'){
-                    */next();
-                    return;/*
-
-                }
-                next('/homeEstabelecimento');
-                return;
-
-            }
-            next('/');
-            return;*/
-
-        }
-    },
-    {
-        path: '/detailsEstablishment/:id',
-        name: 'detailsEstablishment',
-        component: DetailsEstablishment,
-        beforeEnter: (_, __, next) => {
             next();
             return;
-
         }
     },
     {
@@ -149,19 +72,8 @@ const routes = [
         name: 'loginEstablishment',
         component: LoginEstablishment,
         beforeEnter: (_, __, next) => {
-            if(getDadosUsuario()){
-                if(getDadosUsuario().tipoUsuario == '2'){
-                    next('/homeEstablishment');
-                    return;
-
-                }
-                next('/homeUser');
-                return;
-
-            }
             next();
             return;
-
         }
     },
     {
@@ -169,39 +81,27 @@ const routes = [
         name: 'cadEstablishment',
         component: CadEstablishment,
         beforeEnter: (_, __, next) => {
-            if(getDadosUsuario()){
-                if(getDadosUsuario().tipoUsuario == '2'){
-                    next('/homeEstablishment');
-                    return;
-
-                }
-                next('/homeUser');
-                return;
-
-            }
             next();
             return;
-
         }
-    },
+    },/*
     {
         path: '/homeEstablishment',
         name: 'homeEstablishment',
         component: HomeEstablishment,
         beforeEnter: (_, __, next) => {
-            if(getDadosUsuario()){
-                if(getDadosUsuario().tipoUsuario == '2'){
-                    next();
-                    return;
+            next();
+            return
 
-                }
-                next('/homeUser');
-                return;
-
-            }
-            next('/');
+        }
+    },*/
+    {
+        path: '/detailsEstablishment/:pk_public',
+        name: 'detailsEstablishment',
+        component: DetailsEstablishment,
+        beforeEnter: (_, __, next) => {
+            next();
             return;
-            
         }
     },
     {

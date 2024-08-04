@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router';
 const props = defineProps(['id', 'name', 'description', 'isVacancies', 'isOpen']);
 const router = useRouter();
 const redirectDetails = () => {
-  router.push({name: 'detailsEstablishment', params: {id: props.id}});
+  router.push({name: 'detailsEstablishment', params: { pk_public: props.id}});
 
 }
 </script>
@@ -14,7 +14,7 @@ const redirectDetails = () => {
       <q-card-section horizontal>
         <q-img class="col-6" src="https://cdn.quasar.dev/img/parallax1.jpg">
           <div class="absolute-bottom text-subtitle2 text-center">
-              {{ name }}
+              {{ props.name }}
           </div>
         </q-img>
         <q-card-section>
