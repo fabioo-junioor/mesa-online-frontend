@@ -15,7 +15,7 @@ Os estabelecimentos podem efetuar seu cadastro e disponibilizar informções per
 
 # Tecnologias utilizadas
 * Vue.js
-* BootstrapVue
+* Quasar
 * SASS
 * VueRouter
 * Vite
