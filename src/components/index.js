@@ -11,10 +11,12 @@ import CardEstablishment from './cards/CardEstablishment.vue';
 import CardImageProfile from './cards/CardImageProfile.vue';
 import CardReservation from './cards/CardReservation.vue';
 import CardSchedulesEstablishment from './cards/CardSchedulesEstablishment.vue';
+import CardAddressEstablishment from './cards/CardAddressEstablishment.vue';
 
 import CardReservationSkeleton from './cards/CardReservationSkeleton.vue';
 import CardEstablishmentSkeleton from './cards/CardEstablishmentSkeleton.vue';
 import CardSchedulesEstablishmentSkeleton from './cards/CardSchedulesEstablishmentSkeleton.vue';
+import CardAddressEstablishmentSkeleton from './cards/CardAddressEstablishmentSkeleton.vue';
 
 
 export {
@@ -29,7 +31,9 @@ export {
     CardImageProfile,
     CardReservation,
     CardSchedulesEstablishment,
+    CardAddressEstablishment,
     CardReservationSkeleton,
     CardEstablishmentSkeleton,
-    CardSchedulesEstablishmentSkeleton
+    CardSchedulesEstablishmentSkeleton,
+    CardAddressEstablishmentSkeleton
 }
