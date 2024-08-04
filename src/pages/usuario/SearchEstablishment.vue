@@ -26,9 +26,9 @@ const orderArray = array => {
 }
 const getData = async () => {
     let establishments = [
-        {name: 'rock lanches', description: 'descrição', isOpen: true, isVacancies: true},
-        {name: 'gonha lanches', description: 'descrição', isOpen: false, isVacancies: false},
-        {name: 'mana lanches', description: 'descrição', isOpen: false, isVacancies: false}
+        {id_public: 1, name: 'rock lanches', description: 'descrição', isOpen: true, isVacancies: true},
+        {id_public: 2, name: 'gonha lanches', description: 'descrição', isOpen: false, isVacancies: false},
+        {id_public: 3, name: 'mana lanches', description: 'descrição', isOpen: false, isVacancies: false}
     ];
     setTimeout(() => {
         dataEstablishments.push(...establishments)
@@ -60,7 +60,7 @@ onMounted( async () => {
             <CardEstablishment
                 v-show="dataEstablishments.length"
                 v-for="i in searchEstablishment()" :key="i"
-                :id="5"
+                :id="i.id_public"
                 :name="i.name"
                 :description="i.description"
                 :isOpen="i.isOpen"
