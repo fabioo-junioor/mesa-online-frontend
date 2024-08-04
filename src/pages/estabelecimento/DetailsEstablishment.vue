@@ -19,10 +19,15 @@ const addressEstablishment = reactive({
   number: ''
 });
 const detailsEstablishment = reactive({
+  linkInstagram: '',
+  linkFacebook: '',
   totalOccupancy: 0,
-  occupancyNow: 0,
+  occupancyNow: 0
+});
+const validatorsDisable = reactive({
   isOpen: false,
-  isDefineSchedules: true
+  isDefineSchedules: false,
+  isLogin: false
 });
 const getSchedulesEstablishment = async () => {
   let schedules = [
@@ -50,8 +55,9 @@ const getSchedulesEstablishment = async () => {
   ];
   setTimeout(() => {
     schedulesEstablishment.push(...schedules);
-    detailsEstablishment.isDefineSchedules = (schedulesEstablishment.length == 0);
-    detailsEstablishment.isOpen = verifyEstablishmentIsOpen(schedulesEstablishment);
+    validatorsDisable.isDefineSchedules = (schedulesEstablishment.length === 0) ? false : true;
+    validatorsDisable.isOpen = verifyEstablishmentIsOpen(schedulesEstablishment);
+    validatorsDisable.isLogin = true;
 
   }, 3000);
 };
@@ -62,6 +68,8 @@ const getFormReserveEstablishment = async () => {
 };
 const getDetailsEstablishment = async () => {
   setTimeout(() => {
+    detailsEstablishment.linkInstagram = '#';
+    detailsEstablishment.linkFacebook = '#';
     detailsEstablishment.totalOccupancy = 1000;
     detailsEstablishment.occupancyNow = 200;
 
@@ -91,6 +99,7 @@ const reserveEstablishment = () => {
 
   }
   console.log('data valida!');
+  console.log(formReserveEstablishment);
   return;
 
 };
@@ -106,7 +115,7 @@ onMounted( async () => {
   <div id="details-establishment">
     <div class="banner-establishment q-mb-md">
       <div class="status-establishment q-ml-xl q-mb-sm">
-        <div v-if="detailsEstablishment.isOpen" class="q-ma-sm">
+        <div v-if="validatorsDisable.isOpen" class="q-ma-sm">
           <q-badge color="green" class="q-pa-sm">
             <i class='bx bxs-smile'></i>
             <q-separator vertical color="white" class="q-ml-xs q-mr-xs" />
@@ -123,10 +132,10 @@ onMounted( async () => {
       </div>
       <h4 class="q-mb-xs">Rock lanches</h4>
       <div class="socials-establishment q-mr-xl q-mb-md">
-        <a href="#" target="_blank" rel="noopener noreferrer">
+        <a :href="detailsEstablishment.linkInstagram" target="_blank" rel="noopener noreferrer">
           <i class="bx bxl-instagram q-mr-md" />
         </a>
-        <a href="#" target="_blank" rel="noopener noreferrer">
+        <a :href="detailsEstablishment.linkFacebook" target="_blank" rel="noopener noreferrer">
           <i class="bx bxl-facebook-square" />
         </a>
       </div>
@@ -140,7 +149,8 @@ onMounted( async () => {
             v-model:date="formReserveEstablishment.date"
             v-model:time="formReserveEstablishment.time"
             v-model:observation="formReserveEstablishment.observation"
-            :isDefineSchedules="detailsEstablishment.isDefineSchedules"
+            :isDefineSchedules="validatorsDisable.isDefineSchedules"
+            :isLogin="validatorsDisable.isLogin"
             @reserveEstablishment="reserveEstablishment" />
         </div>
       </div>

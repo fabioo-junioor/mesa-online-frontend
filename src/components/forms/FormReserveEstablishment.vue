@@ -3,7 +3,7 @@ import { reactive, ref } from 'vue';
 import { fielsRequired } from '../../utils/inputValidators.js';
 
 const emit = defineEmits(['reserveEstablishment']);
-const props = defineProps(['isDefineSchedules']);
+const props = defineProps(['isDefineSchedules', 'isLogin']);
 const numberOfPeople = defineModel('numberOfPeople');
 const date = defineModel('date');
 const time = defineModel('time');
@@ -20,12 +20,12 @@ const myLocale = reactive({
     firstDayOfWeek: 0,
     format24h: true,
     pluralDay: 'dias'
-})
+});
 const onSubmit = () => {
     emit('reserveEstablishment');
     return;
     
-}
+};
 </script>
 <template>
     <div id="form-reserve-establishment" class="q-ma-sm q-pa-sm">
@@ -80,18 +80,32 @@ const onSubmit = () => {
                 bg-color="white"
                 label="Observações:" />
             <q-btn
-                :disable="props.isDefineSchedules"
+                v-if="props.isLogin"
+                :disable="!props.isDefineSchedules"
                 outline
                 color="orange-9"
                 class="q-mb-md"
                 label="Reservar"
                 type="submit">
                 <q-tooltip 
-                    v-if="props.isDefineSchedules"
+                    v-if="!props.isDefineSchedules"
                     class="bg-orange text-black"
                     :offset="[10, 10]"
                     transition-show="flip-right"
                     transition-hide="flip-left">O estabelecimento não definiu seus horários!</q-tooltip>
+            </q-btn>
+            <q-btn
+                v-else
+                disable
+                outline
+                color="orange-9"
+                class="q-mb-md"
+                label="Reservar">
+                <q-tooltip 
+                    class="bg-orange text-black"
+                    :offset="[10, 10]"
+                    transition-show="flip-right"
+                    transition-hide="flip-left">Efetue um cadastro!</q-tooltip>
             </q-btn>
         </q-form>
     </div>
