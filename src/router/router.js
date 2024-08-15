@@ -32,36 +32,13 @@ const routes = [
         }
     },
     {
-        path: '/homeUser',
-        name: 'homeUser',
-        component: HomeUser,
-        beforeEnter: (_, __, next) => {
-            next();
-            return;
-        }
-    },
-    {
-        path: '/editUser',
-        name: 'editUser',
-        component: EditUser,
-        beforeEnter: (_, __, next) => {
-            next();
-            return;
-        }
-    },
-    {
-        path: '/editPasswordUser',
-        name: 'editPasswordUser',
-        component: EditPasswordUser,
-        beforeEnter: (_, __, next) => {
-            next();
-            return;
-        }
-    },
-    {
-        path: '/searchEstablishment',
-        name: 'searchEstablishment',
-        component: SearchEstablishment,
+        path: '/user',
+        children: [
+            {path: 'homeUser', component: HomeUser},
+            {path: 'editUser', component: EditUser},
+            {path: 'editPasswordUser', component: EditPasswordUser},
+            {path: 'searchEstablishment', component: SearchEstablishment}
+        ],
         beforeEnter: (_, __, next) => {
             next();
             return;
@@ -84,17 +61,18 @@ const routes = [
             next();
             return;
         }
-    },/*
+    },
     {
-        path: '/homeEstablishment',
-        name: 'homeEstablishment',
-        component: HomeEstablishment,
+        path: '/establishment',
+        children: [
+            {path: 'homeEstablishment', component: HomeEstablishment}
+        ],
         beforeEnter: (_, __, next) => {
             next();
-            return
+            return;
 
         }
-    },*/
+    },
     {
         path: '/detailsEstablishment/:pk_public',
         name: 'detailsEstablishment',
@@ -122,4 +100,4 @@ const router = createRouter({
     linkActiveClass: 'vue-school-active-link'
 })
 
-export default router
+export default router;

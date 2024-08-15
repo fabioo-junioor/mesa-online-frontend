@@ -134,19 +134,19 @@ onMounted(() => {
           </div>
           <div class="menu-sidebar-links">
             <i class="bx bx-home"></i>
-            <router-link to="/homeUser">Inicio</router-link>
+            <router-link to="/user/homeUser">Inicio</router-link>
           </div>
           <div class="menu-sidebar-links">
             <i class="bx bx-search-alt"></i>
-            <router-link to="/searchEstablishment">Buscar</router-link>
+            <router-link to="/user/searchEstablishment">Buscar</router-link>
           </div>
           <div class="menu-sidebar-links">
             <i class="bx bx-edit-alt"></i>
-            <router-link to="/editUser">Editar Perfil</router-link>
+            <router-link to="/user/editUser">Editar Perfil</router-link>
           </div>
           <div class="menu-sidebar-links">
             <i class="bx bxs-key"></i>
-            <router-link to="/editPasswordUser">Alterar Senha</router-link>
+            <router-link to="/user/editPasswordUser">Alterar Senha</router-link>
           </div>
         </div>
       </q-drawer>
