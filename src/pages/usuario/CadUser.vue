@@ -14,14 +14,22 @@ const createUser = () => {
 </script>
 <template>
     <div id="cad-user">
-        <h4>Cadastrar Usuário</h4>
-        <FormUser
-            class="form-user q-pt-xl q-pb-xl"
-            typeForm="cadUser"
-            v-model:email="dataFormUser.email"
-            v-model:password="dataFormUser.password"
-            v-model:repeatPassword="dataFormUser.repeatPassword"
-            @createUser="createUser" />
+        <div class="cad-user">
+            <div class="cad-user-img">
+                <q-img 
+                    src="../../assets/draw/undraw_hello.svg"
+                    fit="contain" />
+            </div>
+            <div class="cad-user-forms">
+                <FormUser
+                    class="form-user q-pt-xl q-pb-xl"
+                    typeForm="cadUser"
+                    v-model:email="dataFormUser.email"
+                    v-model:password="dataFormUser.password"
+                    v-model:repeatPassword="dataFormUser.repeatPassword"
+                    @createUser="createUser" />
+            </div>
+        </div>
     </div>
 </template>
 <style lang="scss" scoped>
@@ -34,29 +42,46 @@ const createUser = () => {
     height: calc(100vh - 3.1rem);
     font-family: "Fredoka", sans-serif;
 
-    h4{
-        width: 50%;
-        text-align: center;
-        padding: 1rem;
-        color: white;
-        background-color: $backgroundForms;
-        border: 1px solid rgba(0, 0, 0, .5);
-        border-radius: 5px;
-
-    }
-    .form-user{
-        width: 50%;
+    .cad-user{
         display: flex;
-        flex-direction: column;
-        align-items: center;
         justify-content: center;
-        background-color: $backgroundForms;
-        border: 1px solid rgba(0, 0, 0, .5);
+        align-items: center;
+        background-color: $darkColorSecondary;
+        box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, .5);
         border-radius: 5px;
+        width: 60%;
+        height: 80%;
 
-        .q-form{
-            width: 100%;
-            
+        .cad-user-img{
+            width: 50%;
+            height: 100%;
+            border-radius: 5px;
+            background-color: $orangeColor;
+
+            .q-img{
+                height: 100%;
+                width: 100%;
+                
+            }
+        }
+        .cad-user-forms{
+            display: flex;
+            justify-content: center;
+            width: 50%;
+            height: 100%;
+
+            .form-user{
+                height: 100%;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+        
+                .q-form{
+                    width: 100%;
+                    
+                }
+            }
         }
     }
 }

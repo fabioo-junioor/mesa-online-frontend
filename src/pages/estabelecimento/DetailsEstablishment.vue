@@ -226,7 +226,7 @@ onMounted( async () => {
     background-size: cover;
     border-radius: 0 0 50px 50px;
     box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, .7);
-    border-bottom: 1px solid $iconOrange;
+    border-bottom: 1px solid $orangeColor;
 
     .status-establishment{
       display: flex;
@@ -240,17 +240,16 @@ onMounted( async () => {
       }
     }
     h4 {
-      color: white;
-      text-decoration: underline;
+      color: $whiteColorPrimary;
 
     }
     .socials-establishment {
       i {
-        color: white;
+        color: $whiteColorPrimary;
         font-size: 2rem;
 
         &:hover {
-          color: $iconWhiteHover;
+          color: $greyHover;
 
         }
       }
@@ -263,13 +262,13 @@ onMounted( async () => {
 
     .data-establishment-left{
       width: 60%;
-      background-color: $cardsDark;
+      background-color: $darkColorSecondary;
       border: 1px solid rgba(0, 0, 0, .3);
       border-radius: 5px;
 
       h4{
         text-align: center;
-        color: white;
+        color: $whiteColorPrimary;
         font-size: 2rem;
 
       }
@@ -282,9 +281,9 @@ onMounted( async () => {
 
       .data-establishment-details{
         border-radius: 5px;
-        background-color: $cardsDark;
+        background-color: $darkColorSecondary;
         border: 1px solid rgba(0, 0, 0, .3);
-        color: white;
+        color: $whiteColorPrimary;
 
         h4{
           text-align: center;
@@ -299,9 +298,9 @@ onMounted( async () => {
       }
       .data-establishment-address{
         border-radius: 5px;
-        background-color: $cardsDark;
+        background-color: $darkColorSecondary;
         border: 1px solid rgba(0, 0, 0, .3);
-        color: white;
+        color: $whiteColorPrimary;
 
         h4{
           font-size: 1.5rem;
@@ -311,9 +310,9 @@ onMounted( async () => {
       }
       .data-establishment-schedules{
         border-radius: 5px;
-        background-color: $cardsDark;
+        background-color: $darkColorSecondary;
         border: 1px solid rgba(0, 0, 0, .3);
-        color: white;
+        color: $whiteColorPrimary;
 
         h4{
           font-size: 1.5rem;

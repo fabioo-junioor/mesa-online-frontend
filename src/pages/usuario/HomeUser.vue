@@ -73,8 +73,8 @@ onMounted(async () => {
 
     .data-user-left {
       width: 60%;
-      background-color: $cardsDark;
-      color: white;
+      background-color: $darkColorSecondary;
+      color: $whiteColorPrimary;
       border: 1px solid rgba(0, 0, 0, .3);
       border-radius: 5px;
 
@@ -92,8 +92,8 @@ onMounted(async () => {
     }
     .data-user-right {
       width: 30%;
-      background-color: $cardsDark;
-      color: white;
+      background-color: $darkColorSecondary;
+      color: $whiteColorPrimary;
       border: 1px solid rgba(0, 0, 0, .3);
       border-radius: 5px;
 

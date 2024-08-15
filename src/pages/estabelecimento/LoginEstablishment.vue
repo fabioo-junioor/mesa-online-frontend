@@ -14,13 +14,21 @@ const loginEstablishment = () => {
 </script>
 <template>
     <div id="login-establishment">
-        <h4>Login Estabelecimento</h4>
-        <FormEstablishment
-            class="form-establishment q-pt-xl q-pb-xl"
-            typeForm="loginEstablishment"
-            v-model:emailEstablishment="dataFormEstablishment.email"
-            v-model:password="dataFormEstablishment.password"
-            @loginEstablishment="loginEstablishment" />
+        <div class="login-establishment">
+            <div class="login-establishment-img">
+                <q-img 
+                    src="../../assets/draw/undraw_hello.svg"
+                    fit="contain" />
+            </div>
+            <div class="login-establishment-forms">
+                <FormEstablishment
+                    class="form-establishment q-pt-xl q-pb-xl"
+                    typeForm="loginEstablishment"
+                    v-model:emailEstablishment="dataFormEstablishment.email"
+                    v-model:password="dataFormEstablishment.password"
+                    @loginEstablishment="loginEstablishment" />
+            </div>
+        </div>
     </div>
 </template>
 <style lang="scss" scoped>
@@ -33,29 +41,46 @@ const loginEstablishment = () => {
     height: calc(100vh - 3.1rem);
     font-family: "Fredoka", sans-serif;
 
-    h4{
-        width: 50%;
-        text-align: center;
-        padding: 1rem;
-        color: white;
-        background-color: $backgroundForms;
-        border: 1px solid rgba(0, 0, 0, .5);
-        border-radius: 5px;
-
-    }
-    .form-establishment{
-        width: 50%;
+    .login-establishment{
         display: flex;
-        flex-direction: column;
-        align-items: center;
         justify-content: center;
-        background-color: $backgroundForms;
-        border: 1px solid rgba(0, 0, 0, .5);
+        align-items: center;
+        background-color: $darkColorSecondary;
+        box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, .5);
         border-radius: 5px;
+        width: 60%;
+        height: 80%;
 
-        .q-form{
-            width: 100%;
-            
+        .login-establishment-img{
+            width: 50%;
+            height: 100%;
+            border-radius: 5px;
+            background-color: $orangeColor;
+
+            .q-img{
+                height: 100%;
+                width: 100%;
+                
+            }
+        }
+        .login-establishment-forms{
+            display: flex;
+            justify-content: center;
+            width: 50%;
+            height: 100%;
+
+            .form-establishment{
+                height: 100%;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+        
+                .q-form{
+                    width: 100%;
+                    
+                }
+            }
         }
     }
 }

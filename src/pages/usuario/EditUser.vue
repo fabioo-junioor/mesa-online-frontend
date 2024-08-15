@@ -29,21 +29,23 @@ onMounted(() => {
 </script>
 <template>
     <div id="edit-user" class="q-pa-sm">
-        <CardImageProfile
-            class="q-mt-md q-mb-md"
-            :imgSrc="dataFormUser.imageProfile"
-            :nameUser="dataFormUser.name"
-            width="20rem"
-            height="20rem"
-            fit="contain" />
-        <h4>Editar Usuário</h4>
-        <FormEditUser
-            class="form-edit-user q-pt-md"
-            v-model:name='dataFormUser.name'
-            v-model:phone='dataFormUser.phone'
-            v-model:instagram='dataFormUser.linkInstagram'
-            v-model:imageProfile='imageProfile'
-            @saveFormUser='saveFormUser' />
+        <div class="edit-user q-pa-md q-ma-md">
+            <CardImageProfile
+                class="q-mt-md q-mb-md"
+                :imgSrc="dataFormUser.imageProfile"
+                :nameUser="dataFormUser.name"
+                width="20rem"
+                height="20rem"
+                fit="contain" />
+            <h4 class="q-mt-md q-mb-sm">Editar Usuário</h4>
+            <FormEditUser
+                class="form-edit-user q-pt-md"
+                v-model:name='dataFormUser.name'
+                v-model:phone='dataFormUser.phone'
+                v-model:instagram='dataFormUser.linkInstagram'
+                v-model:imageProfile='imageProfile'
+                @saveFormUser='saveFormUser' />
+        </div>
     </div>
 </template>
 <style lang="scss" scoped>
@@ -56,23 +58,33 @@ onMounted(() => {
     align-items: center;
     min-height: calc(100vh - 3.5rem);
 
-    h4{
-        width: 50%;
-        font-size: 1.5rem;
-        color: white;
-
-    }
-    .form-edit-user{
-        width: 50%;
+    .edit-user{
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        border-top: 1px solid white;
+        border-radius: 5px;
+        border: 1px solid rgba(0, 0, 0, .5);
+        box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, .5);
+        width: 50%;
 
-        .q-form{
+        h4{
             width: 100%;
-            
+            font-size: 1.8rem;
+            color: $whiteColorPrimary;
+            border-bottom: 1px solid $whiteColorPrimary;
+    
+        }
+        .form-edit-user{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+    
+            .q-form{
+                width: 100%;
+                
+            }
         }
     }
 }

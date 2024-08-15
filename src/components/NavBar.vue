@@ -118,7 +118,7 @@ onMounted(() => {
         </q-toolbar>
       </q-header>
       <q-drawer
-        style="background-color: #1c1c1c;"
+        style="background-color: #222831;"
         class="q-pa-md"
         v-model="leftDrawerOpen"
         side="left"
@@ -165,7 +165,7 @@ onMounted(() => {
   font-family: "Fredoka", sans-serif;
 
   .q-header{
-    background-color: $navbar;
+    background-color: $darkColorSecondary;
     height: 3.5rem;
     display: flex;
     align-items: center;
@@ -176,17 +176,17 @@ onMounted(() => {
       
       a{
         text-decoration: none;
-        color: $textOrange;
+        color: $orangeColor;
 
         &:hover{
-          color: white;
+          color: $whiteColorPrimary;
 
         }
       }
       .nav-bar-toggle{
-        color: $buttonOrange;
+        color: $orangeColor;
         font-size: 1rem;
-        border: 1px solid $buttonOrange;
+        border: 1px solid $orangeColor;
 
       }
     }
@@ -195,11 +195,11 @@ onMounted(() => {
       height: 3rem;
 
       .nav-bar-cadastrar{
-        background-color: $buttonOrange;
+        background-color: $orangeColor;
 
       }
       .nav-bar-login-state-btn-sair{
-        color: $buttonOrange;
+        color: $orangeColor;
       }
     }
   }
@@ -214,20 +214,20 @@ onMounted(() => {
       display: flex;
       align-items: center;
       margin: 1rem 0;
-      background-color: $background;
+      background-color: $darkColorPrimary;
       border: 1px solid rgba(0, 0, 0, .5);
       border-radius: 5px;
       width: 100%;
 
       i {
-        color: $iconOrange;
+        color: $orangeColor;
         font-size: 1.5rem;
         padding: 0 0.5rem;
 
       }
       a {
         text-decoration: none;
-        color: white;
+        color: $whiteColorPrimary;
         font-size: 1.1rem;
         width: 100%;
         padding: 0.5rem 0;
@@ -238,8 +238,8 @@ onMounted(() => {
     .menu-sidebar-links:hover,
     .menu-sidebar-links:hover a,
     .menu-sidebar-links:hover i {
-      background-color: white;
-      color: $background;
+      background-color: $whiteColorPrimary;
+      color: black;
       border-radius: 5px;
 
     }

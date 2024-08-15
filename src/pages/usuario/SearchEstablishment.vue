@@ -46,11 +46,9 @@ onMounted( async () => {
         <div class="search-filters q-mt-md q-mb-md">
             <q-form>
                 <q-input 
+                    dark
                     :disable="!dataEstablishments.length"
-                    square outlined
                     color="orange-9"
-                    bg-color="white"
-                    rounded standout
                     v-model="dataSearchEstablishment.name"
                     type="text"
                     label="Nome do estabelecimento" />
@@ -79,7 +77,7 @@ onMounted( async () => {
     height: calc(100vh - 3.5rem);
 
     h4{
-        color: white;
+        color: $whiteColorPrimary;
         
     }
     .search-filters{
@@ -92,7 +90,7 @@ onMounted( async () => {
             gap: .3rem;
 
             .q-field{
-                min-width: 15rem;
+                min-width: 50%;
                 min-height: 3.5rem;
                 
             }

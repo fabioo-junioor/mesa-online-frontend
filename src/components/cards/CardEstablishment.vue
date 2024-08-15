@@ -50,19 +50,19 @@ const redirectDetails = () => {
   .my-card{
       width: 25rem;
       cursor: pointer;
-      background-color: $background;
-      border: 1px solid rgba(0, 0, 0, .6);
-      border-left: 4px solid $colorOrange;
+      background-color: $darkColorPrimary;
+      border: 1px solid rgba(0, 0, 0, .5);
+      border-left: 4px solid $orangeColor;
   
       .q-separator{
-        border: 1px solid $colorOrange;
-        background-color: $colorOrange;
+        border: 1px solid $orangeColor;
+        background-color: $orangeColor;
   
       }
       .text-subtitle2{
         font-size: 1rem;
         padding: .5rem 0;
-        color: white;
+        color: $whiteColorPrimary;
   
       }
       .q-card__actions{
@@ -71,14 +71,14 @@ const redirectDetails = () => {
   
           .infos-establishment{
               display: flex;
-              color: white;
+              color: $whiteColorPrimary;
               
           }
       }
     &:hover{
       border: 1px solid black;
-      border-left: 4px solid $colorOrange;
-      box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, .5);
+      border-left: 4px solid $orangeColor;
+      box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, .3);
   
     }
   }  

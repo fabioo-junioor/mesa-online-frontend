@@ -31,7 +31,7 @@ onMounted(() => {
 #card-image-profile{
     .my-card{
         .q-img{
-            border: 2px solid $colorOrange;
+            border: 2px solid $orangeColor;
             box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, .6);
             border-radius: 5px;
 

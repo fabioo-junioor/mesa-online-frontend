@@ -24,7 +24,7 @@
         .q-card__section{
             display: flex;
             flex-direction: column;
-            background-color: #222;
+            background-color: $darkColorPrimary;
 
             p{
                 margin: 0;

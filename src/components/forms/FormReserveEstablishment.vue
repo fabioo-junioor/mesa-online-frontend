@@ -31,10 +31,10 @@ const onSubmit = () => {
     <div id="form-reserve-establishment" class="q-ma-sm q-pa-sm">
         <q-form @submit="onSubmit">
             <q-input
+                dark
+                standout
                 class="q-mb-md"
-                filled
                 color="orange-9"
-                bg-color="white"
                 v-model="numberOfPeople"
                 type="number"
                 label="Quantidade de pessoas?"
@@ -71,13 +71,13 @@ const onSubmit = () => {
                 </div>
             </div>
             <q-input
+                dark
                 class="q-mb-xl"
-                filled
                 v-model="observation"
                 clearable
+                standout
                 type="textarea"
                 color="orange-9"
-                bg-color="white"
                 label="Observações:" />
             <q-btn
                 v-if="props.isLogin"
@@ -142,7 +142,7 @@ const onSubmit = () => {
             height: 3rem;
             width: 100%;
             color: white;
-            background-color: $buttonOrange;
+            background-color: $orangeColor;
 
         }
     }
