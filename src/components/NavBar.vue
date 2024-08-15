@@ -51,7 +51,7 @@ onMounted(() => {
 </script>
 <template>
   <div id="nav-bar">
-    <q-layout view="hHh lpR lFf">
+    <q-layout view="lHh lpR lFf">
       <q-header bordered class="text-white">
         <q-toolbar>
           <q-btn
@@ -118,12 +118,13 @@ onMounted(() => {
         </q-toolbar>
       </q-header>
       <q-drawer
+        dark
         style="background-color: #222831;"
         class="q-pa-md"
         v-model="leftDrawerOpen"
         side="left"
-        overlay
-        elevated>
+        show-if-above
+        bordered>
         <div class="menu-sidebar">
           <div class="menu-sidebar-header">
             <CardImageProfile

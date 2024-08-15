@@ -59,13 +59,13 @@ onMounted(() => {
     min-height: calc(100vh - 3.5rem);
 
     .edit-user{
+        width: 60%;
         display: flex;
         flex-direction: column;
         align-items: center;
         border-radius: 5px;
         border: 1px solid rgba(0, 0, 0, .5);
         box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, .5);
-        width: 50%;
 
         h4{
             width: 100%;
