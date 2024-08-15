@@ -25,18 +25,21 @@ const props = defineProps(['daysOfTheWeek', 'morningOpen', 'morningClose', 'afte
         .q-card__section{
             display: flex;
             flex-direction: column;
-            background-color: #222;
+            background-color: $darkColorPrimary;
 
             h4{
                 font-size: 1.5rem;
+                color: $whiteColorPrimary;
 
             }
             p{
                 margin: 0;
+                color: $whiteColorPrimary;
 
                 span{
                     font-weight: 500;
                     font-size: 1rem;
+                    color: $whiteColorPrimary;
                     
                 }
                 

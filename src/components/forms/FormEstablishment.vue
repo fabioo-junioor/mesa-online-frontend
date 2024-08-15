@@ -34,20 +34,18 @@ onMounted(() => {
     <div id="form-establishment" class="q-ma-sm q-pa-sm">
         <q-form @submit="onSubmit">
             <q-input
+                dark
                 class="q-mb-md"
-                filled
                 color="orange-9"
-                bg-color="white"
                 v-model="emailEstablishment"
                 type="text"
                 label="Seu e-mail:"
                 lazy-rules
                 :rules="[rulesEstablishment.email]" />
             <q-input
+                dark
                 class="q-mb-md"
-                filled
                 color="orange-9"
-                bg-color="white"
                 v-model="passwordEstablishment"
                 :type="isPwd1 ? 'password' : 'text'"
                 label="Sua senha:"
@@ -60,11 +58,10 @@ onMounted(() => {
                 </template>
             </q-input>
             <q-input
+                dark
                 v-if="!typeFormEstablishment"
                 class="q-mb-md"
-                filled
                 color="orange-9"
-                bg-color="white"
                 v-model="repeatPasswordEstablishment"
                 :type="isPwd2 ? 'password' : 'text'"
                 label="Repita a senha:"
@@ -108,7 +105,8 @@ onMounted(() => {
         .q-btn{
             height: 3rem;
             width: 100%;
-            background-color: $buttonOrange;
+            color: $whiteColorPrimary;
+            background-color: $orangeColor;
 
         }
         .links-type-form-establishment{
@@ -117,11 +115,11 @@ onMounted(() => {
             
             a{
                 text-decoration: underline;
-                color: rgba(255, 255, 255, .7);
+                color: $whiteColorPrimary;
                 font-size: .9rem;
                 
                 &:hover{
-                    color: white;
+                    color: $orangeColor;
                 }
             }
         }

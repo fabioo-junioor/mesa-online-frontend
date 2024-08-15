@@ -64,8 +64,8 @@ const onSubmit = () => {
   .my-card{
     width: 100%;
     background-color: transparent;
-    border: 1px solid $colorOrange;
-    border-left: 4px solid $colorOrange;
+    border: 1px solid $orangeColor;
+    border-left: 4px solid $orangeColor;
 
     .q-card__section{
       width: 100%;
@@ -82,8 +82,8 @@ const onSubmit = () => {
             margin: .2rem;
             padding: .2rem;
             font-size: 1rem;
-            color: $iconOrange;
-            border-right: 1px solid $iconOrange;
+            color: $orangeColor;
+            border-right: 1px solid $orangeColor;
 
           }
           p{
@@ -101,10 +101,12 @@ const onSubmit = () => {
           .q-badge{
             padding: .3rem;
             font-size: .8rem;
+            color: $whiteColorPrimary;
 
             i{
               font-size: .9rem;
               margin-right: 5px;
+              color: $orangeColor;
 
             }
           }

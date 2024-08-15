@@ -15,13 +15,15 @@ const saveFormUser = () => {
 </script>
 <template>
     <div id="edit-password-user" class="q-pa-sm">
-        <h4>Alterar Senha</h4>
-        <FormEditPasswordUser
-            class="form-edit-password-user q-pt-md"
-            v-model:oldPassword='dataFormEditPasswordUser.oldPassword'
-            v-model:newPassword='dataFormEditPasswordUser.newPassword'
-            v-model:repeatNewPassword="dataFormEditPasswordUser.repeatNewPassword"
-            @saveFormUser='saveFormUser' />
+        <div class="edit-password-user q-pa-md q-ma-md">
+            <h4 class="q-mb-sm">Alterar Senha</h4>
+            <FormEditPasswordUser
+                class="form-edit-password-user q-pt-md"
+                v-model:oldPassword='dataFormEditPasswordUser.oldPassword'
+                v-model:newPassword='dataFormEditPasswordUser.newPassword'
+                v-model:repeatNewPassword="dataFormEditPasswordUser.repeatNewPassword"
+                @saveFormUser='saveFormUser' />
+        </div>
     </div>
 </template>
 <style lang="scss" scoped>
@@ -34,23 +36,33 @@ const saveFormUser = () => {
     align-items: center;
     min-height: calc(100vh - 3.5rem);
 
-    h4{
-        width: 50%;
-        font-size: 1.5rem;
-        color: white;
-
-    }
-    .form-edit-password-user{
-        width: 50%;
+    .edit-password-user{
+        width: 60%;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        border-top: 1px solid white;
-        
-        .q-form{
+        border-radius: 5px;
+        border: 1px solid rgba(0, 0, 0, .5);
+        box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, .5);
+
+        h4{
             width: 100%;
+            font-size: 1.8rem;
+            color: $whiteColorPrimary;
+            border-bottom: 1px solid $whiteColorPrimary;
+    
+        }
+        .form-edit-password-user{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             
+            .q-form{
+                width: 100%;
+                
+            }
         }
     }
 }

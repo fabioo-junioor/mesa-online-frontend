@@ -23,12 +23,10 @@ const onSubmit = () => {
     <div id="form-edit-password-user">
         <q-form @submit="onSubmit">
             <div class="form-edit-establishment-inputs">
-                <i class='bx bxs-edit-alt form-edit-input-icons q-ml-xs q-mr-xs'></i>
                 <q-input
+                    dark
                     class="q-mb-md"
-                    filled
                     color="orange-9"
-                    bg-color="white"
                     v-model="oldPassword"
                     :type="isPwd1 ? 'password' : 'text'"
                     label="Sua senha antiga:"
@@ -39,15 +37,16 @@ const onSubmit = () => {
                             class="cursor-pointer"
                             @click="isPwd1 = !isPwd1" />
                     </template>
+                    <template v-slot:prepend>
+                        <i class='bx bxs-edit-alt form-edit-input-icons q-ml-xs q-mr-xs'></i>
+                    </template>
                 </q-input>
             </div>
             <div class="form-edit-establishment-inputs">
-                <i class='bx bxs-edit form-edit-input-icons q-ml-xs q-mr-xs'></i>
                 <q-input
+                    dark
                     class="q-mb-md"
-                    filled
                     color="orange-9"
-                    bg-color="white"
                     v-model="newPassword"
                     :type="isPwd2 ? 'password' : 'text'"
                     label="Sua nova senha:"
@@ -58,15 +57,16 @@ const onSubmit = () => {
                             class="cursor-pointer"
                             @click="isPwd2 = !isPwd2" />
                     </template>
+                    <template v-slot:prepend>
+                        <i class='bx bxs-edit form-edit-input-icons q-ml-xs q-mr-xs'></i>
+                    </template>
                 </q-input>
             </div>
             <div class="form-edit-establishment-inputs">
-                <i class='bx bxs-edit form-edit-input-icons q-ml-xs q-mr-xs'></i>
                 <q-input
+                    dark
                     class="q-mb-md"
-                    filled
                     color="orange-9"
-                    bg-color="white"
                     v-model="repeatNewPassword"
                     :type="isPwd3 ? 'password' : 'text'"
                     label="Repita sua nova senha:"
@@ -76,6 +76,9 @@ const onSubmit = () => {
                         <q-icon :name="isPwd3 ? 'visibility_off' : 'visibility'"
                             class="cursor-pointer"
                             @click="isPwd3 = !isPwd3" />
+                    </template>
+                    <template v-slot:prepend>
+                        <i class='bx bxs-edit form-edit-input-icons q-ml-xs q-mr-xs'></i>
                     </template>
                 </q-input>
             </div>
@@ -102,22 +105,20 @@ const onSubmit = () => {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                width: 10%;
-                height: 3.5rem;
                 font-size: 2rem;
-                color: $iconOrange;
+                color: $orangeColor;
 
             }
             .q-input{
-                width: 90%;
+                width: 100%;
 
             }
         }
         .q-btn{
             height: 3rem;
             width: 100%;
-            color: white;
-            background-color: $buttonOrange;
+            color: $whiteColorPrimary;
+            background-color: $orangeColor;
 
         }
     }

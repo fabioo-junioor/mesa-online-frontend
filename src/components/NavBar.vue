@@ -6,7 +6,7 @@ import { CardImageProfile } from '../components';
 import imagemProfileDefault from '../assets/usuario/usuarioDefault.png';
 
 const router = useRouter();
-const leftDrawerOpen = ref(true);
+const leftDrawerOpen = ref(false);
 const visibleToggle = ref(true);
 const dataUser = reactive({
   name: "Anônimo",
@@ -51,7 +51,7 @@ onMounted(() => {
 </script>
 <template>
   <div id="nav-bar">
-    <q-layout view="hHh lpR lFf">
+    <q-layout view="lHh LpR lFf">
       <q-header bordered class="text-white">
         <q-toolbar>
           <q-btn
@@ -118,12 +118,11 @@ onMounted(() => {
         </q-toolbar>
       </q-header>
       <q-drawer
-        style="background-color: #1c1c1c;"
+        dark
+        style="background-color: #222831;"
         class="q-pa-md"
         v-model="leftDrawerOpen"
-        side="left"
-        overlay
-        elevated>
+        bordered>
         <div class="menu-sidebar">
           <div class="menu-sidebar-header">
             <CardImageProfile
@@ -135,19 +134,19 @@ onMounted(() => {
           </div>
           <div class="menu-sidebar-links">
             <i class="bx bx-home"></i>
-            <router-link to="/homeUser">Inicio</router-link>
+            <router-link to="/user/homeUser">Inicio</router-link>
           </div>
           <div class="menu-sidebar-links">
             <i class="bx bx-search-alt"></i>
-            <router-link to="/searchEstablishment">Buscar</router-link>
+            <router-link to="/user/searchEstablishment">Buscar</router-link>
           </div>
           <div class="menu-sidebar-links">
             <i class="bx bx-edit-alt"></i>
-            <router-link to="/editUser">Editar Perfil</router-link>
+            <router-link to="/user/editUser">Editar Perfil</router-link>
           </div>
           <div class="menu-sidebar-links">
             <i class="bx bxs-key"></i>
-            <router-link to="/editPasswordUser">Alterar Senha</router-link>
+            <router-link to="/user/editPasswordUser">Alterar Senha</router-link>
           </div>
         </div>
       </q-drawer>
@@ -165,7 +164,7 @@ onMounted(() => {
   font-family: "Fredoka", sans-serif;
 
   .q-header{
-    background-color: $navbar;
+    background-color: $darkColorSecondary;
     height: 3.5rem;
     display: flex;
     align-items: center;
@@ -176,17 +175,17 @@ onMounted(() => {
       
       a{
         text-decoration: none;
-        color: $textOrange;
+        color: $orangeColor;
 
         &:hover{
-          color: white;
+          color: $whiteColorPrimary;
 
         }
       }
       .nav-bar-toggle{
-        color: $buttonOrange;
+        color: $orangeColor;
         font-size: 1rem;
-        border: 1px solid $buttonOrange;
+        border: 1px solid $orangeColor;
 
       }
     }
@@ -195,11 +194,11 @@ onMounted(() => {
       height: 3rem;
 
       .nav-bar-cadastrar{
-        background-color: $buttonOrange;
+        background-color: $orangeColor;
 
       }
       .nav-bar-login-state-btn-sair{
-        color: $buttonOrange;
+        color: $orangeColor;
       }
     }
   }
@@ -214,20 +213,20 @@ onMounted(() => {
       display: flex;
       align-items: center;
       margin: 1rem 0;
-      background-color: $background;
+      background-color: $darkColorPrimary;
       border: 1px solid rgba(0, 0, 0, .5);
       border-radius: 5px;
       width: 100%;
 
       i {
-        color: $iconOrange;
+        color: $orangeColor;
         font-size: 1.5rem;
         padding: 0 0.5rem;
 
       }
       a {
         text-decoration: none;
-        color: white;
+        color: $whiteColorPrimary;
         font-size: 1.1rem;
         width: 100%;
         padding: 0.5rem 0;
@@ -238,8 +237,8 @@ onMounted(() => {
     .menu-sidebar-links:hover,
     .menu-sidebar-links:hover a,
     .menu-sidebar-links:hover i {
-      background-color: white;
-      color: $background;
+      background-color: $whiteColorPrimary;
+      color: black;
       border-radius: 5px;
 
     }

@@ -35,7 +35,7 @@
   .my-card{
       width: 25rem;
       cursor: pointer;
-      background-color: $background;
+      background-color: $darkColorPrimary;
       border-left: 4px solid $grey-5;
       box-shadow: none;
 
