@@ -6,7 +6,7 @@ import { CardImageProfile } from '../components';
 import imagemProfileDefault from '../assets/usuario/usuarioDefault.png';
 
 const router = useRouter();
-const leftDrawerOpen = ref(true);
+const leftDrawerOpen = ref(false);
 const visibleToggle = ref(true);
 const dataUser = reactive({
   name: "Anônimo",
@@ -51,7 +51,7 @@ onMounted(() => {
 </script>
 <template>
   <div id="nav-bar">
-    <q-layout view="lHh lpR lFf">
+    <q-layout view="lHh LpR lFf">
       <q-header bordered class="text-white">
         <q-toolbar>
           <q-btn
@@ -122,8 +122,6 @@ onMounted(() => {
         style="background-color: #222831;"
         class="q-pa-md"
         v-model="leftDrawerOpen"
-        side="left"
-        show-if-above
         bordered>
         <div class="menu-sidebar">
           <div class="menu-sidebar-header">

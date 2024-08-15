@@ -76,6 +76,29 @@ const verifyEstablishmentIsOpen = (schedules) => {
 
         }
     }
+    return false;
+    
+}
+const verifyEstablishmentSchedulesReservation = (dateReservation, hoursReservation, schedules) => {
+    let parts = dateReservation.split('-');
+    dateReservation = new Date(parts[2], parts[1] - 1, parts[0]);
+    let dayWeek = String(dateReservation).slice(0, 3);
+    dayWeek = dayWeek.toLowerCase();
+
+    for(let i = 0; i < schedules.length; i++){
+        if(String(Object.keys(schedules[i])) === dayWeek){
+            if(((schedules[i][dayWeek]['manha']['abertura'] <= hoursReservation) && (schedules[i][dayWeek]['manha']['fechamento'] > hoursReservation)) ||
+                ((schedules[i][dayWeek]['tarde']['abertura'] <= hoursReservation) && (schedules[i][dayWeek]['tarde']['fechamento'] > hoursReservation)) ||
+                ((schedules[i][dayWeek]['noite']['abertura'] <= hoursReservation) && (schedules[i][dayWeek]['noite']['fechamento'] > hoursReservation))){
+                return true;
+
+            }
+            return false;
+
+        }
+    }
+    return false;
+
 }
 
 export {
@@ -83,5 +106,6 @@ export {
     getHoursToday,
     compareDate,
     daysOfTheWeek,
-    verifyEstablishmentIsOpen
+    verifyEstablishmentIsOpen,
+    verifyEstablishmentSchedulesReservation
 }

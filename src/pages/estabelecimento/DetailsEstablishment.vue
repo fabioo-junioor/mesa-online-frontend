@@ -2,11 +2,11 @@
 import { onMounted, reactive } from 'vue';
 import { useRoute } from 'vue-router';
 import { FormReserveEstablishment, CardSchedulesEstablishment, CardAddressEstablishment, CardSchedulesEstablishmentSkeleton, CardAddressEstablishmentSkeleton } from '../../components';
-import { getDateToday, getHoursToday, compareDate, daysOfTheWeek, verifyEstablishmentIsOpen } from '../../utils/dateTimeFormatters.js';
+import { getDateToday, getHoursToday, compareDate, daysOfTheWeek, verifyEstablishmentIsOpen, verifyEstablishmentSchedulesReservation } from '../../utils/dateTimeFormatters.js';
 
 const route = useRoute();
 const formReserveEstablishment = reactive({
-    numberOfPeople: null,
+    numberOfPeople: 2,
     date: null,
     time: null,
     observation: ''
@@ -98,8 +98,12 @@ const reserveEstablishment = () => {
     return;
 
   }
+  if(!verifyEstablishmentSchedulesReservation(formReserveEstablishment.date, formReserveEstablishment.time, schedulesEstablishment)){
+    console.log('estabelecimento não abre nesse horário!');
+    return;
+
+  }  
   console.log('data valida!');
-  console.log(formReserveEstablishment);
   return;
 
 };

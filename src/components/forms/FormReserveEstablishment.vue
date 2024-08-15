@@ -64,6 +64,7 @@ const onSubmit = () => {
                         dark
                         bordered
                         format24h
+                        now-btn
                         v-model="time" 
                         color="orange-9"
                         text-color="white"
