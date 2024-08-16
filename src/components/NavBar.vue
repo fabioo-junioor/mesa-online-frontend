@@ -148,6 +148,10 @@ onMounted(() => {
             <i class="bx bxs-key"></i>
             <router-link to="/user/editPasswordUser">Alterar Senha</router-link>
           </div>
+          <div class="menu-sidebar-links">
+            <i class='bx bxs-dashboard'></i>
+            <router-link to="/establishment/dashboardEstablishment">Dashboard</router-link>
+          </div>
         </div>
       </q-drawer>
 
