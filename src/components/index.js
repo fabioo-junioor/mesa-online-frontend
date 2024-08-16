@@ -18,6 +18,7 @@ import CardEstablishmentSkeleton from './cards/CardEstablishmentSkeleton.vue';
 import CardSchedulesEstablishmentSkeleton from './cards/CardSchedulesEstablishmentSkeleton.vue';
 import CardAddressEstablishmentSkeleton from './cards/CardAddressEstablishmentSkeleton.vue';
 
+import CardInfo from './dashboard/CardInfo.vue';
 
 export {
     Alert,
@@ -35,5 +36,6 @@ export {
     CardReservationSkeleton,
     CardEstablishmentSkeleton,
     CardSchedulesEstablishmentSkeleton,
-    CardAddressEstablishmentSkeleton
+    CardAddressEstablishmentSkeleton,
+    CardInfo
 }

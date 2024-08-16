@@ -11,7 +11,7 @@ import CadEstablishment from './estabelecimento/CadEstablishment.vue';
 import HomeEstablishment from './estabelecimento/HomeEstablishment.vue';
 import LoginEstablishment from './estabelecimento/LoginEstablishment.vue';
 import DetailsEstablishment from './estabelecimento/DetailsEstablishment.vue';
-
+import DashboardEstablishment from './estabelecimento/DashboardEstablishment.vue';
 
 export {
     Home,
@@ -24,5 +24,6 @@ export {
     CadEstablishment,
     HomeEstablishment,
     LoginEstablishment,
-    DetailsEstablishment
+    DetailsEstablishment,
+    DashboardEstablishment
 }
