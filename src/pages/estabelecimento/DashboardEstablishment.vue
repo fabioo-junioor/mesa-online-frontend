@@ -9,7 +9,7 @@ const dataCardInfo = reactive([
     {title: 'Total usuários', value: '1500', icon: 'bx bx-group', color: 'green-9'}
 ]);
 const dataChart1 = reactive({
-    title: 'Usuários no ano',
+    title: 'Reservas no ano',
     legend: 'Total de usuários',
     txtColor: 'grey-9',
     bgColor: 'grey-2',
