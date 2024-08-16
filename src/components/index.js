@@ -19,7 +19,7 @@ import CardSchedulesEstablishmentSkeleton from './cards/CardSchedulesEstablishme
 import CardAddressEstablishmentSkeleton from './cards/CardAddressEstablishmentSkeleton.vue';
 
 import CardInfo from './dashboard/CardInfo.vue';
-
+import MonthReservations from './dashboard/charts/MonthReservations.vue';
 export {
     Alert,
     NavBar,
@@ -37,5 +37,6 @@ export {
     CardEstablishmentSkeleton,
     CardSchedulesEstablishmentSkeleton,
     CardAddressEstablishmentSkeleton,
-    CardInfo
+    CardInfo,
+    MonthReservations
 }

@@ -1,6 +1,6 @@
 <script setup>
 import { reactive } from 'vue';
-import { CardInfo } from '../../components';
+import { CardInfo, MonthReservations } from '../../components';
 
 const dataCardInfo = reactive([
     {title: 'Reservas do mês', value: '300', icon: 'bx bx-line-chart', color: 'red-9'},
@@ -8,7 +8,14 @@ const dataCardInfo = reactive([
     {title: 'Novos usuários no mês', value: '10', icon: 'bx bx-user-plus', color: 'orange-9'},
     {title: 'Total usuários', value: '1500', icon: 'bx bx-group', color: 'green-9'}
 ]);
-
+const dataChart1 = reactive({
+    title: 'Usuários no ano',
+    legend: 'Total de usuários',
+    txtColor: 'grey-9',
+    bgColor: 'grey-2',
+    dataChart: [40, 15, 4, 55, 7, 40, 15, 4, 55, 7, 10, 80],
+    icon: 'bx bx-group'
+});
 </script>
 <template>
     <div id="dashboard-establishment" class="q-pa-sm">
@@ -22,7 +29,14 @@ const dataCardInfo = reactive([
                 :color="i.color" />
         </div>
         <div class="dashboard-charts">
-            <p>charts</p>
+            <MonthReservations
+                class="dashboard-charts-chart"
+                :title="dataChart1.title"
+                :legend="dataChart1.legend"
+                :txtColor="dataChart1.txtColor"
+                :bgColor="dataChart1.bgColor"
+                :dataChart="dataChart1.dataChart"
+                :icon="dataChart1.icon" />
         </div>
     </div>
 </template>
@@ -44,6 +58,16 @@ const dataCardInfo = reactive([
 
         }
 
+    }
+    .dashboard-charts{
+        display: flex;
+        justify-content: center;
+        gap: .5rem;
+        flex-wrap: wrap;
+
+        .dashboard-charts-chart{
+            width: 45%;
+        }
     }
 }
 
