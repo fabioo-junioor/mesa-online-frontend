@@ -11,6 +11,7 @@
   "dependencies": {
     "@quasar/extras": "^1.16.11",
     "@vue/compat": "^3.4.23",
+    "chart.js": "^4.4.3",
     "quasar": "^2.15.4",
     "vue": "^3.4.23",
     "vue-router": "^4.3.0"

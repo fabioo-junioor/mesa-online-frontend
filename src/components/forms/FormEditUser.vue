@@ -35,7 +35,7 @@ const onSubmit = () => {
                                 class="cursor-pointer" />
                         </template>
                         <template v-slot:prepend>
-                            <i class='bx bxs-image-add q-ml-xs q-mr-xs'></i>
+                            <i class='bx bxs-image-add q-ma-xs'></i>
                         </template>
                     </q-file>
             </div>
@@ -50,7 +50,7 @@ const onSubmit = () => {
                     lazy-rules
                     :rules="[rulesUser.required]">
                     <template v-slot:prepend>
-                        <i class='bx bxs-user q-ml-xs q-mr-xs'></i>
+                        <i class='bx bxs-user q-ma-xs'></i>
                     </template>
                 </q-input>
             </div>
@@ -66,7 +66,7 @@ const onSubmit = () => {
                     mask="(##) ####-#####"
                     :rules="[rulesUser.phone]">
                     <template v-slot:prepend>
-                        <i class='bx bxs-phone q-ml-xs q-mr-xs'></i>
+                        <i class='bx bxs-phone q-ma-xs'></i>
                     </template>    
                 </q-input>
             </div>
@@ -80,7 +80,7 @@ const onSubmit = () => {
                     label="Link do instagram:"
                     lazy-rules>
                     <template v-slot:prepend>
-                        <i class='bx bxl-instagram-alt q-ml-xs q-mr-xs'></i>
+                        <i class='bx bxl-instagram-alt q-ma-xs'></i>
                     </template>
                 </q-input>
             </div>

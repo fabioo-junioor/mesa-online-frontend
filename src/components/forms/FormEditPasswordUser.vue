@@ -38,7 +38,7 @@ const onSubmit = () => {
                             @click="isPwd1 = !isPwd1" />
                     </template>
                     <template v-slot:prepend>
-                        <i class='bx bxs-edit-alt form-edit-input-icons q-ml-xs q-mr-xs'></i>
+                        <i class='bx bxs-edit-alt form-edit-input-icons q-ma-xs'></i>
                     </template>
                 </q-input>
             </div>
@@ -58,7 +58,7 @@ const onSubmit = () => {
                             @click="isPwd2 = !isPwd2" />
                     </template>
                     <template v-slot:prepend>
-                        <i class='bx bxs-edit form-edit-input-icons q-ml-xs q-mr-xs'></i>
+                        <i class='bx bxs-edit form-edit-input-icons q-ma-xs'></i>
                     </template>
                 </q-input>
             </div>
@@ -78,7 +78,7 @@ const onSubmit = () => {
                             @click="isPwd3 = !isPwd3" />
                     </template>
                     <template v-slot:prepend>
-                        <i class='bx bxs-edit form-edit-input-icons q-ml-xs q-mr-xs'></i>
+                        <i class='bx bxs-edit form-edit-input-icons q-ma-xs'></i>
                     </template>
                 </q-input>
             </div>
