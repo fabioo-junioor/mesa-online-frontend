@@ -18,6 +18,8 @@ Os estabelecimentos podem efetuar seu cadastro e disponibilizar informções per
 * Quasar
 * SASS
 * VueRouter
+* Vuex
+* ChartJs
 * Vite
 * Netlify
 
