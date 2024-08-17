@@ -8,6 +8,7 @@ import imagemProfileDefault from '../assets/usuario/usuarioDefault.png';
 const router = useRouter();
 const leftDrawerOpen = ref(false);
 const visibleToggle = ref(true);
+const typeUser = ref(false);
 const dataUser = reactive({
   name: "Anônimo",
   phone: '',
@@ -132,25 +133,33 @@ onMounted(() => {
               height="14rem"
               fit="contain" />
           </div>
-          <div class="menu-sidebar-links">
-            <i class="bx bx-home"></i>
-            <router-link to="/user/homeUser">Inicio</router-link>
+          <div class="type-user" v-if="typeUser">
+            <div class="menu-sidebar-links">
+              <i class="bx bx-home"></i>
+              <router-link to="/user/homeUser">Inicio</router-link>
+            </div>
+            <div class="menu-sidebar-links">
+              <i class="bx bx-search-alt"></i>
+              <router-link to="/user/searchEstablishment">Buscar</router-link>
+            </div>
+            <div class="menu-sidebar-links">
+              <i class="bx bx-edit-alt"></i>
+              <router-link to="/user/editUser">Editar Perfil</router-link>
+            </div>
+            <div class="menu-sidebar-links">
+              <i class="bx bxs-key"></i>
+              <router-link to="/user/editPasswordUser">Alterar Senha</router-link>
+            </div>
           </div>
-          <div class="menu-sidebar-links">
-            <i class="bx bx-search-alt"></i>
-            <router-link to="/user/searchEstablishment">Buscar</router-link>
-          </div>
-          <div class="menu-sidebar-links">
-            <i class="bx bx-edit-alt"></i>
-            <router-link to="/user/editUser">Editar Perfil</router-link>
-          </div>
-          <div class="menu-sidebar-links">
-            <i class="bx bxs-key"></i>
-            <router-link to="/user/editPasswordUser">Alterar Senha</router-link>
-          </div>
-          <div class="menu-sidebar-links">
-            <i class='bx bxs-dashboard'></i>
-            <router-link to="/establishment/dashboardEstablishment">Dashboard</router-link>
+          <div class="type-user" v-else>
+            <div class="menu-sidebar-links">
+              <i class="bx bx-home"></i>
+              <router-link to="/establishment/homeEstablishment">Inicio</router-link>
+            </div>
+            <div class="menu-sidebar-links">
+              <i class='bx bxs-dashboard'></i>
+              <router-link to="/establishment/dashboardEstablishment">Dashboard</router-link>
+            </div>
           </div>
         </div>
       </q-drawer>

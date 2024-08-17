@@ -1,6 +1,6 @@
 <script setup>
 import { reactive } from 'vue';
-import { CardInfo, MonthReservations } from '../../components';
+import { CardInfo, CardUserReservation, MonthReservations, WeekReservations } from '../../components';
 
 const dataCardInfo = reactive([
     {title: 'Reservas do mês', value: '300', icon: 'bx bx-line-chart', color: 'red-9'},
@@ -8,18 +8,40 @@ const dataCardInfo = reactive([
     {title: 'Novos usuários no mês', value: '10', icon: 'bx bx-user-plus', color: 'orange-9'},
     {title: 'Total usuários', value: '1500', icon: 'bx bx-group', color: 'green-9'}
 ]);
-const dataChart1 = reactive({
+const dataChartMonth = reactive({
     title: 'Reservas no ano',
     legend: 'Total de usuários',
-    txtColor: 'grey-9',
-    bgColor: 'grey-2',
-    dataChart: [40, 15, 4, 55, 7, 40, 15, 4, 55, 7, 10, 80],
-    icon: 'bx bx-group'
+    txtColor: '#eeeeee',
+    dataChart: [40, 0, 4, 55, 7, 40, 15, 70, 5, 13, 100, 2],
+    icon: 'bx bx-line-chart'
 });
+const dataChartWeek = reactive({
+    title: 'Reservas na semana',
+    legend: 'Total de usuários',
+    txtColor: '#eeeeee',
+    dataChart: [40, 15, 4, 55, 7, 40, 15],
+    icon: 'bx bx-line-chart'
+});
+const dataUserReservation = reactive([
+    {
+        img: 'https://cdn.quasar.dev/img/avatar.png',
+        name: 'João Paulo II',
+        date: '25-10-2024 10:00',
+        totalPeoples: 7,
+        status: 'Ativo'
+    },
+    {
+        img: 'https://cdn.quasar.dev/img/avatar.png',
+        name: 'Maria',
+        date: '20-08-2024 20:00',
+        totalPeoples: 15,
+        status: 'Cancelado'
+    }
+]);
 </script>
 <template>
     <div id="dashboard-establishment" class="q-pa-sm">
-        <div class="dashboard-header q-mb-md">
+        <div class="dashboard-header">
             <CardInfo
                 class="dashboard-header-info"
                 v-for="i in dataCardInfo" :key="i"
@@ -28,15 +50,28 @@ const dataChart1 = reactive({
                 :icon="i.icon"
                 :color="i.color" />
         </div>
-        <div class="dashboard-charts">
+        <div class="dashboard-charts q-pa-sm">
             <MonthReservations
-                class="dashboard-charts-chart"
-                :title="dataChart1.title"
-                :legend="dataChart1.legend"
-                :txtColor="dataChart1.txtColor"
-                :bgColor="dataChart1.bgColor"
-                :dataChart="dataChart1.dataChart"
-                :icon="dataChart1.icon" />
+                class='dashboard-charts-chart'
+                :title='dataChartMonth.title'
+                :legend='dataChartMonth.legend'
+                :txtColor='dataChartMonth.txtColor'
+                :dataChart='dataChartMonth.dataChart'
+                :icon='dataChartMonth.icon' />
+            <q-separator class="q-ml-xs q-mr-xs" vertical inset="" size="1px" color="grey-7" />
+            <WeekReservations
+                class='dashboard-charts-chart'
+                :title='dataChartWeek.title'
+                :legend='dataChartWeek.legend'
+                :txtColor='dataChartWeek.txtColor'
+                :dataChart='dataChartWeek.dataChart'
+                :icon='dataChartWeek.icon' />
+        </div>
+        <div class="dashboard-list-users-reservation q-pa-sm">
+           <h4 class="q-pa-sm">Ultimas reservas</h4>
+           <CardUserReservation
+                class="dashboard-list-user"
+                :dataUserReservation='dataUserReservation' />
         </div>
     </div>
 </template>
@@ -46,27 +81,53 @@ const dataChart1 = reactive({
 #dashboard-establishment{
     display: flex;
     flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    min-height: calc(100vh - 3.5rem);
 
     .dashboard-header{
         display: flex;
         justify-content: center;
+        width: 99%;
         gap: .5rem;
         flex-wrap: wrap;
 
         .dashboard-header-info{
-            width: 24%;
+            width: 23%;
 
         }
-
     }
     .dashboard-charts{
         display: flex;
         justify-content: center;
         gap: .5rem;
         flex-wrap: wrap;
+        width: 99%;
+        background-color: $darkColorSecondary;
+        border-radius: 5px;
+        border: 1px solid rgba(0, 0, 0, .3);
 
         .dashboard-charts-chart{
-            width: 45%;
+            width: 40%;
+
+        }
+    }
+    .dashboard-list-users-reservation{
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+        width: 99%;
+        background-color: $darkColorSecondary;
+        border-radius: 5px;
+        border: 1px solid rgba(0, 0, 0, .3);
+
+        h4{
+            color: $whiteColorPrimary;
+
+        }
+        .dashboard-list-user{
+            width: 100%;
+            
         }
     }
 }

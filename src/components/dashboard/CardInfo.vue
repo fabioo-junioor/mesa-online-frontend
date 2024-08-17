@@ -7,7 +7,7 @@ const props = defineProps(['title', 'value', 'icon', 'color']);
     <q-card bordered :class="'my-card bg-' + props.color">
       <q-card-section class="card-info">
         <div class="text-h4">{{ props.value }}</div>
-        <div class="text-p">{{ props.title }}</div>
+        <div class="text-subtitle1">{{ props.title }}</div>
       </q-card-section>
 
       <q-separator vertical color="white" inset />

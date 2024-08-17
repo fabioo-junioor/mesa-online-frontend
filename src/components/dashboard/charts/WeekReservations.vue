@@ -6,7 +6,7 @@ const props = defineProps(['title', 'legend', 'txtColor', 'dataChart', 'icon']);
 const config = {
     type: 'line',
     data: {
-        labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+        labels: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
         datasets: [{
                 label: props.legend || 'Legenda',
                 data: props.dataChart,
@@ -31,8 +31,7 @@ const config = {
                 },
                 grid: {
                     color: (props.txtColor || '#eeeeee') + '50'
-                },
-                beginAtZero: true
+                }
             },
             y: {
                 ticks: {
@@ -47,7 +46,7 @@ const config = {
     }
 }
 onMounted(() => {
-    const ctx = document.getElementById('myChartMonth');
+    const ctx = document.getElementById('myChartWeek');
     new Chart(ctx, config);
 
 })
@@ -60,7 +59,7 @@ onMounted(() => {
             <q-separator class="q-ml-sm q-mr-sm" vertical size="1px" :style="'background-color:' + (props.txtColor || '#eeeeee')" />
             {{ props. title }}
         </h5>
-        <canvas id="myChartMonth"></canvas>
+        <canvas id="myChartWeek"></canvas>
     </div>
   </div>
 </template>
