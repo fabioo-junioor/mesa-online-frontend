@@ -43,14 +43,14 @@ const dataUserReservation = reactive([
     <div id="dashboard-establishment" class="q-pa-sm">
         <div class="dashboard-header">
             <CardInfo
-                class="dashboard-header-info"
+                class="dashboard-header-info q-pt-sm q-pb-sm"
                 v-for="i in dataCardInfo" :key="i"
                 :title="i.title"
                 :value="i.value"
                 :icon="i.icon"
                 :color="i.color" />
         </div>
-        <div class="dashboard-charts q-pa-sm">
+        <div class="dashboard-charts q-pt-md q-pb-md">
             <MonthReservations
                 class='dashboard-charts-chart'
                 :title='dataChartMonth.title'
@@ -58,7 +58,6 @@ const dataUserReservation = reactive([
                 :txtColor='dataChartMonth.txtColor'
                 :dataChart='dataChartMonth.dataChart'
                 :icon='dataChartMonth.icon' />
-            <q-separator class="q-ml-xs q-mr-xs" vertical inset="" size="1px" color="grey-7" />
             <WeekReservations
                 class='dashboard-charts-chart'
                 :title='dataChartWeek.title'
@@ -67,10 +66,10 @@ const dataUserReservation = reactive([
                 :dataChart='dataChartWeek.dataChart'
                 :icon='dataChartWeek.icon' />
         </div>
-        <div class="dashboard-list-users-reservation q-pa-sm">
-           <h4 class="q-pa-sm">Ultimas reservas</h4>
+        <div class="dashboard-list-users-reservation q-pt-md q-pb-md">
+           <h4 class="q-pa-md">Ultimas reservas</h4>
            <CardUserReservation
-                class="dashboard-list-user"
+                class="dashboard-list-user q-pa-md"
                 :dataUserReservation='dataUserReservation' />
         </div>
     </div>
@@ -81,6 +80,7 @@ const dataUserReservation = reactive([
 #dashboard-establishment{
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 1rem;
     width: 100%;
     min-height: calc(100vh - 3.5rem);
@@ -100,9 +100,9 @@ const dataUserReservation = reactive([
     .dashboard-charts{
         display: flex;
         justify-content: center;
-        gap: .5rem;
+        width: 98%;
+        gap: 1rem;
         flex-wrap: wrap;
-        width: 99%;
         background-color: $darkColorSecondary;
         border-radius: 5px;
         border: 1px solid rgba(0, 0, 0, .3);
@@ -116,7 +116,7 @@ const dataUserReservation = reactive([
         display: flex;
         flex-direction: column;
         gap: .5rem;
-        width: 99%;
+        width: 98%;
         background-color: $darkColorSecondary;
         border-radius: 5px;
         border: 1px solid rgba(0, 0, 0, .3);

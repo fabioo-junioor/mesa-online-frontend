@@ -6,11 +6,11 @@
     </div>
 </template>
 <style lang="scss" scoped>
-    #home-establishment{
-        display: flex;
-        min-height: calc(100vh - 3.1rem);
-        padding: 1rem;
-        background-color: yellow;
+#home-establishment{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: calc(100vh - 3.5rem);
 
-    }
+}
 </style>
