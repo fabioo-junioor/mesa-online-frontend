@@ -1,7 +1,9 @@
 <script setup>
 import { reactive } from 'vue';
+import { useStore } from 'vuex';
 import { FormEditPasswordUser } from '../../components';
 
+const store = useStore();
 const dataFormEditPasswordUser = reactive({
     oldPassword: '',
     newPassword: '',
@@ -10,6 +12,8 @@ const dataFormEditPasswordUser = reactive({
 });
 const saveFormUser = () => {
     console.log('edição salva ', dataFormEditPasswordUser);
+    store.commit('setAlertConfig', {message: 'Senha alterada', type:'positive'});
+    return;
 
 };
 </script>

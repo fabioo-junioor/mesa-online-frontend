@@ -1,10 +1,12 @@
 <script setup>
 import { onMounted, reactive } from 'vue';
 import { useRoute } from 'vue-router';
+import { useStore } from 'vuex';
 import { FormReserveEstablishment, CardSchedulesEstablishment, CardAddressEstablishment, CardSchedulesEstablishmentSkeleton, CardAddressEstablishmentSkeleton } from '../../components';
 import { getDateToday, getHoursToday, compareDate, daysOfTheWeek, verifyEstablishmentIsOpen, verifyEstablishmentSchedulesReservation } from '../../utils/dateTimeFormatters.js';
 
 const route = useRoute();
+const store = useStore();
 const formReserveEstablishment = reactive({
     numberOfPeople: 2,
     date: null,
@@ -95,15 +97,18 @@ const formatTotalOccupancy = () => {
 const reserveEstablishment = () => {
   if(!compareDate(formReserveEstablishment.date)){
     console.log('data invalida!');
+    store.commit('setAlertConfig', {message: 'Data invalida', type:'warning'});
     return;
 
   }
   if(!verifyEstablishmentSchedulesReservation(formReserveEstablishment.date, formReserveEstablishment.time, schedulesEstablishment)){
-    console.log('estabelecimento não abre nesse horário!');
+    console.log('Sem atendimento nessa data ou horário!');
+    store.commit('setAlert', {message: 'Sem atendimento nessa data ou horário', type:'warning'});
     return;
 
   }  
-  console.log('data valida!');
+  console.log('Reserva realizada!');
+  store.commit('setAlert', {message: 'Reserva realizada', type:'positive'});
   return;
 
 };

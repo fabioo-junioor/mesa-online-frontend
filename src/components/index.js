@@ -1,4 +1,5 @@
-import Alert from './Alert.vue';
+import AlertChangedConfiguration from './AlertChangedConfiguration.vue';
+import AlertInfoUser from './AlertInfoUser.vue';
 import NavBar from './NavBar.vue';
 
 import FormUser from './forms/FormUser.vue';
@@ -24,7 +25,8 @@ import MonthReservations from './dashboard/charts/MonthReservations.vue';
 import WeekReservations from './dashboard/charts/WeekReservations.vue';
 
 export {
-    Alert,
+    AlertChangedConfiguration,
+    AlertInfoUser,
     NavBar,
     FormUser,
     FormEditUser,

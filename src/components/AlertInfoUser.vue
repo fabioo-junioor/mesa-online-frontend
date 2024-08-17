@@ -1,18 +1,15 @@
 <script setup>
-import { onMounted } from 'vue'
-import { useQuasar } from 'quasar'
+import { onMounted } from 'vue';
+import { useQuasar } from 'quasar';
+import { useStore } from 'vuex';
 
-const props = defineProps({
-    type: String,
-    msg: String
-})
-
+const store = useStore();
 const $q = useQuasar()
 
 const trigger = () => {
     $q.notify({
-        type: props.type,
-        message: props.msg+'!',
+        avatar: store.getters.getAlertInfoUser.avatar,
+        message: store.getters.getAlertInfoUser.message + '!',
         progress: true,
         position: 'top-right',
         timeout: 2000
@@ -28,8 +25,6 @@ onMounted(() => {
     
 </template>
 <style lang="scss" scoped>
-@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap");
-
 
 /*################################################*/
 @media only screen and (max-width: 1560px) {

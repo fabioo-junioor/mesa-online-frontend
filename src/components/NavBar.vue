@@ -2,13 +2,15 @@
 import { getDadosUsuario, deleteDadosUsuario } from '../services/localStorage/settingSession.js';
 import { ref, reactive, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import { CardImageProfile } from '../components';
+import { useStore } from 'vuex';
+import { CardImageProfile, AlertChangedConfiguration, AlertInfoUser } from '../components';
 import imagemProfileDefault from '../assets/usuario/usuarioDefault.png';
 
 const router = useRouter();
+const store = useStore();
 const leftDrawerOpen = ref(false);
 const visibleToggle = ref(true);
-const typeUser = ref(false);
+const typeUser = ref(true);
 const dataUser = reactive({
   name: "Anônimo",
   phone: '',
@@ -23,6 +25,8 @@ const verificaDadosUsuario = () => {
   if(getDadosUsuario()) {
     visibleToggle.value = true;
     leftDrawerOpen.value = true;
+
+    store.commit('setAlertInfoUser', {message: 'Bem vindo ' + dataUser.name, avatar:'https://cdn.quasar.dev/img/boy-avatar.png'});
     return;
 
   }
@@ -167,6 +171,10 @@ onMounted(() => {
       <q-page-container>
         <router-view />
       </q-page-container>
+      <AlertChangedConfiguration 
+        v-if="store.getters.getAlertConfig.isAlert" />
+      <AlertInfoUser
+        v-if="store.getters.getAlertInfoUser.isAlert" />
     </q-layout>
   </div>
 </template>
