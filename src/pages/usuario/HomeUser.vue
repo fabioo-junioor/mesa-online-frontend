@@ -22,7 +22,7 @@ const getData = async () => {
     dataCardReservation. nameEstablishment = 'rock lanches'
     dataCardReservation.dateReservation = '15-08-2024'
 
-  }, 3000)
+  }, 3000);
 
 }
 onMounted(async () => {

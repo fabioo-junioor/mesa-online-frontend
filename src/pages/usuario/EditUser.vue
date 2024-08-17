@@ -1,8 +1,10 @@
 <script setup>
 import { onMounted, reactive, ref } from 'vue';
+import { useStore } from 'vuex';
 import { FormEditUser, CardImageProfile } from '../../components';
 import imagemProfileDefault from '../../assets/usuario/usuarioDefault.png';
 
+const store = useStore();
 const imageProfile = ref(null);
 const dataFormUser = reactive({
     name: '',
@@ -19,7 +21,8 @@ const getDataUser = () => {
 }
 const saveFormUser = () => {
     console.log('edição salva ', dataFormUser);
-
+    store.commit('setAlertConfig', {message: 'Alteração realizada', type:'positive'});
+    return;
 }
 onMounted(() => {
     getDataUser();
