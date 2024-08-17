@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted } from 'vue';
 import Chart from 'chart.js/auto';
-const props = defineProps(['title', 'legend', 'txtColor', 'bgColor', 'dataChart', 'icon']);
+const props = defineProps(['title', 'legend', 'txtColor', 'dataChart', 'icon']);
 
 const config = {
     type: 'line',
@@ -11,36 +11,56 @@ const config = {
                 label: props.legend || 'Legenda',
                 data: props.dataChart,
                 borderWidth: 2,
-                borderColor: props.txtColor,
-                backgroundColor: props.txtColor
+                borderColor: props.txtColor || 'white',
+                backgroundColor: props.txtColor || 'white'
         }]
-    }
-}
-const options = {
-    responsive: true,
-    plugins: {
-        legend: {
-            labels: {
-                color: "blue"
+    },
+    options: {
+        plugins: {
+            legend: {
+                display: true,
+                labels: {
+                    color: props.txtColor || 'white'
+                }
+            }
+        },
+        scales: {
+            x: {
+                ticks: {
+                    color: props.txtColor || 'white'
+                },
+                grid: {
+                    color: (props.txtColor || '#eeeeee') + '50'
+                },
+                beginAtZero: true
+            },
+            y: {
+                ticks: {
+                    color: props.txtColor || 'white'
+                },
+                grid: {
+                    color: (props.txtColor || '#eeeeee') + '50'
+                },
+                beginAtZero: true
             }
         }
     }
 }
 onMounted(() => {
-    const ctx = document.getElementById('myChart1');
-    new Chart(ctx, config, options);
+    const ctx = document.getElementById('myChartMonth');
+    new Chart(ctx, config);
 
 })
 </script>
 <template>
   <div id="month-reservations">
-    <div :class="'month-reservations q-pa-md bg-' + props.bgColor ">
-        <h5 :class="'q-pb-md text-' + props.txtColor">
-            <i :class="props.icon + ' text-' + props.txtColor" />
-            <q-separator class="q-ml-xs q-mr-xs" vertical size="1px" :color="props.txtColor" />
+    <div class="month-reservations q-pa-md">
+        <h5 class="q-pb-md" :style="'color:' + (props.txtColor || '#eeeeee')">
+            <i :class="props.icon" />
+            <q-separator class="q-ml-sm q-mr-sm" vertical size="1px" :style="'background-color:' + (props.txtColor || '#eeeeee')" />
             {{ props. title }}
         </h5>
-        <canvas id="myChart1"></canvas>
+        <canvas id="myChartMonth"></canvas>
     </div>
   </div>
 </template>
@@ -49,15 +69,12 @@ onMounted(() => {
 
 #month-reservations{
     .month-reservations{
-        border-radius: 5px;
-        border: 1px solid rgba(0, 0, 0, .5);
-
         h5{
             display: flex;
             align-items: center;
 
             i{
-                font-size: 2rem;
+                font-size: 2.5rem;
 
             }
         }    
