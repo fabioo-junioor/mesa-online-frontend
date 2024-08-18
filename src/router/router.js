@@ -5,7 +5,8 @@ import { Home, LoginUser,
     EditUser, EditPasswordUser,
     SearchEstablishment, CadEstablishment,
     HomeEstablishment, LoginEstablishment,
-    DetailsEstablishment, DashboardEstablishment } from '../pages';
+    DetailsEstablishment, DashboardEstablishment,
+    EditEstablishment } from '../pages';
 
 const routes = [
     {
@@ -34,10 +35,10 @@ const routes = [
     {
         path: '/user',
         children: [
-            {path: 'homeUser', component: HomeUser},
-            {path: 'editUser', component: EditUser},
-            {path: 'editPasswordUser', component: EditPasswordUser},
-            {path: 'searchEstablishment', component: SearchEstablishment}
+            { path: 'homeUser', component: HomeUser },
+            { path: 'editUser', component: EditUser },
+            { path: 'editPasswordUser', component: EditPasswordUser },
+            { path: 'searchEstablishment', component: SearchEstablishment }
         ],
         beforeEnter: (_, __, next) => {
             next();
@@ -65,8 +66,9 @@ const routes = [
     {
         path: '/establishment',
         children: [
-            {path: 'homeEstablishment', component: HomeEstablishment},
-            {path: 'dashboardEstablishment', component: DashboardEstablishment}
+            { path: 'homeEstablishment', component: HomeEstablishment },
+            { path: 'dashboardEstablishment', component: DashboardEstablishment },
+            { path: 'editEstablishment', component: EditEstablishment }
         ],
         beforeEnter: (_, __, next) => {
             next();

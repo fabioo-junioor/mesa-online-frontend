@@ -32,7 +32,7 @@ const onSubmit = () => {
         <q-form @submit="onSubmit">
             <q-input
                 dark
-                standout
+                filled
                 class="q-mb-md"
                 color="orange-9"
                 v-model="numberOfPeople"
@@ -76,7 +76,7 @@ const onSubmit = () => {
                 class="q-mb-xl"
                 v-model="observation"
                 clearable
-                standout
+                filled
                 type="textarea"
                 color="orange-9"
                 label="Observações:" />
