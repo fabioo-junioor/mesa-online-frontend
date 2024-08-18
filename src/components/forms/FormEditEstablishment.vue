@@ -77,7 +77,7 @@ const onSubmit = () => {
                     class="q-mb-md"
                     color="orange-9"
                     v-model="linkInstagram"
-                    type="text"
+                    type="url"
                     label="Link do instagram:"
                     lazy-rules>
                     <template v-slot:prepend>
@@ -91,7 +91,7 @@ const onSubmit = () => {
                     class="q-mb-md"
                     color="orange-9"
                     v-model="linkFacebook"
-                    type="text"
+                    type="url"
                     label="Link do facebook:"
                     lazy-rules>
                     <template v-slot:prepend>
