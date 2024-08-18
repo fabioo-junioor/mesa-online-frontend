@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, reactive, ref } from 'vue';
 import { useStore } from 'vuex';
-import { FormEditEstablishment, FormSchedulesEstablishment, CardImageProfile } from '../../components';
+import { FormEditEstablishment, FormEditSchedulesEstablishment, CardImageProfile } from '../../components';
 import imagemProfileDefault from '../../assets/usuario/usuarioDefault.png';
 
 const store = useStore();
@@ -17,9 +17,9 @@ const dataFormEstablishment = reactive({
 const dataFormSchedulesEstablishment = reactive([
     {
       sun: {
-        manha: { open: '', close: '' },
-        tarde: { open: '', close: '' },
-        noite: { open: '', close: '' }
+        morning: { open: '', close: '' },
+        afternoon: { open: '', close: '' },
+        night: { open: '', close: '' }
       }
     }
 ]);
@@ -49,24 +49,24 @@ onMounted(() => {
     <div id="edit-establishment" class="q-pa-sm">
         <div class="edit-establishment q-pa-md q-ma-md">
             <CardImageProfile
-                class="q-mt-md q-mb-md"
+                class="q-mt-md q-mb-xl"
                 :imgSrc="dataFormEstablishment.imageProfile"
                 :nameUser="dataFormEstablishment.name"
                 width="20rem"
                 height="20rem"
                 fit="contain" />
-            <h4 class="q-mt-md q-mb-sm">Editar Estabelecimento</h4>
+            <h4 class="q-mb-lg">Editar Estabelecimento</h4>
             <FormEditEstablishment
-                class="form-edit-establishment q-pt-md"
+                class="form-edit-establishment q-mb-xl"
                 v-model:name='dataFormEstablishment.name'
                 v-model:phone='dataFormEstablishment.phone'
                 v-model:instagram='dataFormEstablishment.linkInstagram'
                 v-model:facebook='dataFormEstablishment.linkFacebook'
                 v-model:imageProfile='imageProfile'
                 @saveFormEstablishment='saveFormEstablishment' />
-            <h4 class="q-mt-md q-mb-sm">Editar Horários</h4>
-            <FormSchedulesEstablishment
-                class="form-edit-schedules-establishment q-mt-md q-mb-md"
+            <h4 class="q-mb-lg">Editar Horários</h4>
+            <FormEditSchedulesEstablishment
+                class="form-edit-schedules-establishment q-mb-lg"
                 v-model:dataSchedules="dataFormSchedulesEstablishment"
                 @saveFormSchedulesEstablishment="saveFormSchedulesEstablishment" />
         </div>

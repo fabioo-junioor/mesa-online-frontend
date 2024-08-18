@@ -8,7 +8,7 @@ import FormEditPasswordUser from './forms/FormEditPasswordUser.vue';
 import FormEstablishment from './forms/FormEstablishment.vue';
 import FormReserveEstablishment from './forms/FormReserveEstablishment.vue';
 import FormEditEstablishment from './forms/FormEditEstablishment.vue';
-import FormSchedulesEstablishment from './forms/FormSchedulesEstablishment.vue';
+import FormEditSchedulesEstablishment from './forms/FormEditSchedulesEstablishment.vue';
 
 import CardEstablishment from './cards/CardEstablishment.vue';
 import CardImageProfile from './cards/CardImageProfile.vue';
@@ -36,7 +36,7 @@ export {
     FormEstablishment,
     FormReserveEstablishment,
     FormEditEstablishment,
-    FormSchedulesEstablishment,
+    FormEditSchedulesEstablishment,
     CardEstablishment,
     CardImageProfile,
     CardReservation,
